@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopcaycanh/ui/shared/app_drawer.dart';
 
 import 'user_product_list_title.dart';
 
 import '../products/products_manager.dart';
 
 class UserProductsScreen extends StatelessWidget {
+  static const routeName = '/admin-product';
   const UserProductsScreen({super.key});
 
   @override
@@ -17,6 +20,7 @@ class UserProductsScreen extends StatelessWidget {
           buildAddButton(),
         ],
       ),
+      drawer: const AppDrawer(),
       body: RefreshIndicator(
         onRefresh: () async => print('refresh product'),
         child: buildUserProductListView(productsManager),
@@ -33,16 +37,20 @@ class UserProductsScreen extends StatelessWidget {
   }
 
   Widget buildUserProductListView(ProductsManager productsManager) {
-    return ListView.builder(
-      itemCount: productsManager.itemCount,
-      itemBuilder: (context, index) => Column(
-        children: [
-          UserProductListTile(
-            productsManager.items[index],
+    return Consumer<ProductsManager>(
+      builder: (context, productsManager, child) {
+        return ListView.builder(
+          itemCount: productsManager.itemCount,
+          itemBuilder: (context, index) => Column(
+            children: [
+              UserProductListTile(
+                productsManager.items[index],
+              ),
+              const Divider(),
+            ],
           ),
-          const Divider(),
-        ],
-      ),
+        );
+      },
     );
   }
 }

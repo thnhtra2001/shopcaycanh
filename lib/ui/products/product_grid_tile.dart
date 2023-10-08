@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopcaycanh/ui/cart/cart_manager.dart';
 
 import '../../models/product.dart';
 
@@ -19,10 +21,8 @@ class ProductGridTile extends StatelessWidget {
           footer: buildGridFooterBar(context),
           child: GestureDetector(
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (context) => ProductDetailScreen(product)),
-              );
+              Navigator.of(context).pushNamed(ProductDetailScreen.routeName,
+                  arguments: product.id);
             },
             child: Image.network(
               product.imageUrl,
@@ -53,7 +53,20 @@ class ProductGridTile extends StatelessWidget {
           Icons.shopping_cart,
         ),
         onPressed: () {
-          print('Add item to cart');
+          final cart = context.read<CartManager>();
+          cart.addItem(product);
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+                SnackBar(content: const Text('Da them vao gio hang'),
+                duration: const Duration(seconds: 2),
+                action: SnackBarAction(
+                  label: 'UNDO',
+                  onPressed: () {
+                    cart.removeSingleItem(product.id!);
+                  },
+                ),)
+          );
         },
         color: Theme.of(context).colorScheme.secondary,
       ),

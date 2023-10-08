@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopcaycanh/ui/cart/cart_manager.dart';
+import 'package:shopcaycanh/ui/cart/cart_screen.dart';
+import 'package:shopcaycanh/ui/products/top_right_badge.dart';
+import 'package:shopcaycanh/ui/shared/app_drawer.dart';
 
 import 'product_grid.dart';
 
@@ -23,16 +28,24 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
           buildShoppingCartIcon(),
         ],
       ),
+      drawer: const AppDrawer(),
       body: ProductsGrid(_showOnlyFavorites),
     );
   }
 
   Widget buildShoppingCartIcon() {
-    return IconButton(
-        onPressed: () {
-          print('Go to cart screen');
-        },
-        icon: const Icon(Icons.shopping_cart));
+    return Consumer<CartManager>(
+      builder: (context, cartManager, child) {
+        return TopRightBadge(
+          data: cartManager.productCount,
+          child: IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(CartScreen.routeName);
+              },
+              icon: const Icon(Icons.shopping_cart)),
+        );
+      },
+    );
   }
 
   Widget buildProductFilterMenu() {

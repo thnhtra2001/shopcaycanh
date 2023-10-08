@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopcaycanh/ui/products/products_manager.dart';
 
 import '../../models/product.dart';
 
 class UserProductListTile extends StatelessWidget {
+  static const routeName = '/admin-products';
   final Product product;
 
   const UserProductListTile(
@@ -34,7 +37,7 @@ class UserProductListTile extends StatelessWidget {
       onPressed: () async {
         print('Delete a product');
       },
-      icon: const Icon(Icons.delete),
+      icon: const Icon(Icons.edit),
       color: Theme.of(context).colorScheme.error,
     );
   }
@@ -42,9 +45,16 @@ class UserProductListTile extends StatelessWidget {
   Widget buildDeleteButton(BuildContext context) {
     return IconButton(
       onPressed: () {
-        print('Go to edit product screen');
+        context.read<ProductsManager>().deleteProduct(product.id!);
+        ScaffoldMessenger.of(context)
+          ..hideCurrentMaterialBanner()
+          ..showSnackBar(const SnackBar(
+              content: Text(
+            'San pham da xoa',
+            textAlign: TextAlign.center,
+          )));
       },
-      icon: const Icon(Icons.edit),
+      icon: const Icon(Icons.delete),
       color: Theme.of(context).colorScheme.error,
     );
   }
