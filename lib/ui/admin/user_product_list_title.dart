@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopcaycanh/ui/add_product/edit_product_screen.dart';
 import 'package:shopcaycanh/ui/products/products_manager.dart';
 
 import '../../models/product.dart';
@@ -35,7 +36,10 @@ class UserProductListTile extends StatelessWidget {
   Widget buildEditButton(BuildContext context) {
     return IconButton(
       onPressed: () async {
-        print('Delete a product');
+        Navigator.of(context).pushNamed(
+          EditProductScreen.routeName,
+          arguments: product.id,
+        );
       },
       icon: const Icon(Icons.edit),
       color: Theme.of(context).colorScheme.error,

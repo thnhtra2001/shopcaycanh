@@ -60,12 +60,13 @@ class ProductsManager with ChangeNotifier {
     _items.add(product.copyWith(
       id: 'p${DateTime.now().toIso8601String()}',
     ));
-    void updateProduct(Product product) {
-      final index = _items.indexWhere((item) => item.id == product.id);
-      if (index >= 0) {
-        _items[index] == product;
-        notifyListeners();
-      }
+  }
+
+  void updateProduct(Product product) {
+    final index = _items.indexWhere((item) => item.id == product.id);
+    if (index >= 0) {
+      _items[index] == product;
+      notifyListeners();
     }
   }
 

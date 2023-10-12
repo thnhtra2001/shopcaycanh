@@ -3,20 +3,40 @@ import 'package:flutter/material.dart';
 Future<bool?> showConfirmDialog(BuildContext context, String message) {
   return showDialog(
     context: context,
-    builder: (context) => AlertDialog(
-      title: const Text('Ban chac chu?'),
+    builder: (ctx) => AlertDialog(
+      title: const Text('Are you sure?'),
       content: Text(message),
-      actions: [
+      actions: <Widget>[
         TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(false);
-            },
-            child: const Text('Khong')),
+          child: const Text('No'),
+          onPressed: () {
+            Navigator.of(context).pop(false);
+          },
+        ),
         TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(true);
-            },
-            child: const Text('Vang'))
+          child: const Text('Yes'),
+          onPressed: () {
+            Navigator.of(context).pop(true);
+          },
+        ),
+      ],
+    ),
+  );
+}
+
+Future<void> showErrorDialog(BuildContext context, String message) {
+  return showDialog(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      title: const Text('An Error Occurred!'),
+      content: Text(message),
+      actions: <Widget>[
+        TextButton(
+          child: const Text('Okay'),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ],
     ),
   );

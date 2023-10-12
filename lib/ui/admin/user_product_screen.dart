@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopcaycanh/ui/add_product/edit_product_screen.dart';
 import 'package:shopcaycanh/ui/shared/app_drawer.dart';
 
 import 'user_product_list_title.dart';
@@ -17,7 +18,7 @@ class UserProductsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('San pham cua ban'),
         actions: [
-          buildAddButton(),
+          buildAddButton(context),
         ],
       ),
       drawer: const AppDrawer(),
@@ -28,10 +29,12 @@ class UserProductsScreen extends StatelessWidget {
     );
   }
 
-  Widget buildAddButton() {
+  Widget buildAddButton(BuildContext context) {
     return IconButton(
         onPressed: () {
-          print('go to add product screen');
+          Navigator.of(context).pushNamed(
+            EditProductScreen.routeName,
+          );
         },
         icon: const Icon(Icons.add));
   }
