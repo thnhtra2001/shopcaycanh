@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/ui/cart/cart_manager.dart';
 import 'package:shopcaycanh/ui/cart/cart_screen.dart';
+import 'package:shopcaycanh/ui/products/products_manager.dart';
 import 'package:shopcaycanh/ui/products/top_right_badge.dart';
 import 'package:shopcaycanh/ui/shared/app_drawer.dart';
 
@@ -18,19 +19,36 @@ class ProductOverviewScreen extends StatefulWidget {
 
 class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
   var _showOnlyFavorites = false;
+  late Future<void> _fetchProducts;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchProducts = context.read<ProductsManager>().fetchProducts();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Shop Cay Canh'),
-        actions: <Widget>[
-          buildProductFilterMenu(),
-          buildShoppingCartIcon(),
-        ],
-      ),
-      drawer: const AppDrawer(),
-      body: ProductsGrid(_showOnlyFavorites),
-    );
+        appBar: AppBar(
+          title: const Text('Shop Cay Canh'),
+          actions: <Widget>[
+            buildProductFilterMenu(),
+            buildShoppingCartIcon(),
+          ],
+        ),
+        drawer: const AppDrawer(),
+        body: FutureBuilder(
+          future: _fetchProducts,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return ProductsGrid(_showOnlyFavorites);
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+        ));
   }
 
   Widget buildShoppingCartIcon() {

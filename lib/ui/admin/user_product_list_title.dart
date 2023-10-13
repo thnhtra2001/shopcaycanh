@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopcaycanh/ui/add_product/edit_product_screen.dart';
+import 'package:shopcaycanh/ui/admin/edit_product_screen.dart';
 import 'package:shopcaycanh/ui/products/products_manager.dart';
 
 import '../../models/product.dart';

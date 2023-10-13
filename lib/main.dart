@@ -27,6 +27,12 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => ProductsManager()),
+          // ChangeNotifierProxyProvider<AuthManager, ProductsManager>(
+          //     create: (context) => ProductsManager(),
+          //     update: (context, authManager, productsManager) {
+          //       productsManager!.authToken = authManager.authToken;
+          //       return productsManager;
+          //     }),
           ChangeNotifierProvider(create: (context) => CartManager()),
           ChangeNotifierProvider(create: (context) => OrdersManager()),
           ChangeNotifierProvider(create: (context) => AuthManager()),
@@ -64,27 +70,27 @@ class MyApp extends StatelessWidget {
               UserProductsScreen.routeName: (context) =>
                   const UserProductsScreen(),
             },
-            // onGenerateRoute: (settings) {
-            //   if (settings.name == ProductDetailScreen.routeName) {
-            //     final productId = settings.arguments as String;
-            //     return MaterialPageRoute(builder: (context) {
-            //       return ProductDetailScreen(
-            //         ProductsManager().findById(productId),
-            //       );
-            //     });
-            //   }
-            //   if (settings.name == EditProductScreen.routeName) {
-            //     final productId = settings.arguments as String?;
-            //     return MaterialPageRoute(builder: (context) {
-            //       return EditProductScreen(
-            //         productId != null
-            //             ? context.read<ProductsManager>().findById(productId)
-            //             : null,
-            //       );
-            //     });
-            //   }
-            //   return null;
-            // },
+            onGenerateRoute: (settings) {
+              if (settings.name == ProductDetailScreen.routeName) {
+                final productId = settings.arguments as String;
+                return MaterialPageRoute(builder: (context) {
+                  return ProductDetailScreen(
+                    ProductsManager().findById(productId),
+                  );
+                });
+              }
+              if (settings.name == EditProductScreen.routeName) {
+                final productId = settings.arguments as String?;
+                return MaterialPageRoute(builder: (context) {
+                  return EditProductScreen(
+                    productId != null
+                        ? context.read<ProductsManager>().findById(productId)
+                        : null,
+                  );
+                });
+              }
+              return null;
+            },
           );
         }));
   }

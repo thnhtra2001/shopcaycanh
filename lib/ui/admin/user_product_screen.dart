@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopcaycanh/ui/add_product/edit_product_screen.dart';
-import 'package:shopcaycanh/ui/shared/app_drawer.dart';
+import 'package:shopcaycanh/ui/admin/edit_product_screen.dart';
+import 'package:shopcaycanh/ui/shared/admin_app_drawer.dart';
 
 import 'user_product_list_title.dart';
 
@@ -11,22 +11,35 @@ class UserProductsScreen extends StatelessWidget {
   static const routeName = '/admin-product';
   const UserProductsScreen({super.key});
 
+  Future<void> _refreshProduct(BuildContext context) async {
+    await context.read<ProductsManager>().fetchProducts();
+  }
+
   @override
   Widget build(BuildContext context) {
     final productsManager = ProductsManager();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('San pham cua ban'),
-        actions: [
-          buildAddButton(context),
-        ],
-      ),
-      drawer: const AppDrawer(),
-      body: RefreshIndicator(
-        onRefresh: () async => print('refresh product'),
-        child: buildUserProductListView(productsManager),
-      ),
-    );
+        appBar: AppBar(
+          title: const Text('San pham'),
+          actions: [
+            buildAddButton(context),
+          ],
+        ),
+        drawer: const AdminAppDrawer(),
+        body: FutureBuilder(
+          future: _refreshProduct(context),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return RefreshIndicator(
+              onRefresh: () => _refreshProduct(context),
+              child: buildUserProductListView(productsManager),
+            );
+          },
+        ));
   }
 
   Widget buildAddButton(BuildContext context) {

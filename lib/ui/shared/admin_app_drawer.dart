@@ -5,8 +5,8 @@ import 'package:shopcaycanh/ui/auth/auth_manager.dart';
 import '../orders/order_screen.dart';
 import '../admin/user_product_screen.dart';
 
-class AppDrawer extends StatelessWidget {
-  const AppDrawer({super.key});
+class AdminAppDrawer extends StatelessWidget {
+  const AdminAppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,29 +19,12 @@ class AppDrawer extends StatelessWidget {
           ),
           const Divider(),
           ListTile(
-            leading: const Icon(Icons.shop),
+            leading: const Icon(Icons.add),
             title: const Text('Shop'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/');
             },
           ),
-          const Divider(),
-          ListTile(
-              leading: const Icon(Icons.payment),
-              title: const Text('Orders'),
-              onTap: () {
-                Navigator.of(context)
-                    .pushReplacementNamed(OrdersScreen.routeName);
-              }),
-          // const Divider(),
-          // ListTile(
-          //   leading: const Icon(Icons.edit),
-          //   title: const Text('Admin'),
-          //   onTap: () {
-          //     Navigator.of(context)
-          //         .pushReplacementNamed(UserProductsScreen.routeName);
-          //   },
-          // ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.exit_to_app),
