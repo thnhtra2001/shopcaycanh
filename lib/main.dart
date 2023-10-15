@@ -14,6 +14,7 @@ import 'ui/admin/user_product_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'ui/screens.dart';
+import 'ui/personal/personal_screen.dart';
 
 Future<void> main() async {
   await dotenv.load();
@@ -69,6 +70,7 @@ class MyApp extends StatelessWidget {
               OrdersScreen.routeName: (context) => const OrdersScreen(),
               UserProductsScreen.routeName: (context) =>
                   const UserProductsScreen(),
+              PersonalScreen.routeName: (context) => const PersonalScreen(),
             },
             onGenerateRoute: (settings) {
               if (settings.name == ProductDetailScreen.routeName) {

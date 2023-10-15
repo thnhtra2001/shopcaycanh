@@ -18,13 +18,16 @@ class ProductOverviewScreen extends StatefulWidget {
 }
 
 class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
-  var _showOnlyFavorites = false;
+  var _showOnlyFavorites = ValueNotifier<bool>(false);
   late Future<void> _fetchProducts;
 
   @override
   void initState() {
     super.initState();
     _fetchProducts = context.read<ProductsManager>().fetchProducts();
+    // print('=========================');
+    // print(_fetchProducts.toString().length);
+    // print('=========================');
   }
 
   @override
@@ -42,7 +45,12 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
           future: _fetchProducts,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              return ProductsGrid(_showOnlyFavorites);
+              // return ProductsGrid(_showOnlyFavorites);
+              return ValueListenableBuilder<bool>(
+                  valueListenable: _showOnlyFavorites,
+                  builder: (context, onlyFavorites, child) {
+                    return ProductsGrid(onlyFavorites);
+                  });
             }
             return const Center(
               child: CircularProgressIndicator(),
@@ -71,9 +79,9 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
       onSelected: (FilterOptions selectedValue) {
         setState(() {
           if (selectedValue == FilterOptions.favorites) {
-            _showOnlyFavorites = true;
+            _showOnlyFavorites.value = true;
           } else {
-            _showOnlyFavorites = false;
+            _showOnlyFavorites.value = false;
           }
         });
       },

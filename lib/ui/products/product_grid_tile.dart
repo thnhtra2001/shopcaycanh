@@ -21,8 +21,8 @@ class ProductGridTile extends StatelessWidget {
           footer: buildGridFooterBar(context),
           child: GestureDetector(
             onTap: () {
-              Navigator.of(context).pushNamed(ProductDetailScreen.routeName,
-                  arguments: product.id);
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ProductDetailScreen(product)));
             },
             child: Image.network(
               product.imageUrl,
@@ -35,13 +35,18 @@ class ProductGridTile extends StatelessWidget {
   Widget buildGridFooterBar(BuildContext context) {
     return GridTileBar(
       backgroundColor: Colors.black87,
-      leading: IconButton(
-        icon: Icon(
-          product.isFavorite ? Icons.favorite : Icons.favorite_border,
-        ),
-        color: Theme.of(context).colorScheme.secondary,
-        onPressed: () {
-          print('Toggle a favorite product');
+      leading: ValueListenableBuilder<bool>(
+        valueListenable: product.isFavoriteListenable,
+        builder: (context, isFavorite, child) {
+          return IconButton(
+            icon: Icon(
+              product.isFavorite ? Icons.favorite : Icons.favorite_border,
+            ),
+            color: Theme.of(context).colorScheme.secondary,
+            onPressed: () {
+              product.isFavorite = !isFavorite;
+            },
+          );
         },
       ),
       title: Text(
@@ -50,23 +55,23 @@ class ProductGridTile extends StatelessWidget {
       ),
       trailing: IconButton(
         icon: const Icon(
-          Icons.shopping_cart,
+          Icons.card_travel,
         ),
         onPressed: () {
           final cart = context.read<CartManager>();
           cart.addItem(product);
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
-            ..showSnackBar(
-                SnackBar(content: const Text('Da them vao gio hang'),
-                duration: const Duration(seconds: 2),
-                action: SnackBarAction(
-                  label: 'UNDO',
-                  onPressed: () {
-                    cart.removeSingleItem(product.id!);
-                  },
-                ),)
-          );
+            ..showSnackBar(SnackBar(
+              content: const Text('Da them vao gio hang'),
+              duration: const Duration(seconds: 2),
+              action: SnackBarAction(
+                label: 'UNDO',
+                onPressed: () {
+                  cart.removeSingleItem(product.id!);
+                },
+              ),
+            ));
         },
         color: Theme.of(context).colorScheme.secondary,
       ),
