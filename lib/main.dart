@@ -4,6 +4,7 @@ import 'package:shopcaycanh/ui/cart/cart_manager.dart';
 import 'package:shopcaycanh/ui/cart/cart_screen.dart';
 import 'package:shopcaycanh/ui/orders/order_manager.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
+import 'package:shopcaycanh/ui/payment/payment_screen.dart';
 import 'package:shopcaycanh/ui/products/product_detail_screen.dart';
 import 'package:shopcaycanh/ui/products/product_overview_screen.dart';
 import 'package:shopcaycanh/ui/products/products_manager.dart';
@@ -71,6 +72,7 @@ class MyApp extends StatelessWidget {
               UserProductsScreen.routeName: (context) =>
                   const UserProductsScreen(),
               PersonalScreen.routeName: (context) => const PersonalScreen(),
+              PaymentDetailScreen.routeName: (context) => PaymentDetailScreen(),
             },
             onGenerateRoute: (settings) {
               if (settings.name == ProductDetailScreen.routeName) {

@@ -20,8 +20,6 @@ class ProductsGrid extends StatelessWidget {
             ? productsManager.favoriteItems
             : productsManager.items);
     // print(productsManager.items[0].title);
-    print('===================');
-    print(product.length);
     // print(productsManager.favoriteItems.length);
     return GridView.builder(
         padding: const EdgeInsets.all(10),

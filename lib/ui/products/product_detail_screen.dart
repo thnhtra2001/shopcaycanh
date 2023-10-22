@@ -6,6 +6,8 @@ import 'package:shopcaycanh/ui/products/top_right_badge.dart';
 import '../../models/product.dart';
 import '../cart/cart_manager.dart';
 
+import '../payment/payment_screen.dart';
+
 class ProductDetailScreen extends StatelessWidget {
   static const routeName = '/product-detail';
   const ProductDetailScreen(
@@ -41,28 +43,28 @@ class ProductDetailScreen extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           buildShoppingCartIcon(),
-          // Container(
-          //   width: 200,
-          //   height: 40,
-          //   child: ElevatedButton(
-          //     onPressed: () {
-          //       Navigator.of(context).pushNamed(CartScreen.routeName);
-          //       // context
-          //       //     .read<SelectionManager>()
-          //       //     .setTimeSelected(DateTime.now());
-
-          //       // context.read<SelectionManager>().setMovieSelected(product);
-          //       // Navigator.of(context).pushNamed(TimeSelectionScreen.routeName);
-          //     },
-          //     style: ElevatedButton.styleFrom(
-          //       backgroundColor: Colors.red,
-          //     ),
-          //     child: const Text('Dat hang ngay',
-          //         style: TextStyle(
-          //           color: Colors.white,
-          //         )),
-          //   ),
-          // ),
+          Container(
+            width: 200,
+            height: 40,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(
+                  PaymentDetailScreen.routeName,
+                  arguments: product.id,
+                );
+                //     arguments: product.id);
+                // Navigator.of(context).push(MaterialPageRoute(
+                //     builder: (context) => PaymentDetailScreen(product)));
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+              ),
+              child: const Text('Dat hang ngay',
+                  style: TextStyle(
+                    color: Colors.white,
+                  )),
+            ),
+          ),
           const SizedBox(height: 10),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -81,8 +83,7 @@ class ProductDetailScreen extends StatelessWidget {
   Widget buildShoppingCartIcon() {
     return Consumer<CartManager>(
       builder: (context, cartManager, child) {
-        return TopRightBadge(
-          data: cartManager.productCount,
+        return Container(
           child: IconButton(
               onPressed: () {
                 final cart = context.read<CartManager>();

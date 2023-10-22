@@ -5,7 +5,7 @@ import '../../models/cart_item.dart';
 
 class CartManager with ChangeNotifier {
   Map<String, CartItem> _items = {
-    // 'p1': CartItem(id: 'c1', title: 'Red Shirt', price: 22, quantity: 3)
+    // 'p1': CartItem(id: 'c1', title: 'Red Shirt', price: 22, quantity: 33)
   };
 
   int get productCount {
@@ -28,6 +28,8 @@ class CartManager with ChangeNotifier {
     return total;
   }
 
+  void listCart(Product product) {}
+
   void addItem(Product product) {
     if (_items.containsKey(product.id)) {
       _items.update(
@@ -42,7 +44,8 @@ class CartManager with ChangeNotifier {
               id: 'c${DateTime.now().toIso8601String()}',
               title: product.title,
               quantity: 1,
-              price: product.price));
+              price: product.price,
+              imageUrl: product.imageUrl));
     }
     notifyListeners();
   }
