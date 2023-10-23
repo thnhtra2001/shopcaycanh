@@ -12,7 +12,6 @@ class ProductGridTile extends StatelessWidget {
     super.key,
   });
   final Product product;
-
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -23,6 +22,8 @@ class ProductGridTile extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ProductDetailScreen(product)));
+              print(product.title);
+              // print(product.id);
             },
             child: Image.network(
               product.imageUrl,

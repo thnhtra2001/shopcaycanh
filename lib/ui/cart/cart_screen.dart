@@ -51,7 +51,7 @@ class CartScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             const Text(
-              'Total',
+              'Tong cong',
               style: TextStyle(fontSize: 20),
             ),
             const Spacer(),
@@ -71,7 +71,7 @@ class CartScreen extends StatelessWidget {
                       context
                           .read<OrdersManager>()
                           .addOrder(cart.product, cart.totalAmount);
-                      cart.clear();
+                      // cart.clear();
                     },
               style: TextButton.styleFrom(
                 textStyle: TextStyle(color: Theme.of(context).primaryColor),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopcaycanh/models/payment.dart';
 import 'package:shopcaycanh/ui/cart/cart_screen.dart';
 import 'package:shopcaycanh/ui/products/top_right_badge.dart';
 
@@ -7,6 +8,7 @@ import '../../models/product.dart';
 import '../cart/cart_manager.dart';
 
 import '../payment/payment_screen.dart';
+import '../payment/payment_manager.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   static const routeName = '/product-detail';
@@ -48,13 +50,9 @@ class ProductDetailScreen extends StatelessWidget {
             height: 40,
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(
-                  PaymentDetailScreen.routeName,
-                  arguments: product.id,
-                );
-                //     arguments: product.id);
-                // Navigator.of(context).push(MaterialPageRoute(
-                //     builder: (context) => PaymentDetailScreen(product)));
+                Navigator.of(context).pushNamed(PaymentDetailScreen.routeName,
+                    arguments: product);
+                print(product.id);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,

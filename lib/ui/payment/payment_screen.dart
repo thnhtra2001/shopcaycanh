@@ -1,19 +1,31 @@
-import 'dart:developer';
+import 'dart:async';
+import 'dart:js_interop';
 
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
+import 'package:shopcaycanh/models/cart_item.dart';
+import 'package:shopcaycanh/ui/payment/payment_manager.dart';
 import '../../models/product.dart';
 import '../../services/user_service.dart';
 
+import 'package:shopcaycanh/ui/cart/cart_manager.dart';
+import 'package:after_layout/after_layout.dart';
+
 class PaymentDetailScreen extends StatefulWidget {
   static const routeName = '/payment-detail';
+  const PaymentDetailScreen({Key? key}) : super(key: key);
+
   @override
   State<PaymentDetailScreen> createState() => _PaymentDetailScreenState();
 }
 
-class _PaymentDetailScreenState extends State<PaymentDetailScreen> {
+class _PaymentDetailScreenState extends State<PaymentDetailScreen>
+    with AfterLayoutMixin {
   late Future<Map<String, dynamic>> _futureFetchUserInformation;
+  @override
+  Future<FutureOr<void>> afterFirstLayout(BuildContext context) async {}
+
   @override
   void initState() {
     super.initState();
@@ -22,7 +34,7 @@ class _PaymentDetailScreenState extends State<PaymentDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    late Product product;
+    final List<Product> product;
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -40,6 +52,7 @@ class _PaymentDetailScreenState extends State<PaymentDetailScreen> {
                     children: [
                       paymentAddress(),
                       inforUser(snapshot.data!['name']),
+                      productDetails(),
                     ],
                   )),
             );
@@ -55,7 +68,7 @@ class _PaymentDetailScreenState extends State<PaymentDetailScreen> {
       decoration: const InputDecoration(labelText: 'Dia chi'),
       textInputAction: TextInputAction.next,
       autofocus: true,
-      maxLines: 3,
+      maxLines: 1,
     );
   }
 
@@ -85,46 +98,32 @@ class _PaymentDetailScreenState extends State<PaymentDetailScreen> {
           Text(
             data ?? '',
           ),
-          // SvgPicture.asset(
-          //   GlobalImages.copyIcon,
-          //   height: 20,
-          //   width: 20,
-          //   color: GlobalColors.kGreyTextColor,
-          // ),
         ],
       ),
     );
   }
 
-  Widget productDetails(Product product) {
+  Widget productDetails() {
     return Container(
         padding: const EdgeInsets.only(left: 20),
         color: Colors.white,
         height: 100,
-        child: Row(
-          children: [
-            Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 0.5,
-                    )),
-                child: CircleAvatar(
-                    backgroundImage: NetworkImage(product.imageUrl))),
-            const SizedBox(width: 7),
-            Text(
-              product.title ?? '',
-            ),
-            const SizedBox(width: 7),
-            // SvgPicture.asset(
-            //   GlobalImages.copyIcon,
-            //   height: 20,
-            //   width: 20,
-            //   color: GlobalColors.kGreyTextColor,
-            // ),
-          ],
-        ));
+        child: Row(children: [
+          Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 0.5,
+                  )),
+              child: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                      'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg'))),
+          const SizedBox(width: 7),
+          Text(
+            'AAAAA' ?? '',
+          ),
+        ]));
   }
 }
