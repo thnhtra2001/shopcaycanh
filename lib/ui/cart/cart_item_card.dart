@@ -37,7 +37,7 @@ class CartItemCard extends StatelessWidget {
       confirmDismiss: (directiion) {
         return showConfirmDialog(
           context,
-          'Ban co chac muon xoa gio hang',
+          'Bạn chắc chứ?',
         );
       },
       onDismissed: (direction) {

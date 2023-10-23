@@ -73,6 +73,7 @@ class ProductGridTile extends StatelessWidget {
                 },
               ),
             ));
+          print(product.id);
         },
         color: Theme.of(context).colorScheme.secondary,
       ),

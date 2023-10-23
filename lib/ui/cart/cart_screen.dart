@@ -4,6 +4,7 @@ import 'package:shopcaycanh/ui/orders/order_manager.dart';
 
 import 'cart_manager.dart';
 import 'cart_item_card.dart';
+import '../screens.dart';
 
 class CartScreen extends StatelessWidget {
   static const routeName = '/cart';
@@ -15,7 +16,7 @@ class CartScreen extends StatelessWidget {
     final cart = context.watch<CartManager>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Cart'),
+        title: const Text('Giỏ hàng'),
       ),
       body: Column(
         children: <Widget>[
@@ -51,7 +52,7 @@ class CartScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             const Text(
-              'Tong cong',
+              'Total',
               style: TextStyle(fontSize: 20),
             ),
             const Spacer(),
@@ -68,18 +69,16 @@ class CartScreen extends StatelessWidget {
               onPressed: cart.totalAmount <= 0
                   ? null
                   : () {
-                      context
-                          .read<OrdersManager>()
-                          .addOrder(cart.products, cart.totalAmount);
+                      context.read<OrdersManager>().addOrder(
+                            cart.products,
+                            cart.totalAmount,
+                          );
                       cart.clear();
-                      print(
-                          '#######################################################');
-                      print(cart.products.first.id);
                     },
               style: TextButton.styleFrom(
                 textStyle: TextStyle(color: Theme.of(context).primaryColor),
               ),
-              child: const Text('Dat hang ngay'),
+              child: const Text('Đặt hàng ngay'),
             ),
           ],
         ),

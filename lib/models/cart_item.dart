@@ -7,12 +7,13 @@ class CartItem {
   final double price;
   final String imageUrl;
 
-  CartItem(
-      {required this.id,
-      required this.title,
-      required this.quantity,
-      required this.price,
-      required this.imageUrl});
+  CartItem({
+    required this.id,
+    required this.title,
+    required this.quantity,
+    required this.price,
+    required this.imageUrl,
+  });
 
   CartItem copyWith(
       {String? id,
@@ -21,10 +22,11 @@ class CartItem {
       double? price,
       String? imageUrl}) {
     return CartItem(
-        id: id ?? this.id,
-        title: title ?? this.title,
-        quantity: quantity ?? this.quantity,
-        price: price ?? this.price,
-        imageUrl: imageUrl ?? this.imageUrl);
+      id: id ?? this.id,
+      title: title ?? this.title,
+      quantity: quantity ?? this.quantity,
+      price: price ?? this.price,
+      imageUrl: imageUrl ?? this.imageUrl,
+    );
   }
 }
