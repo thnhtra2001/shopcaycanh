@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopcaycanh/models/payment.dart';
 import 'package:shopcaycanh/ui/cart/cart_manager.dart';
 import 'package:shopcaycanh/ui/cart/cart_screen.dart';
 import 'package:shopcaycanh/ui/orders/order_manager.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
+import 'package:shopcaycanh/ui/payment/payment_manager.dart';
 import 'package:shopcaycanh/ui/payment/payment_screen.dart';
 import 'package:shopcaycanh/ui/products/product_detail_screen.dart';
 import 'package:shopcaycanh/ui/products/product_overview_screen.dart';
 import 'package:shopcaycanh/ui/products/products_manager.dart';
 import 'package:shopcaycanh/ui/screens.dart';
+import 'models/product.dart';
 import 'ui/products/product_overview_screen.dart';
 
 import 'ui/admin/user_product_screen.dart';
@@ -72,7 +75,7 @@ class MyApp extends StatelessWidget {
               UserProductsScreen.routeName: (context) =>
                   const UserProductsScreen(),
               PersonalScreen.routeName: (context) => const PersonalScreen(),
-              PaymentDetailScreen.routeName: (context) => PaymentDetailScreen(),
+              PaymentScreen.routeName: (context) => const PaymentScreen(),
             },
             onGenerateRoute: (settings) {
               if (settings.name == ProductDetailScreen.routeName) {
@@ -91,6 +94,12 @@ class MyApp extends StatelessWidget {
                         ? context.read<ProductsManager>().findById(productId)
                         : null,
                   );
+                });
+              }
+              if (settings.name == PaymentScreen.routeName) {
+                final args = settings.arguments as Product?;
+                return MaterialPageRoute(builder: (context) {
+                  return PaymentScreen();
                 });
               }
               return null;

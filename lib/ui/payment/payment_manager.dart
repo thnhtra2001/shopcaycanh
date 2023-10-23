@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import '../../models/product.dart';
 
-class Payment extends ChangeNotifier {
+class PaymentManager extends ChangeNotifier {
   List<Product> _productSelected = [];
 
   int get productSelected {

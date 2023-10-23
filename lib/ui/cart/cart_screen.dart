@@ -70,8 +70,11 @@ class CartScreen extends StatelessWidget {
                   : () {
                       context
                           .read<OrdersManager>()
-                          .addOrder(cart.product, cart.totalAmount);
-                      // cart.clear();
+                          .addOrder(cart.products, cart.totalAmount);
+                      cart.clear();
+                      print(
+                          '#######################################################');
+                      print(cart.products.first.id);
                     },
               style: TextButton.styleFrom(
                 textStyle: TextStyle(color: Theme.of(context).primaryColor),

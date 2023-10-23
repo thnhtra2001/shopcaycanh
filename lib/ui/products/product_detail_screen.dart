@@ -50,9 +50,8 @@ class ProductDetailScreen extends StatelessWidget {
             height: 40,
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(PaymentDetailScreen.routeName,
-                    arguments: product);
-                print(product.id);
+                Navigator.of(context)
+                    .pushNamed(PaymentScreen.routeName, arguments: Product(title: product.title, description: product.description, price: product.price, imageUrl: product.imageUrl));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,

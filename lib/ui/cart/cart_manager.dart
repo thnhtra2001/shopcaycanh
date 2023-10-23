@@ -12,7 +12,7 @@ class CartManager with ChangeNotifier {
     return _items.length;
   }
 
-  List<CartItem> get product {
+  List<CartItem> get products {
     return _items.values.toList();
   }
 

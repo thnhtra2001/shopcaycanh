@@ -1,30 +1,22 @@
-import 'dart:async';
-import 'dart:js_interop';
-
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/models/cart_item.dart';
-import 'package:shopcaycanh/ui/payment/payment_manager.dart';
+// import 'package:shopcaycanh/ui/payment/payment_manager.dart';
+import '../../models/payment.dart';
 import '../../models/product.dart';
 import '../../services/user_service.dart';
-
 import 'package:shopcaycanh/ui/cart/cart_manager.dart';
-import 'package:after_layout/after_layout.dart';
 
-class PaymentDetailScreen extends StatefulWidget {
+class PaymentScreen extends StatefulWidget {
   static const routeName = '/payment-detail';
-  const PaymentDetailScreen({Key? key}) : super(key: key);
-
+  const PaymentScreen({super.key});
   @override
-  State<PaymentDetailScreen> createState() => _PaymentDetailScreenState();
+  State<PaymentScreen> createState() => _PaymentScreenState();
 }
 
-class _PaymentDetailScreenState extends State<PaymentDetailScreen>
-    with AfterLayoutMixin {
+class _PaymentScreenState extends State<PaymentScreen> {
   late Future<Map<String, dynamic>> _futureFetchUserInformation;
-  @override
-  Future<FutureOr<void>> afterFirstLayout(BuildContext context) async {}
 
   @override
   void initState() {
@@ -34,31 +26,38 @@ class _PaymentDetailScreenState extends State<PaymentDetailScreen>
 
   @override
   Widget build(BuildContext context) {
-    final List<Product> product;
+    final args = ModalRoute.of(context)!.settings.arguments as Product;
+    print(args.price);
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Trang thanh toán'),
       ),
-      body: FutureBuilder<Map<String, dynamic>>(
-        future: _futureFetchUserInformation,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return Center(
-              child: Container(
-                  alignment: Alignment.center,
-                  width: deviceSize.width * 0.9,
-                  child: Column(
-                    children: [
-                      paymentAddress(),
-                      inforUser(snapshot.data!['name']),
-                      productDetails(),
-                    ],
-                  )),
-            );
-          }
-          return const Center(child: CircularProgressIndicator());
-        },
+      body: Column(
+        children: [
+          FutureBuilder<Map<String, dynamic>>(
+            future: _futureFetchUserInformation,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return Center(
+                  child: Container(
+                      alignment: Alignment.center,
+                      width: deviceSize.width * 0.9,
+                      child: Column(
+                        children: [
+                          paymentAddress(),
+                          inforUser(snapshot.data!['name']),
+                        ],
+                      )),
+                );
+              }
+              return const Center(child: CircularProgressIndicator());
+            },
+          ),
+          Column(
+            children: [productDetails(args)],
+          )
+        ],
       ),
     );
   }
@@ -103,7 +102,7 @@ class _PaymentDetailScreenState extends State<PaymentDetailScreen>
     );
   }
 
-  Widget productDetails() {
+  Widget productDetails(args) {
     return Container(
         padding: const EdgeInsets.only(left: 20),
         color: Colors.white,
@@ -117,13 +116,16 @@ class _PaymentDetailScreenState extends State<PaymentDetailScreen>
                     color: Colors.black,
                     width: 0.5,
                   )),
-              child: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg'))),
+              child:
+                  CircleAvatar(backgroundImage: NetworkImage(args.imageUrl))),
           const SizedBox(width: 7),
           Text(
-            'AAAAA' ?? '',
+            args.title ?? '',
           ),
+          const SizedBox(width: 7),
+          Container(
+            child: Text(args.price.toString()),
+          )
         ]));
   }
 }
