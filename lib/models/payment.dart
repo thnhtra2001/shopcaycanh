@@ -1,33 +1,26 @@
 import 'package:flutter/material.dart';
+import 'cart_item.dart';
 
 class Payment {
-  final String id;
-  final String title;
-  final int quantity;
-  final double price;
-  final String imageUrl;
+  final String? id;
+  final List<CartItem> products;
+  final double amount;
 
-  Payment({
-    required this.id,
-    required this.title,
-    required this.quantity,
-    required this.price,
-    required this.imageUrl,
-  });
+   int get productSelectedCount {
+    return products.length;
+  }
+
+  Payment({this.id, required this.products, required this.amount});
 
   Payment copyWith({
     String? id,
-    String? title,
-    int? quantity,
-    double? price,
-    String? imageUrl,
+    List<CartItem>? products,
+    double? amount,
   }) {
     return Payment(
       id: id ?? this.id,
-      title: title ?? this.title,
-      quantity: quantity ?? this.quantity,
-      price: price ?? this.price,
-      imageUrl: imageUrl ?? this.imageUrl,
+      products: products ?? this.products,
+      amount: amount ?? this.amount,
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopcaycanh/models/cart_item.dart';
 import 'package:shopcaycanh/models/payment.dart';
 import 'package:shopcaycanh/ui/cart/cart_screen.dart';
 import 'package:shopcaycanh/ui/products/top_right_badge.dart';
@@ -50,13 +51,24 @@ class ProductDetailScreen extends StatelessWidget {
             height: 40,
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context)
-                    .pushNamed(PaymentScreen.routeName, arguments: Product(title: product.title, description: product.description, price: product.price, imageUrl: product.imageUrl));
+                // context.read<PaymentManager>().addPaymentInProductDetail(
+                //     title: product.title,
+                //     description: product.description,
+                //     price: product.price,
+                //     imageUrl: product.imageUrl,
+                //     id: product.id);
+                print(product.title);
+                Navigator.of(context).pushNamed(PaymentScreen.routeName,
+                    arguments: Product(
+                        title: product.title,
+                        description: product.description,
+                        price: product.price,
+                        imageUrl: product.imageUrl));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
               ),
-              child: const Text('Dat hang ngay',
+              child: const Text('Đặt hàng',
                   style: TextStyle(
                     color: Colors.white,
                   )),

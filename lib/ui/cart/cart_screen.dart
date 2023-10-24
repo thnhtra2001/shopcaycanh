@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/ui/orders/order_manager.dart';
+import 'package:shopcaycanh/ui/payment/payment_screen.dart';
 
 import 'cart_manager.dart';
 import 'cart_item_card.dart';
 import '../screens.dart';
+import '../payment/payment_manager.dart';
 
 class CartScreen extends StatelessWidget {
   static const routeName = '/cart';
@@ -69,10 +71,16 @@ class CartScreen extends StatelessWidget {
               onPressed: cart.totalAmount <= 0
                   ? null
                   : () {
-                      context.read<OrdersManager>().addOrder(
-                            cart.products,
-                            cart.totalAmount,
-                          );
+                      context
+                          .read<PaymentManager>()
+                          .addPaymentInCart(cart.products, cart.totalAmount);
+                      // print('######################');
+                      // print(cart.products.length);
+                      // context.read<OrdersManager>().addOrder(
+                      //       cart.products,
+                      //       cart.totalAmount,
+                      //     );
+                      Navigator.of(context).pushNamed(PaymentScreen.routeName);
                       cart.clear();
                     },
               style: TextButton.styleFrom(

@@ -19,8 +19,8 @@ class AuthScreen extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color.fromARGB(255, 72, 255, 197).withOpacity(0.5),
-                  Color.fromARGB(255, 8, 167, 185).withOpacity(0.7),
+                  Color.fromARGB(255, 180, 8, 131).withOpacity(0.5),
+                  Color.fromARGB(255, 189, 15, 146).withOpacity(0.7),
                 ],
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
@@ -35,10 +35,7 @@ class AuthScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const <Widget>[
-                  AppBanner(),
-                  AuthCard()
-                ],
+                children: const <Widget>[AppBanner(), AuthCard()],
               ),
             ),
           ),

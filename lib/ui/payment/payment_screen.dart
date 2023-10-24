@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/models/cart_item.dart';
+import 'package:shopcaycanh/ui/payment/payment_manager.dart';
 // import 'package:shopcaycanh/ui/payment/payment_manager.dart';
 import '../../models/payment.dart';
 import '../../models/product.dart';
 import '../../services/user_service.dart';
 import 'package:shopcaycanh/ui/cart/cart_manager.dart';
+
+import '../payment/payment_item_card.dart';
 
 class PaymentScreen extends StatefulWidget {
   static const routeName = '/payment-detail';
@@ -26,8 +29,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Payment payment;
     final args = ModalRoute.of(context)!.settings.arguments as Product;
-    print(args.price);
+    // print(args.price);
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -54,6 +58,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
               return const Center(child: CircularProgressIndicator());
             },
           ),
+          // Consumer<PaymentManager>(
+          //   builder: (context, paymentManager, child) {
+          //     return ListView.builder(
+          //       itemCount: paymentManager!.productSelectedCount,
+          //       itemBuilder: (context, index) =>
+          //           PaymentItemCard(paymentManager.payments[index]),
+          //     );
+          //   },
+          // ),
           Column(
             children: [productDetails(args)],
           )

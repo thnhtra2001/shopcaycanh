@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => CartManager()),
           ChangeNotifierProvider(create: (context) => OrdersManager()),
           ChangeNotifierProvider(create: (context) => AuthManager()),
+          ChangeNotifierProvider(create: (contex) => PaymentManager()),
         ],
         child: Consumer<AuthManager>(builder: (context, authManager, child) {
           return MaterialApp(
