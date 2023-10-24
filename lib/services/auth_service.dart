@@ -22,7 +22,7 @@ class AuthService {
   }
 
   Future<AuthToken> _authenticate(String email, String password, String method,
-      [String phone = '', String name = '']) async {
+      [String phone = '', String name = '', String address = '']) async {
     try {
       final url = Uri.parse(_buildAuthUrl(method));
       final response = await http.post(
@@ -53,6 +53,7 @@ class AuthService {
               'email': email,
               'name': name,
               'phone': phone,
+              'address': address,
               'birthday': '',
               'role': 'user'
             }));
@@ -69,9 +70,9 @@ class AuthService {
     }
   }
 
-  Future<AuthToken> signup(
-      String email, String password, String phone, String name) {
-    return _authenticate(email, password, 'signUp', phone, name);
+  Future<AuthToken> signup(String email, String password, String phone,
+      String name, String address) {
+    return _authenticate(email, password, 'signUp', phone, name, address);
   }
 
   Future<AuthToken> login(String email, String password) {

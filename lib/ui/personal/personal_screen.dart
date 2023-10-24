@@ -29,6 +29,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
     'phone': '',
     'name': '',
     'birthday': '',
+    'address': '',
   };
   final _isSubmitting = ValueNotifier<bool>(false);
   final _birthFieldController =
@@ -76,6 +77,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
                           _buildNameField(snapshot.data!['name']),
                           _buildPhoneField(snapshot.data!['phone']),
                           _buildBirthField(snapshot.data!['birthday'] ?? ''),
+                          _buildAddressField(snapshot.data!['address']),
                           const SizedBox(
                             height: 20,
                           ),
@@ -240,6 +242,48 @@ class _PersonalScreenState extends State<PersonalScreen> {
                 },
                 onSaved: (value) {
                   _data['name'] = value!;
+                })),
+      ],
+    );
+  }
+
+  Widget _buildAddressField(initValue) {
+    return Column(
+      children: [
+        Container(
+          height: 40,
+          alignment: Alignment.centerLeft,
+          child: Text('Địa chỉ:',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        ),
+        Container(
+            height: 40,
+            margin: EdgeInsets.only(bottom: 8),
+            child: TextFormField(
+                initialValue: initValue,
+                maxLines: 1,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            width: 1,
+                            color: Colors.red,
+                            style: BorderStyle.solid),
+                        borderRadius: BorderRadius.all(Radius.circular(8))),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                    prefixIcon: Icon(Icons.person)),
+                style: TextStyle(fontSize: 18),
+                keyboardType: TextInputType.name,
+                validator: (value) {
+                  if (value == null || value.length < 5) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Địa chỉ không hợp lệ!')),
+                    );
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _data['address'] = value!;
                 })),
       ],
     );
