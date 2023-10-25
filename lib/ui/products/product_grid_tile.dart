@@ -12,7 +12,6 @@ class ProductGridTile extends StatelessWidget {
     super.key,
   });
   final Product product;
-
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -23,6 +22,8 @@ class ProductGridTile extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ProductDetailScreen(product)));
+              print(product.title);
+              // print(product.id);
             },
             child: Image.network(
               product.imageUrl,
@@ -55,7 +56,7 @@ class ProductGridTile extends StatelessWidget {
       ),
       trailing: IconButton(
         icon: const Icon(
-          Icons.card_travel,
+          Icons.shopping_bag_outlined,
         ),
         onPressed: () {
           final cart = context.read<CartManager>();
@@ -66,12 +67,13 @@ class ProductGridTile extends StatelessWidget {
               content: const Text('Da them vao gio hang'),
               duration: const Duration(seconds: 2),
               action: SnackBarAction(
-                label: 'UNDO',
+                label: 'Xoa',
                 onPressed: () {
                   cart.removeSingleItem(product.id!);
                 },
               ),
             ));
+          print(product.id);
         },
         color: Theme.of(context).colorScheme.secondary,
       ),

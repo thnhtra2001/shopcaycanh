@@ -2,17 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:shopcaycanh/models/product.dart';
 
 import '../../models/cart_item.dart';
+import 'package:flutter/foundation.dart';
+import '../../models/product.dart';
 
 class CartManager with ChangeNotifier {
   Map<String, CartItem> _items = {
-    'p1': CartItem(id: 'c1', title: 'Red Shirt', price: 22, quantity: 3)
+    // 'p1': CartItem(
+    //   id: 'c1',
+    //   title: 'Red Shirt',
+    //   price: 29.99,
+    //   quantity: 2,
+    // ),
   };
-
   int get productCount {
     return _items.length;
   }
 
-  List<CartItem> get product {
+  List<CartItem> get products {
     return _items.values.toList();
   }
 
@@ -30,19 +36,24 @@ class CartManager with ChangeNotifier {
 
   void addItem(Product product) {
     if (_items.containsKey(product.id)) {
+      //change quantity...
       _items.update(
-          product.id!,
-          (existingCarItem) => existingCarItem.copyWith(
-                quantity: existingCarItem.quantity + 1,
-              ));
+        product.id!,
+        (existingCartItem) => existingCartItem.copyWith(
+          quantity: existingCartItem.quantity + 1,
+        ),
+      );
     } else {
       _items.putIfAbsent(
-          product.id!,
-          () => CartItem(
-              id: 'c${DateTime.now().toIso8601String()}',
-              title: product.title,
-              quantity: 1,
-              price: product.price));
+        product.id!,
+        () => CartItem(
+          id: 'c${DateTime.now().toIso8601String()}',
+          title: product.title,
+          price: product.price,
+          quantity: 1,
+          imageUrl: product.imageUrl,
+        ),
+      );
     }
     notifyListeners();
   }
@@ -58,9 +69,11 @@ class CartManager with ChangeNotifier {
     }
     if (_items[productId]?.quantity as num > 1) {
       _items.update(
-          productId,
-          (existingCartItem) => existingCartItem.copyWith(
-              quantity: existingCartItem.quantity - 1));
+        productId,
+        (existingCartItem) => existingCartItem.copyWith(
+          quantity: existingCartItem.quantity - 1,
+        ),
+      );
     } else {
       _items.remove(productId);
     }

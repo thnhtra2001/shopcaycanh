@@ -51,6 +51,7 @@ class _AuthCardState extends State<AuthCard> {
               _authData['password']!,
               _authData['phone']!,
               _authData['name']!,
+              _authData['address']!,
             );
       }
     } catch (error) {
@@ -95,6 +96,7 @@ class _AuthCardState extends State<AuthCard> {
                   _buildPasswordConfirmField(),
                   _buildPhoneField(),
                   _buildNameField(),
+                  _buildAddressField(),
                 ],
                 const SizedBox(
                   height: 20,
@@ -231,6 +233,22 @@ class _AuthCardState extends State<AuthCard> {
       },
       onSaved: (value) {
         _authData['name'] = value!;
+      },
+    );
+  }
+
+  Widget _buildAddressField() {
+    return TextFormField(
+      decoration: const InputDecoration(labelText: 'Địa chỉ'),
+      keyboardType: TextInputType.name,
+      validator: (value) {
+        if (value == null || value.length < 5) {
+          return 'Địa chỉ không hợp lệ';
+        }
+        return null;
+      },
+      onSaved: (value) {
+        _authData['address'] = value!;
       },
     );
   }

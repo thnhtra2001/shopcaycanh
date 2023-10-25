@@ -37,7 +37,7 @@ class CartItemCard extends StatelessWidget {
       confirmDismiss: (directiion) {
         return showConfirmDialog(
           context,
-          'Ban co chac muon xoa gio hang',
+          'Bạn chắc chứ?',
         );
       },
       onDismissed: (direction) {
@@ -57,12 +57,7 @@ class CartItemCard extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         child: ListTile(
           leading: CircleAvatar(
-            child: Padding(
-              padding: const EdgeInsets.all(5),
-              child: FittedBox(
-                child: Text('\$${cardItem.price}'),
-              ),
-            ),
+            backgroundImage: NetworkImage(cardItem.imageUrl),
           ),
           title: Text(cardItem.title),
           subtitle: Text('Total: \$${(cardItem.price * cardItem.quantity)}'),

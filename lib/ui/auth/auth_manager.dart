@@ -25,8 +25,8 @@ class AuthManager with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> signup(String email, String password, String phone, String name) async {
-    _setAuthToken(await _authService.signup(email, password, phone, name));
+  Future<void> signup(String email, String password, String phone, String name, String address) async {
+    _setAuthToken(await _authService.signup(email, password, phone, name,address));
   }
 
   Future<void> login(String email, String password) async {
