@@ -48,7 +48,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               Container(
                   padding: EdgeInsets.only(left: 5),
                   child: Text(
-                    'Hình thức thanh toán:',
+                    'Hình thức thanh toánaaaaaaaaaaaa:',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 15,
