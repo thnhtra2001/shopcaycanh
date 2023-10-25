@@ -92,7 +92,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
           // ),
           Column(
             children: [productDetails(args)],
-          )
+          ),
+          Column(
+            children: [paymentNow()],
+          ),
         ],
       ),
     );
@@ -199,6 +202,25 @@ class _PaymentScreenState extends State<PaymentScreen> {
               )
             ]))
       ],
+    );
+  }
+
+  Widget paymentNow() {
+    return Container(
+      width: 200,
+      height: 40,
+      child: ElevatedButton(
+        onPressed: () {
+          print('chuyen den trang order');
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.red,
+        ),
+        child: const Text('Thanh toán',
+            style: TextStyle(
+              color: Colors.white,
+            )),
+      ),
     );
   }
 }

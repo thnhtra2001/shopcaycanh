@@ -75,12 +75,12 @@ class CartScreen extends StatelessWidget {
                           .read<PaymentManager>()
                           .addPaymentInCart(cart.products, cart.totalAmount);
                       // print('######################');
-                      // print(cart.products.length);
+                      print(cart.totalAmount);
                       // context.read<OrdersManager>().addOrder(
                       //       cart.products,
                       //       cart.totalAmount,
                       //     );
-                      Navigator.of(context).pushNamed(PaymentScreen.routeName);
+                      // Navigator.of(context).pushNamed(PaymentScreen.routeName);
                       cart.clear();
                     },
               style: TextButton.styleFrom(
