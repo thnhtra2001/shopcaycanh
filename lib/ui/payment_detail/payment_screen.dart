@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/models/cart_item.dart';
-import 'package:shopcaycanh/ui/payment/payment_manager.dart';
-// import 'package:shopcaycanh/ui/payment/payment_manager.dart';
-import '../../models/payment.dart';
+import '../../models/payment_cart.dart';
 import '../../models/product.dart';
 import '../../services/user_service.dart';
 import 'package:shopcaycanh/ui/cart/cart_manager.dart';
 
-import '../payment/payment_item_card.dart';
+import '../payment_detail/payment_item_card.dart';
 
-import '../payment/payments_selectiton.dart';
+import '../payment_detail/payments_selectiton.dart';
 
-class PaymentScreen extends StatefulWidget {
+class PaymentDetailScreen extends StatefulWidget {
   static const routeName = '/payment-detail';
-  const PaymentScreen({super.key});
+  const PaymentDetailScreen({super.key});
   @override
-  State<PaymentScreen> createState() => _PaymentScreenState();
+  State<PaymentDetailScreen> createState() => _PaymentDetailScreenState();
 }
 
-class _PaymentScreenState extends State<PaymentScreen> {
+class _PaymentDetailScreenState extends State<PaymentDetailScreen> {
   late Future<Map<String, dynamic>> _futureFetchUserInformation;
 
   @override
@@ -31,7 +28,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final Payment payment;
     final args = ModalRoute.of(context)!.settings.arguments as Product;
     // print(args.price);
     final deviceSize = MediaQuery.of(context).size;
@@ -48,7 +44,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               Container(
                   padding: EdgeInsets.only(left: 5),
                   child: Text(
-                    'Hình thức thanh toánaaaaaaaaaaaa:',
+                    'Hình thức thanh toán:',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 15,

@@ -3,17 +3,17 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../models/order_item.dart';
+import '../../models/payment_cart.dart';
 
-class OrderItemCard extends StatefulWidget {
-  final OrderItem order;
-  const OrderItemCard(this.order, {super.key});
+class PaymentItemCart extends StatefulWidget {
+  final PaymentItem payments;
+  const PaymentItemCart(this.payments, {super.key});
 
   @override
-  State<OrderItemCard> createState() => _OrderItemCardState();
+  State<PaymentItemCart> createState() => _PaymentItemCartState();
 }
 
-class _OrderItemCardState extends State<OrderItemCard> {
+class _PaymentItemCartState extends State<PaymentItemCart> {
   var _expanded = false;
 
   @override
@@ -21,20 +21,17 @@ class _OrderItemCardState extends State<OrderItemCard> {
     return Card(
       margin: const EdgeInsets.all(10),
       child: Column(
-        children: <Widget>[
-          buildOrderSummary(),
-          if (_expanded) buildOrderDetails()
-        ],
+        children: <Widget>[buildPaymentSummary(), buildPaymentDetails()],
       ),
     );
   }
 
-  Widget buildOrderDetails() {
+  Widget buildPaymentDetails() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
-      height: min(widget.order.productCount * 20.0 + 10, 100),
+      height: min(widget.payments.productCount * 20.0 + 10, 100),
       child: ListView(
-        children: widget.order.products
+        children: widget.payments.products
             .map(
               (prod) => Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,19 +58,11 @@ class _OrderItemCardState extends State<OrderItemCard> {
     );
   }
 
-  Widget buildOrderSummary() {
+  Widget buildPaymentSummary() {
     return ListTile(
-      title: Text('\$${widget.order.amount}'),
+      title: Text('\$${widget.payments.amount}'),
       subtitle: Text(
-        DateFormat('dd/MM/yyyy hh:mm').format(widget.order.dateTime),
-      ),
-      trailing: IconButton(
-        icon: Icon(_expanded ? Icons.expand_less : Icons.expand_more),
-        onPressed: () {
-          setState(() {
-            _expanded = !_expanded;
-          });
-        },
+        DateFormat('dd/MM/yyyy hh:mm').format(widget.payments.dateTime),
       ),
     );
   }

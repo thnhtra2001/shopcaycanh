@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:shopcaycanh/ui/payment_cart/payment_cart_screen.dart';
+import '../screens.dart';
 import 'package:provider/provider.dart';
-import 'package:shopcaycanh/ui/orders/order_manager.dart';
-import 'package:shopcaycanh/ui/payment/payment_screen.dart';
 
 import 'cart_manager.dart';
 import 'cart_item_card.dart';
-import '../screens.dart';
-import '../payment/payment_manager.dart';
+
+import '../payment_cart/payment_cart_manager.dart';
+
+import '../orders/order_manager.dart';
 
 class CartScreen extends StatelessWidget {
   static const routeName = '/cart';
@@ -54,13 +56,13 @@ class CartScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             const Text(
-              'Total',
+              'Tổng',
               style: TextStyle(fontSize: 20),
             ),
             const Spacer(),
             Chip(
               label: Text(
-                '\$${cart.totalAmount.toStringAsFixed(2)}',
+                '${cart.totalAmount.toStringAsFixed(2)}',
                 style: TextStyle(
                   color: Theme.of(context).primaryTextTheme.titleLarge?.color,
                 ),
@@ -71,17 +73,12 @@ class CartScreen extends StatelessWidget {
               onPressed: cart.totalAmount <= 0
                   ? null
                   : () {
-                      context
-                          .read<PaymentManager>()
-                          .addPaymentInCart(cart.products, cart.totalAmount);
-                      // print('######################');
-                      print(cart.totalAmount);
-                      // context.read<OrdersManager>().addOrder(
-                      //       cart.products,
-                      //       cart.totalAmount,
-                      //     );
-                      // Navigator.of(context).pushNamed(PaymentScreen.routeName);
+                      context.read<PaymentsManager>().addOrder(
+                            cart.products,
+                            cart.totalAmount,
+                          );
                       cart.clear();
+                      Navigator.of(context).pushNamed(PaymentCartScreen.routeName);
                     },
               style: TextButton.styleFrom(
                 textStyle: TextStyle(color: Theme.of(context).primaryColor),
