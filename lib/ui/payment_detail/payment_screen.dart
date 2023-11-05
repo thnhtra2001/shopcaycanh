@@ -77,17 +77,8 @@ class _PaymentDetailScreenState extends State<PaymentDetailScreen> {
               return const Center(child: CircularProgressIndicator());
             },
           ),
-          // Consumer<PaymentManager>(
-          //   builder: (context, paymentManager, child) {
-          //     return ListView.builder(
-          //       itemCount: paymentManager!.productSelectedCount,
-          //       itemBuilder: (context, index) =>
-          //           PaymentItemCard(paymentManager.payments[index]),
-          //     );
-          //   },
-          // ),
           Column(
-            children: [productDetails(args)],
+            children: [buildPaymentDetails(args)],
           ),
           Column(
             children: [paymentNow()],
@@ -163,43 +154,55 @@ class _PaymentDetailScreenState extends State<PaymentDetailScreen> {
       ],
     );
   }
-
-  Widget productDetails(args) {
-    return Column(
-      children: [
-        Container(
-          height: 40,
-          alignment: Alignment.centerLeft,
-          child: Text('Sản phẩm:',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-        ),
-        Container(
-            padding: const EdgeInsets.only(left: 20),
-            color: Colors.white,
-            height: 100,
-            child: Row(children: [
-              Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 0.5,
-                      )),
-                  child: CircleAvatar(
-                      backgroundImage: NetworkImage(args.imageUrl))),
-              const SizedBox(width: 7),
-              Text(
-                args.title ?? '',
-              ),
-              const SizedBox(width: 7),
-              Container(
-                child: Text(args.price.toString()),
-              )
-            ]))
-      ],
+  Widget buildPaymentDetails(Product args) {
+    return Container(
+      // padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(args.imageUrl),
+                      ),
+                      title: Text(args.title),
+                      subtitle: Text('Tổng: ${(args.price)}'),
+                      trailing: Text('SL: 1'),
+                    )
     );
   }
+  // Widget productDetails(args) {
+  //   return Column(
+  //     children: [
+  //       Container(
+  //         height: 40,
+  //         alignment: Alignment.centerLeft,
+  //         child: Text('Sản phẩm:',
+  //             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+  //       ),
+  //       Container(
+  //           padding: const EdgeInsets.only(left: 20),
+  //           color: Colors.white,
+  //           height: 100,
+  //           child: Row(children: [
+  //             Container(
+  //                 padding: const EdgeInsets.all(12),
+  //                 decoration: BoxDecoration(
+  //                     borderRadius: BorderRadius.circular(100),
+  //                     border: Border.all(
+  //                       color: Colors.black,
+  //                       width: 0.5,
+  //                     )),
+  //                 child: CircleAvatar(
+  //                     backgroundImage: NetworkImage(args.imageUrl))),
+  //             const SizedBox(width: 7),
+  //             Text(
+  //               args.title ?? '',
+  //             ),
+  //             const SizedBox(width: 7),
+  //             Container(
+  //               child: Text(args.price.toString()),
+  //             )
+  //           ]))
+  //     ],
+  //   );
+  // }
 
   Widget paymentNow() {
     return Container(
@@ -212,7 +215,7 @@ class _PaymentDetailScreenState extends State<PaymentDetailScreen> {
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.red,
         ),
-        child: const Text('Thanh toán',
+        child: const Text('Thanh toánnnn',
             style: TextStyle(
               color: Colors.white,
             )),

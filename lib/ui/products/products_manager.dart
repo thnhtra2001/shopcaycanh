@@ -11,34 +11,7 @@ import '../../services/products_service.dart';
 class ProductsManager with ChangeNotifier {
   final ProductsService _productsService = ProductsService();
   List<Product> _items = [
-    // Product(
-    //   id: 'p1',
-    //   title: 'Red Shirt',
-    //   description: 'A red shirt - it is pretty red!',
-    //   price: 29.99,
-    //   imageUrl:
-    //       'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
-    //   isFavorite: true,
-    // ),
-    // Product(
-    //   id: 'p1',
-    //   title: 'Red Shirt',
-    //   description: 'A red shirt - it is pretty red!',
-    //   price: 29.99,
-    //   imageUrl:
-    //       'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
-    //   isFavorite: true,
-    // ),
   ];
-  // // set authToken(AuthToken? authToken) {
-  // //   _productsService.authToken = authToken;
-  // // }
-  // final ProductsService _productsService;
-  // ProductsManager([AuthToken? authToken])
-  //     : _productsService = ProductsService(authToken);
-  // set authToken(AuthToken? authToken) {
-  //   _productsService.authToken = authToken;
-  // }
 
   int get itemCount {
     return _items.length;

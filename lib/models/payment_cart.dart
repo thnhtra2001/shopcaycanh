@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:shopcaycanh/models/cart_item.dart';
 
 import 'cart_item.dart';
 
 class PaymentItem {
-  final String? id;
-  final double amount;
-  final List<CartItem> products;
-  final DateTime dateTime;
+  late  String? id;
+  late double amount;
+  late List<CartItem> products;
+  late DateTime dateTime;
 
   int get productCount {
     return products.length;
   }
-
   PaymentItem({
     this.id,
     required this.amount,
@@ -23,6 +23,7 @@ class PaymentItem {
     String? id,
     double? amount,
     List<CartItem>? products,
+    PaymentItem? payments,
     DateTime? dateTime,
   }) {
     return PaymentItem(
@@ -32,4 +33,6 @@ class PaymentItem {
       dateTime: dateTime ?? this.dateTime,
     );
   }
+
+  void add(int i, PaymentItem paymentItem) {}
 }

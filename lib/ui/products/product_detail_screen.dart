@@ -50,12 +50,6 @@ class ProductDetailScreen extends StatelessWidget {
             height: 40,
             child: ElevatedButton(
               onPressed: () {
-                // context.read<PaymentManager>().addPaymentInProductDetail(
-                //     title: product.title,
-                //     description: product.description,
-                //     price: product.price,
-                //     imageUrl: product.imageUrl,
-                //     id: product.id);
                 print(product.title);
                 Navigator.of(context).pushNamed(PaymentDetailScreen.routeName,
                     arguments: Product(
