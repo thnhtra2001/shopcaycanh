@@ -26,6 +26,13 @@ class CartManager with ChangeNotifier {
     });
     return total;
   }
+    int get totalQuantity {
+    var totalQuantity = 0;
+    _items.forEach((key, cartItem) {
+      totalQuantity +=  cartItem.quantity;
+    });
+    return totalQuantity;
+  }
 
   void addItem(Product product) {
     if (_items.containsKey(product.id)) {

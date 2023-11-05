@@ -6,25 +6,30 @@ import '../../models/order_item.dart';
 import 'package:flutter/foundation.dart';
 
 class OrdersManager with ChangeNotifier {
-  final List<OrderItem> _orders = [];
+  List<OrderItem> _items = [];
+
   int get orderCount {
-    return _orders.length;
+    return _items.length;
   }
 
-  List<OrderItem> get orders {
-    return [..._orders];
+  List<OrderItem> get items {
+    return [..._items];
   }
 
-  void addOrder(List<CartItem> cartProducts, double total) async {
-    _orders.insert(
-      0,
-      OrderItem(
-        id: 'o${DateTime.now().toIso8601String()}',
-        amount: total,
-        products: cartProducts,
-        dateTime: DateTime.now(),
-      ),
-    );
+  OrderItem? findById(String id) {
+    try {
+      return _items.firstWhere((item) => item.id == id);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  void fetchOrders() async {
     notifyListeners();
+  }
+
+  void addOrder(OrderItem order) async {
+      _items.add(order);
+      notifyListeners();
   }
 }

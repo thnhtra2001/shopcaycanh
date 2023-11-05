@@ -2,6 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:shopcaycanh/models/order_item.dart';
+import 'package:shopcaycanh/ui/orders/order_manager.dart';
+import 'package:shopcaycanh/ui/orders/order_screen.dart';
 import 'package:shopcaycanh/ui/payment_cart/payments_selectiton.dart';
 import 'package:shopcaycanh/ui/widget/custom_rich_text.dart';
 
@@ -72,7 +76,7 @@ class _PaymentItemCardState extends State<PaymentItemCard> {
           // buildOrderSummary(),
           buildPaymentDetails(),
           buildProductTotal(),
-          SizedBox(height: 20),
+          SizedBox(height: 10),
           paymentNow(),
           const SizedBox(
             height: 20,
@@ -186,7 +190,11 @@ class _PaymentItemCardState extends State<PaymentItemCard> {
       height: 40,
       child: ElevatedButton(
         onPressed: () {
-          print('chuyen den trang order');
+          context.read<OrdersManager>().addOrder(
+            OrderItem(products: context.read<PaymentItem>().products, amount: context.read<PaymentItem>().amount, dateTime: context.read<PaymentItem>().dateTime)
+          );
+          Navigator.of(context).pushNamed(OrdersScreen.routeName);
+          print('AAAAAAAAAAAAAAAAAAAAAAa');
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.red,
@@ -199,22 +207,31 @@ class _PaymentItemCardState extends State<PaymentItemCard> {
     );
   }
 
-    Widget buildProductTotal () {
+  Widget buildProductTotal() {
     return Container(
-      height: 250,
+      height: 100,
       child: Container(
         child: Column(
-          children: widget.payment.products
-              .map((prod) => Column(
-                children: [
-                  CustomRowText(
-                                  title:'${prod.quantity}',
-                                  value:'${prod.price}',
-                                ),
-                ],
-              )
-                  )
-              .toList(),
+          children: [
+            CustomRowText(
+              title: 'Tổng số lượng',
+              value: '${widget.payment.totalQuantity}',
+            ),
+                        CustomRowText(
+              title: 'Tổng giá',
+              value: '${widget.payment.amount}',
+            )
+          ],
+          // children: widget.payment.products
+          //     .map((prod) => Column(
+          //           children: [
+          //             CustomRowText(
+          //               title: '${prod.quantity}',
+          //               value: '${prod.price}',
+          //             ),
+          //           ],
+          //         ))
+          //     .toList(),
         ),
       ),
     );

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shopcaycanh/models/payment_cart.dart';
 
 import '../../models/order_item.dart';
 
@@ -14,17 +15,12 @@ class OrderItemCard extends StatefulWidget {
 }
 
 class _OrderItemCardState extends State<OrderItemCard> {
-  var _expanded = false;
-
   @override
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.all(10),
       child: Column(
-        children: <Widget>[
-          buildOrderSummary(),
-          if (_expanded) buildOrderDetails()
-        ],
+        children: <Widget>[buildOrderSummary(), buildOrderDetails()],
       ),
     );
   }
@@ -66,14 +62,6 @@ class _OrderItemCardState extends State<OrderItemCard> {
       title: Text('\$${widget.order.amount}'),
       subtitle: Text(
         DateFormat('dd/MM/yyyy hh:mm').format(widget.order.dateTime),
-      ),
-      trailing: IconButton(
-        icon: Icon(_expanded ? Icons.expand_less : Icons.expand_more),
-        onPressed: () {
-          setState(() {
-            _expanded = !_expanded;
-          });
-        },
       ),
     );
   }

@@ -79,7 +79,8 @@ class CartScreen extends StatelessWidget {
                   : () {
                       context.read<PaymentsManager>().addPayment(
                             cart.products,
-                            cart.totalAmount
+                            cart.totalAmount,
+                            cart.totalQuantity
                           );
                       cart.clear();
                       Navigator.of(context).pushNamed(PaymentCartScreen.routeName);

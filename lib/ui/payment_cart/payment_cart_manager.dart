@@ -14,11 +14,10 @@ class PaymentsManager with ChangeNotifier {
     return _payments.length;
   }
 
-  List<PaymentItem> get payments {
+  List<PaymentItem> get payment {
     return [..._payments];
   }
-
-  void addPayment(List<CartItem> cartProducts, double total) async {
+  void addPayment(List<CartItem> cartProducts, double total, int totalQuantity) async {
     _payments.insert(
       0,
       PaymentItem(
@@ -26,6 +25,7 @@ class PaymentsManager with ChangeNotifier {
         amount: total,
         products: cartProducts,
         dateTime: DateTime.now(),
+        totalQuantity: totalQuantity,
       ),
     );
     notifyListeners();

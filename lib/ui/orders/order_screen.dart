@@ -14,14 +14,14 @@ class OrdersScreen extends StatelessWidget {
     final ordersManager = OrdersManager();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Trang thanh toan'),
+        title: const Text('Đơn đã đặt'),
       ),
       drawer: const AppDrawer(),
       body: Consumer<OrdersManager>(
         builder: (ctx, ordersManager, child) {
           return ListView.builder(
-            itemCount: 1,
-            itemBuilder: (ctx, i) => OrderItemCard(ordersManager.orders[i]),
+            itemCount: ordersManager.orderCount,
+            itemBuilder: (ctx, i) => OrderItemCard(ordersManager.items[i]),
           );
         },
       ),

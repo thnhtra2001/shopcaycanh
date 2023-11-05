@@ -13,14 +13,14 @@ class CustomRichText extends StatelessWidget {
       text: TextSpan(
         text: title ?? '',
         style: const TextStyle(
-          color: Colors.black,
+          color: Colors.red,
           fontWeight: FontWeight.bold,
         ),
         children: <TextSpan>[
           TextSpan(
             text: value ?? '',
             style:const TextStyle(
-              color: Colors.black,
+              color: Colors.red,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -53,8 +53,8 @@ class CustomRowText extends StatelessWidget {
         children: [
           Text(
             title ?? '',
-            style: TextStyle(
-              color: textColor,
+            style: const TextStyle(
+              color: Colors.black,
               fontSize: 18,
               fontWeight: FontWeight.w400,
             ),
@@ -62,8 +62,8 @@ class CustomRowText extends StatelessWidget {
           const Spacer(),
           Text(
             value ?? '',
-            style: TextStyle(
-              color: textColorNumber,
+            style: const TextStyle(
+              color: Colors.red,
               fontSize: 18,
               fontWeight: FontWeight.w500,
             ),

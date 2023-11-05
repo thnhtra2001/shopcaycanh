@@ -215,7 +215,7 @@ class _PaymentDetailScreenState extends State<PaymentDetailScreen> {
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.red,
         ),
-        child: const Text('Thanh toánnnn',
+        child: const Text('Thanh toán',
             style: TextStyle(
               color: Colors.white,
             )),

@@ -7,7 +7,7 @@ import 'payment_cart_manager.dart';
 import '../payment_cart/payment_cart_item.dart';
 
 class PaymentCartScreen extends StatelessWidget {
-  static const routeName = '/orders';
+  static const routeName = '/payment-cart';
   const PaymentCartScreen({super.key});
 
   @override
@@ -22,7 +22,7 @@ class PaymentCartScreen extends StatelessWidget {
         builder: (ctx, paymentsManager, child) {
           return ListView.builder(
             itemCount: 1,
-            itemBuilder: (ctx, i) => PaymentItemCard(paymentsManager.payments[i]),
+            itemBuilder: (ctx, i) => PaymentItemCard(paymentsManager.payment[i]),
           );
         },
       ),
