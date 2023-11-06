@@ -34,7 +34,7 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Shop Cay Canh'),
+          title: const Text('Shop cây cảnh'),
           actions: <Widget>[
             buildProductFilterMenu(),
             buildShoppingCartIcon(),

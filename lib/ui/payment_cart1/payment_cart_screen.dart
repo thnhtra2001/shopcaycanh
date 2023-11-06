@@ -13,6 +13,7 @@ import '../payment_cart1/payment_cart_item.dart';
 import '../payment_cart/payment_cart_manager.dart';
 
 import '../orders/order_manager.dart';
+import '../shared/dialog_utils.dart';
 import '../widget/custom_rich_text.dart';
 
 class PaymentCartScreen1 extends StatefulWidget {
@@ -215,7 +216,8 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
               .read<OrdersManager>()
               .addOrders(cart.products, cart.totalAmount, cart.totalQuantity);
           cart.clear();
-          Navigator.of(context).pushNamed(OrdersScreen.routeName);
+              showMyDialog(context);
+          // Navigator.of(context).pushNamed(OrdersScreen.routeName);
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.red,
@@ -226,5 +228,15 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
             )),
       ),
     );
+  //   return TextButton(
+  //       onPressed: () => {
+  //             context.read<OrdersManager>().addOrders(
+  //                 cart.products, cart.totalAmount, cart.totalQuantity),
+  //             cart.clear(),
+  //             showMyDialog(context),
+  //             // Navigator.of(context).pushReplacementNamed('/')
+
+  //           },
+  //       child: const Text('Thanh toán'));
   }
 }
