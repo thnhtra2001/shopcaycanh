@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
 import 'package:shopcaycanh/ui/payment_cart/payment_cart_screen.dart';
+import 'package:shopcaycanh/ui/payment_cart1/payment_cart_screen.dart';
 import '../screens.dart';
 import 'package:provider/provider.dart';
 
@@ -77,13 +78,14 @@ class CartScreen extends StatelessWidget {
               onPressed: cart.totalAmount <= 0
                   ? null
                   : () {
-                      context.read<PaymentsManager>().addPayment(
-                            cart.products,
-                            cart.totalAmount,
-                            cart.totalQuantity
-                          );
-                      cart.clear();
-                      Navigator.of(context).pushNamed(PaymentCartScreen.routeName);
+                    // print(cart.totalQuantity);
+                    //   context.read<PaymentsManager>().addPayment(
+                    //         cart.products,
+                    //         cart.totalAmount,
+                    //         cart.totalQuantity
+                    //       );
+                      // cart.clear();
+                      Navigator.of(context).pushNamed(PaymentCartScreen1.routeName);
                     },
               style: TextButton.styleFrom(
                 textStyle: TextStyle(color: Theme.of(context).primaryColor),

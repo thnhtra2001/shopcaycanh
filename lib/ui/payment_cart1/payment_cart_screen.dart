@@ -1,26 +1,29 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-import 'package:shopcaycanh/models/order_item.dart';
-import 'package:shopcaycanh/ui/orders/order_manager.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
-import 'package:shopcaycanh/ui/payment_cart/payments_selectiton.dart';
-import 'package:shopcaycanh/ui/widget/custom_rich_text.dart';
-
-import '../../models/payment_cart.dart';
+import 'package:shopcaycanh/ui/payment_cart/payment_cart_screen.dart';
+import 'package:shopcaycanh/ui/payment_cart1/payments_selectiton.dart';
 import '../../services/user_service.dart';
+import '../screens.dart';
+import 'package:provider/provider.dart';
 
-class PaymentItemCard extends StatefulWidget {
-  final PaymentItem payment;
-  const PaymentItemCard(this.payment, {super.key});
+import '../cart/cart_manager.dart';
+import '../payment_cart1/payment_cart_item.dart';
+
+import '../payment_cart/payment_cart_manager.dart';
+
+import '../orders/order_manager.dart';
+import '../widget/custom_rich_text.dart';
+
+class PaymentCartScreen1 extends StatefulWidget {
+  static const routeName = '/payment-cart1';
+
+  const PaymentCartScreen1({super.key});
+
   @override
-  State<PaymentItemCard> createState() => _PaymentItemCardState();
+  State<PaymentCartScreen1> createState() => _PaymentCartScreen1State();
 }
 
-class _PaymentItemCardState extends State<PaymentItemCard> {
-  late OrderItem _order;
+class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
   late Future<Map<String, dynamic>> _futureFetchUserInformation;
   @override
   void initState() {
@@ -30,11 +33,15 @@ class _PaymentItemCardState extends State<PaymentItemCard> {
 
   @override
   Widget build(BuildContext context) {
-    final deviceSize = MediaQuery.of(context).size;
-    return Card(
-      child: Column(
+    final cart = context.watch<CartManager>();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Trang thanh toán'),
+      ),
+      body: Column(
         children: <Widget>[
           SizedBox(height: 20),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
@@ -74,19 +81,16 @@ class _PaymentItemCardState extends State<PaymentItemCard> {
               return const Center(child: CircularProgressIndicator());
             },
           ),
-          // buildOrderSummary(),
-          buildPaymentDetails(),
-          buildProductTotal(),
-          SizedBox(height: 10),
-          paymentNow(),
-          const SizedBox(
-            height: 20,
+          // buildCartSummary(cart, context),
+          const SizedBox(height: 10),
+          Expanded(
+            child: buildCartDetails(cart),
           ),
+          buildProductTotal(cart)
         ],
       ),
     );
   }
-
   Widget paymentAddress(data) {
     return Column(children: [
       Container(
@@ -112,8 +116,7 @@ class _PaymentItemCardState extends State<PaymentItemCard> {
           ))
     ]);
   }
-
-  Widget inforUser(data) {
+    Widget inforUser(data) {
     return Column(
       children: [
         Container(
@@ -154,61 +157,19 @@ class _PaymentItemCardState extends State<PaymentItemCard> {
       ],
     );
   }
-
-  Widget buildPaymentDetails() {
-    return Container(
-      height: 250,
-      child: Container(
-        child: Column(
-          children: widget.payment.products
-              .map((prod) => Card(
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: NetworkImage(prod.imageUrl),
-                      ),
-                      title: Text(prod.title),
-                      subtitle: Text('Tổng: ${(prod.price * prod.quantity)}'),
-                      trailing: Text('SL: ${prod.quantity}'),
-                    ),
-                  ))
-              .toList(),
-        ),
-      ),
+  Widget buildCartDetails(CartManager cart) {
+    return ListView(
+      children: cart.productEntries
+          .map(
+            (entry) => CartItemCard(
+              productId: entry.key,
+              cardItem: entry.value,
+            ),
+          )
+          .toList(),
     );
   }
-
-  // Widget buildOrderSummary() {
-  //   return ListTile(
-  //     title: Text('${widget.payment.amount}'),
-  //     subtitle: Text(
-  //       DateFormat('dd/MM/yyyy hh:mm').format(widget.payment.dateTime),
-  //     ),
-  //   );
-  // }
-  Widget paymentNow() {
-    return Container(
-      width: 200,
-      height: 40,
-      child: ElevatedButton(
-        onPressed: () {
-          context.read<OrdersManager>().addOrder(
-            _order = OrderItem(products: context.read<PaymentItem>().products, amount: context.read<PaymentItem>().amount, dateTime: context.read<PaymentItem>().dateTime)
-          );
-          Navigator.of(context).pushNamed(OrdersScreen.routeName);
-          print('AAAAAAAAAAAAAAAAAAAAAAa');
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.red,
-        ),
-        child: const Text('Thanh toán',
-            style: TextStyle(
-              color: Colors.white,
-            )),
-      ),
-    );
-  }
-
-  Widget buildProductTotal() {
+  Widget buildProductTotal(CartManager cart) {
     return Container(
       height: 100,
       child: Container(
@@ -216,11 +177,11 @@ class _PaymentItemCardState extends State<PaymentItemCard> {
           children: [
             CustomRowText(
               title: 'Tổng số lượng',
-              value: '${widget.payment.totalQuantity}',
+              value: '${cart.totalQuantity}',
             ),
                         CustomRowText(
               title: 'Tổng giá',
-              value: '${widget.payment.amount}',
+              value: '${cart.totalAmount}',
             )
           ],
           // children: widget.payment.products

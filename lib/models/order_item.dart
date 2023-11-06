@@ -31,5 +31,8 @@ class OrderItem {
       products: products ?? this.products,
       dateTime: dateTime ?? this.dateTime,
     );
+    
   }
+  void add(int i, OrderItem orderItem) {}
+
 }

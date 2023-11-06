@@ -5,6 +5,7 @@ import 'package:shopcaycanh/ui/cart/cart_screen.dart';
 import 'package:shopcaycanh/ui/orders/order_manager.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
 import 'package:shopcaycanh/ui/payment_cart/payment_cart_screen.dart';
+import 'package:shopcaycanh/ui/payment_cart1/payment_cart_screen.dart';
 import 'package:shopcaycanh/ui/payment_detail/payment_screen.dart';
 import 'package:shopcaycanh/ui/products/product_detail_screen.dart';
 import 'package:shopcaycanh/ui/products/product_overview_screen.dart';
@@ -74,6 +75,8 @@ class MyApp extends StatelessWidget {
               PersonalScreen.routeName: (context) => const PersonalScreen(),
               PaymentDetailScreen.routeName: (context) => const PaymentDetailScreen(),
               PaymentCartScreen.routeName: (context) => const PaymentCartScreen(),
+              PaymentCartScreen1.routeName: (context) => const PaymentCartScreen1(),
+
 
             },
             onGenerateRoute: (settings) {
