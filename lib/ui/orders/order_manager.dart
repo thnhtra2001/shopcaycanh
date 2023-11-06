@@ -1,35 +1,36 @@
 import 'package:flutter/widgets.dart';
+import 'package:shopcaycanh/models/cart_item.dart';
+import 'package:shopcaycanh/models/order_item.dart';
 
-import '../../models/cart_item.dart';
-import '../../models/order_item.dart';
 
 import 'package:flutter/foundation.dart';
 
+import '../../models/product.dart';
+
 class OrdersManager with ChangeNotifier {
-  List<OrderItem> _items = [];
-
-  int get orderCount {
-    return _items.length;
+  final List<OrderItem> _orders = [];
+  int get ordersCount {
+    return _orders.length;
   }
 
-  List<OrderItem> get items {
-    return [..._items];
+  List<OrderItem> get orders {
+    return [..._orders];
   }
-
-  OrderItem? findById(String id) {
-    try {
-      return _items.firstWhere((item) => item.id == id);
-    } catch (error) {
-      return null;
-    }
-  }
-
-  void fetchOrders() async {
+  void addOrders(List<CartItem> cartProducts, double total, int totalQuantity) async {
+    _orders.insert(
+      0,
+      OrderItem(
+        id: 'o${DateTime.now().toIso8601String()}',
+        amount: total,
+        products: cartProducts,
+        dateTime: DateTime.now(),
+        totalQuantity: totalQuantity,
+      ),
+    );
     notifyListeners();
   }
-
-  void addOrder(OrderItem order) async {
-      _items.add(order);
-      notifyListeners();
-  }
+  // void addOrders(OrderItem orders){
+  //   _orders.add(orders);
+  //   notifyListeners();
+  // }
 }

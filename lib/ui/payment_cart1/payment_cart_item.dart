@@ -88,10 +88,11 @@ class _CartItemCardState extends State<CartItemCard> {
           ),
           title: Text(widget.cardItem.title),
           subtitle: Text(
-              'Tổng: ${(widget.cardItem.price * widget.cardItem.quantity)}'),
+              'Giá: ${(widget.cardItem.price)}'),
           trailing: Text('SL: ${widget.cardItem.quantity}'),
         ),
       ),
     );
   }
+
 }

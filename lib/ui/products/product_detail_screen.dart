@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shopcaycanh/models/cart_item.dart';
 import 'package:shopcaycanh/models/payment_cart.dart';
 import 'package:shopcaycanh/ui/cart/cart_screen.dart';
+import 'package:shopcaycanh/ui/payment_cart1/payment_cart_screen.dart';
 import 'package:shopcaycanh/ui/products/top_right_badge.dart';
 
 import '../../models/product.dart';
@@ -50,14 +51,17 @@ class ProductDetailScreen extends StatelessWidget {
             height: 40,
             child: ElevatedButton(
               onPressed: () {
-                print(product.title);
-                Navigator.of(context).pushNamed(PaymentDetailScreen.routeName,
-                    arguments: Product(
-                        title: product.title,
-                        description: product.description,
-                        price: product.price,
-                        imageUrl: product.imageUrl)
-                        );
+                final cart = context.read<CartManager>();
+                cart.addItem(product);
+                Navigator.of(context).pushNamed(PaymentCartScreen1.routeName);
+                //   print(product.title);
+                //   Navigator.of(context).pushNamed(PaymentDetailScreen.routeName,
+                //       arguments: Product(
+                //           title: product.title,
+                //           description: product.description,
+                //           price: product.price,
+                //           imageUrl: product.imageUrl)
+                //           );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,

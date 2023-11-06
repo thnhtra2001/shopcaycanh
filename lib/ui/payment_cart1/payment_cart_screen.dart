@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopcaycanh/models/cart_item.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
 import 'package:shopcaycanh/ui/payment_cart/payment_cart_screen.dart';
 import 'package:shopcaycanh/ui/payment_cart1/payments_selectiton.dart';
@@ -86,11 +87,13 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
           Expanded(
             child: buildCartDetails(cart),
           ),
-          buildProductTotal(cart)
+          buildProductTotal(cart),
+          paymentNow(cart),
         ],
       ),
     );
   }
+
   Widget paymentAddress(data) {
     return Column(children: [
       Container(
@@ -116,7 +119,8 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
           ))
     ]);
   }
-    Widget inforUser(data) {
+
+  Widget inforUser(data) {
     return Column(
       children: [
         Container(
@@ -157,6 +161,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
       ],
     );
   }
+
   Widget buildCartDetails(CartManager cart) {
     return ListView(
       children: cart.productEntries
@@ -169,6 +174,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
           .toList(),
     );
   }
+
   Widget buildProductTotal(CartManager cart) {
     return Container(
       height: 100,
@@ -179,7 +185,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
               title: 'Tổng số lượng',
               value: '${cart.totalQuantity}',
             ),
-                        CustomRowText(
+            CustomRowText(
               title: 'Tổng giá',
               value: '${cart.totalAmount}',
             )
@@ -195,6 +201,29 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
           //         ))
           //     .toList(),
         ),
+      ),
+    );
+  }
+
+  Widget paymentNow(CartManager cart) {
+    return Container(
+      width: 200,
+      height: 40,
+      child: ElevatedButton(
+        onPressed: () {
+          context
+              .read<OrdersManager>()
+              .addOrders(cart.products, cart.totalAmount, cart.totalQuantity);
+          cart.clear();
+          Navigator.of(context).pushNamed(OrdersScreen.routeName);
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.red,
+        ),
+        child: const Text('Thanh toán',
+            style: TextStyle(
+              color: Colors.white,
+            )),
       ),
     );
   }

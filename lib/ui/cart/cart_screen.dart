@@ -90,7 +90,7 @@ class CartScreen extends StatelessWidget {
               style: TextButton.styleFrom(
                 textStyle: TextStyle(color: Theme.of(context).primaryColor),
               ),
-              child: const Text('Đặt hàng ngay'),
+              child: const Text('Đặt hàng'),
             ),
           ],
         ),

@@ -101,7 +101,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit product'),
+        title: const Text('Chỉnh sửa sản phẩm'),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.save),

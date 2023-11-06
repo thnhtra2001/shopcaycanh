@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         ],
         child: Consumer<AuthManager>(builder: (context, authManager, child) {
           return MaterialApp(
-            title: 'Book Shop',
+            title: 'B1910315',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               fontFamily: 'Lato',
@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
                   const UserProductsScreen(),
               PersonalScreen.routeName: (context) => const PersonalScreen(),
               PaymentDetailScreen.routeName: (context) => const PaymentDetailScreen(),
-              PaymentCartScreen.routeName: (context) => const PaymentCartScreen(),
+              // PaymentCartScreen.routeName: (context) => const PaymentCartScreen(),
               PaymentCartScreen1.routeName: (context) => const PaymentCartScreen1(),
 
 
