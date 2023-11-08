@@ -9,6 +9,9 @@ class OrderItem {
   late List<CartItem> products;
   late DateTime dateTime;
   late int totalQuantity;
+  late String name;
+  late String phone;
+  late String address;
 
   int get productCount {
     return products.length;
@@ -18,6 +21,9 @@ class OrderItem {
     required this.amount,
     required this.products,
     required this.totalQuantity,
+    required this.name,
+    required this.phone,
+    required this.address,
     DateTime? dateTime,
   }) : dateTime = dateTime ?? DateTime.now();
 
@@ -28,6 +34,9 @@ class OrderItem {
     OrderItem? payments,
     DateTime? dateTime,
     int? totalQuantity,
+    String? name,
+    String? phone,
+    String? address,
   }) {
     return OrderItem(
       id: id ?? this.id,
@@ -35,8 +44,11 @@ class OrderItem {
       products: products ?? this.products,
       dateTime: dateTime ?? this.dateTime,
       totalQuantity: totalQuantity ?? this.totalQuantity,
+      name: name ?? this.name,
+      phone: phone ?? this.phone,
+      address: address ?? this.address,
     );
   }
 
-  void add(int i, OrderItem paymentItem, int totalQuantity) {}
+  void add(int i, OrderItem paymentItem, int totalQuantity, String name, String phone, String address) {}
 }

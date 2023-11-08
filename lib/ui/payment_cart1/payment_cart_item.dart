@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/ui/payment_cart1/payments_selectiton.dart';
-
 import '../../models/cart_item.dart';
 import '../../services/user_service.dart';
 import '../shared/dialog_utils.dart';
@@ -27,20 +26,6 @@ class _CartItemCardState extends State<CartItemCard> {
     return Card(
       child: Column(
         children: [
-          // Container(
-          //     padding: EdgeInsets.only(left: 5),
-          //     child: Text(
-          //       'Hình thức thanh toán:',
-          //       style: TextStyle(
-          //         color: Colors.black,
-          //         fontSize: 15,
-          //       ),
-          //     )),
-          // Container(
-          //   alignment: Alignment.centerRight,
-          //   padding: EdgeInsets.only(right: 5),
-          //   child: PaymentSelectionDropdown(),
-          // ),
           Dismissible(
             key: ValueKey(widget.cardItem.id),
             background: Container(

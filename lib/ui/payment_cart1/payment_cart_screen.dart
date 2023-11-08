@@ -43,7 +43,6 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
       body: Column(
         children: <Widget>[
           SizedBox(height: 20),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
@@ -89,7 +88,24 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
             child: buildCartDetails(cart),
           ),
           buildProductTotal(cart),
-          paymentNow(cart),
+          FutureBuilder<Map<String, dynamic>>(
+            future: _futureFetchUserInformation,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return Center(
+                  child: Container(
+                      alignment: Alignment.center,
+                      // width: deviceSize.width * 0.9,
+                      child: Column(
+                        children: [
+                          paymentNow(snapshot, cart),
+                        ],
+                      )),
+                );
+              }
+              return const Center(child: CircularProgressIndicator());
+            },
+          ),
         ],
       ),
     );
@@ -206,7 +222,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
     );
   }
 
-  Widget paymentNow(CartManager cart) {
+  Widget paymentNow(snapshot, cart) {
     return Container(
       width: 200,
       height: 40,
@@ -214,9 +230,9 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
         onPressed: () {
           context
               .read<OrdersManager>()
-              .addOrders(cart.products, cart.totalAmount, cart.totalQuantity);
+              .addOrders(cart.products, cart.totalAmount, cart.totalQuantity, snapshot.data['name'], snapshot.data['phone'], snapshot.data['address']);
           // cart.clear();
-              showMyDialog(context, cart);
+          showMyDialog(context, cart);
           // Navigator.of(context).pushNamed(OrdersScreen.routeName);
         },
         style: ElevatedButton.styleFrom(

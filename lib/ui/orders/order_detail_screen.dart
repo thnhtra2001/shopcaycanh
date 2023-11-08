@@ -101,7 +101,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
         Container(
           alignment: Alignment.centerRight,
           padding: EdgeInsets.only(right: 20),
-          child: Text('${widget.order.amount}',
+          child: Text('${widget.order.name}',
               style: TextStyle(fontSize: 16, color: Colors.black)),
         ),
       ],
@@ -124,7 +124,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
         Container(
           alignment: Alignment.centerRight,
           padding: EdgeInsets.only(right: 20),
-          child: Text('${widget.order.amount}',
+          child: Text('${widget.order.phone}',
               style: TextStyle(fontSize: 16, color: Colors.black)),
         ),
       ],
@@ -149,7 +149,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
             alignment: Alignment.centerRight,
             padding: EdgeInsets.only(right: 20, left: 40),
             child: Text(
-              '${widget.order.amount}',
+              '${widget.order.address}',
               style: TextStyle(fontSize: 16, color: Colors.black),
               textAlign: TextAlign.justify,
             ),
