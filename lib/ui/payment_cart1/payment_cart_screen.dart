@@ -215,8 +215,8 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
           context
               .read<OrdersManager>()
               .addOrders(cart.products, cart.totalAmount, cart.totalQuantity);
-          cart.clear();
-              showMyDialog(context);
+          // cart.clear();
+              showMyDialog(context, cart);
           // Navigator.of(context).pushNamed(OrdersScreen.routeName);
         },
         style: ElevatedButton.styleFrom(
@@ -228,15 +228,5 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
             )),
       ),
     );
-  //   return TextButton(
-  //       onPressed: () => {
-  //             context.read<OrdersManager>().addOrders(
-  //                 cart.products, cart.totalAmount, cart.totalQuantity),
-  //             cart.clear(),
-  //             showMyDialog(context),
-  //             // Navigator.of(context).pushReplacementNamed('/')
-
-  //           },
-  //       child: const Text('Thanh toán'));
   }
 }

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:shopcaycanh/ui/cart/cart_manager.dart';
 
 Future<bool?> showConfirmDialog(BuildContext context, String message) {
   return showDialog(
     context: context,
     builder: (ctx) => AlertDialog(
-      title: const Text('Bạn chắc chứ?'),
+      title: const Text('Thông báo'),
       content: Text(message),
       actions: <Widget>[
         TextButton(
@@ -41,7 +42,7 @@ Future<void> showErrorDialog(BuildContext context, String message) {
     ),
   );
 }
-Future<void> showMyDialog(BuildContext context) async {
+Future<void> showMyDialog(BuildContext context, CartManager cart) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
@@ -60,6 +61,7 @@ Future<void> showMyDialog(BuildContext context) async {
             child: const Text('Ok'),
             onPressed: () {
               Navigator.of(context).pushReplacementNamed('/');
+              cart.clear();
             },
           ),
         ],

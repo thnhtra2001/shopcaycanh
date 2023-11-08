@@ -77,11 +77,11 @@ class _CartItemCardState extends State<CartItemCard> {
   Widget buildItemCard() {
     return Card(
       margin: const EdgeInsets.symmetric(
-        horizontal: 15,
-        vertical: 4,
+        horizontal: 0,
+        vertical: 0,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(0),
         child: ListTile(
           leading: CircleAvatar(
             backgroundImage: NetworkImage(widget.cardItem.imageUrl),
