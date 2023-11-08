@@ -1,19 +1,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
-import 'package:shopcaycanh/ui/payment_cart/payment_cart_screen.dart';
 import 'package:shopcaycanh/ui/payment_cart1/payment_cart_screen.dart';
 import '../screens.dart';
 import 'package:provider/provider.dart';
 
 import 'cart_manager.dart';
 import 'cart_item_card.dart';
-
-import '../payment_cart/payment_cart_manager.dart';
-
 import '../orders/order_manager.dart';
 
-import '../payment_cart/payment_cart_item.dart';
 
 class CartScreen extends StatelessWidget {
   static const routeName = '/cart';

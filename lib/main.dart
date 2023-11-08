@@ -4,9 +4,7 @@ import 'package:shopcaycanh/ui/cart/cart_manager.dart';
 import 'package:shopcaycanh/ui/cart/cart_screen.dart';
 import 'package:shopcaycanh/ui/orders/order_manager.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
-import 'package:shopcaycanh/ui/payment_cart/payment_cart_screen.dart';
 import 'package:shopcaycanh/ui/payment_cart1/payment_cart_screen.dart';
-import 'package:shopcaycanh/ui/payment_detail/payment_screen.dart';
 import 'package:shopcaycanh/ui/products/product_detail_screen.dart';
 import 'package:shopcaycanh/ui/products/product_overview_screen.dart';
 import 'package:shopcaycanh/ui/products/products_manager.dart';
@@ -20,7 +18,6 @@ import 'package:provider/provider.dart';
 import 'ui/screens.dart';
 import 'ui/personal/personal_screen.dart';
 
-import 'ui/payment_cart/payment_cart_manager.dart';
 
 Future<void> main() async {
   await dotenv.load();
@@ -37,8 +34,6 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => CartManager()),
           ChangeNotifierProvider(create: (context) => OrdersManager()),
           ChangeNotifierProvider(create: (context) => AuthManager()),
-          ChangeNotifierProvider(create: (context) => PaymentsManager()),
-
         ],
         child: Consumer<AuthManager>(builder: (context, authManager, child) {
           return MaterialApp(
@@ -73,8 +68,6 @@ class MyApp extends StatelessWidget {
               UserProductsScreen.routeName: (context) =>
                   const UserProductsScreen(),
               PersonalScreen.routeName: (context) => const PersonalScreen(),
-              PaymentDetailScreen.routeName: (context) => const PaymentDetailScreen(),
-              // PaymentCartScreen.routeName: (context) => const PaymentCartScreen(),
               PaymentCartScreen1.routeName: (context) => const PaymentCartScreen1(),
 
 
@@ -96,12 +89,6 @@ class MyApp extends StatelessWidget {
                         ? context.read<ProductsManager>().findById(productId)
                         : null,
                   );
-                });
-              }
-              if (settings.name == PaymentDetailScreen.routeName) {
-                final args = settings.arguments as Product?;
-                return MaterialPageRoute(builder: (context) {
-                  return PaymentDetailScreen();
                 });
               }
               return null;

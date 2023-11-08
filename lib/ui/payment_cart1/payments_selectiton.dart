@@ -33,9 +33,9 @@ class _PaymentSelectionDropdownState extends State<PaymentSelectionDropdown> {
           icon: const Icon(Icons.arrow_drop_down),
           elevation: 16,
           style: const TextStyle(
-            color: Colors.black,
+            color: Colors.green,
           ),
-          underline: Container(height: 1, color: Colors.black),
+          underline: Container(height: 2, color: Colors.green),
           onChanged: (String? value) {
             // This is called when the user selects an item.
             setState(() {

@@ -1,17 +1,17 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_zalopay_sdk/flutter_zalopay_sdk.dart';
 import 'package:shopcaycanh/models/cart_item.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
-import 'package:shopcaycanh/ui/payment_cart/payment_cart_screen.dart';
 import 'package:shopcaycanh/ui/payment_cart1/payments_selectiton.dart';
+import 'package:shopcaycanh/utils_zalo/theme_data.dart';
+import '../../repo_zalo/payment.dart';
 import '../../services/user_service.dart';
 import '../screens.dart';
 import 'package:provider/provider.dart';
 
 import '../cart/cart_manager.dart';
 import '../payment_cart1/payment_cart_item.dart';
-
-import '../payment_cart/payment_cart_manager.dart';
-
 import '../orders/order_manager.dart';
 import '../shared/dialog_utils.dart';
 import '../widget/custom_rich_text.dart';
@@ -26,6 +26,10 @@ class PaymentCartScreen1 extends StatefulWidget {
 }
 
 class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
+  String zpTransToken = "";
+  String payResult = "";
+    final valueStyle = TextStyle(
+      color: AppColor.accentColor, fontSize: 18.0, fontWeight: FontWeight.w400);
   late Future<Map<String, dynamic>> _futureFetchUserInformation;
   @override
   void initState() {
@@ -42,27 +46,27 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
       ),
       body: Column(
         children: <Widget>[
-          SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Container(
-                  padding: EdgeInsets.only(left: 5),
-                  child: Text(
-                    'Hình thức thanh toán:',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                    ),
-                  )),
-              Container(
-                alignment: Alignment.centerRight,
-                padding: EdgeInsets.only(right: 5),
-                child: PaymentSelectionDropdown(),
-              ),
-            ],
-          ),
-          const Divider(),
+          // SizedBox(height: 20),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //   children: <Widget>[
+          //     Container(
+          //         padding: EdgeInsets.only(left: 5),
+          //         child: Text(
+          //           'Hình thức thanh toán:',
+          //           style: TextStyle(
+          //             color: Colors.black,
+          //             fontSize: 15,
+          //           ),
+          //         )),
+          //     Container(
+          //       alignment: Alignment.centerRight,
+          //       padding: EdgeInsets.only(right: 5),
+          //       child: PaymentSelectionDropdown(),
+          //     ),
+          //   ],
+          // ),
+          // const Divider(),
           FutureBuilder<Map<String, dynamic>>(
             future: _futureFetchUserInformation,
             builder: (context, snapshot) {
@@ -70,11 +74,11 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                 return Center(
                   child: Container(
                       alignment: Alignment.center,
-                      // width: deviceSize.width * 0.9,
                       child: Column(
                         children: [
                           paymentAddress(snapshot.data!['address']),
-                          inforUser(snapshot.data!['name']),
+                          inforNameUser(snapshot.data!['name']),
+                          inforPhoneUser(snapshot.data!['phone'])
                         ],
                       )),
                 );
@@ -95,10 +99,10 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                 return Center(
                   child: Container(
                       alignment: Alignment.center,
-                      // width: deviceSize.width * 0.9,
                       child: Column(
                         children: [
                           paymentNow(snapshot, cart),
+                          paymentZaloPay(snapshot, cart),
                         ],
                       )),
                 );
@@ -106,8 +110,59 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
               return const Center(child: CircularProgressIndicator());
             },
           ),
+
         ],
       ),
+    );
+  }
+  Widget statusPayZalo (){
+              return Container(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Text(
+              payResult ?? "clm",
+              style: valueStyle,
+            ),
+          );
+  }
+  Widget inforPhoneUser(data) {
+    return Row(
+      children: [
+        Container(
+          height: 50,
+          alignment: Alignment.centerLeft,
+          child: const Text('Số điện thoại:',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        ),
+        Container(
+          padding: const EdgeInsets.only(left: 20),
+          color: Colors.white,
+          height: 50,
+          child: Row(
+            children: [
+              // Container(
+              //   padding: const EdgeInsets.all(12),
+              //   decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(100),
+              //       border: Border.all(
+              //         color: Colors.black,
+              //         width: 0.5,
+              //       )),
+              //   child: Image.asset(
+              //     'assets/Images/user-icon.png',
+              //     color: Colors.black12,
+              //     height: 23,
+              //     width: 23,
+              //   ),
+              // ),
+              const SizedBox(width: 7),
+              Text(
+                data ?? '',
+                style: TextStyle(fontSize: 15),
+              ),
+            ],
+          ),
+        )
+      ],
     );
   }
 
@@ -137,7 +192,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
     ]);
   }
 
-  Widget inforUser(data) {
+  Widget inforNameUser(data) {
     return Column(
       children: [
         Container(
@@ -207,16 +262,6 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
               value: '${cart.totalAmount}',
             )
           ],
-          // children: widget.payment.products
-          //     .map((prod) => Column(
-          //           children: [
-          //             CustomRowText(
-          //               title: '${prod.quantity}',
-          //               value: '${prod.price}',
-          //             ),
-          //           ],
-          //         ))
-          //     .toList(),
         ),
       ),
     );
@@ -224,13 +269,17 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
 
   Widget paymentNow(snapshot, cart) {
     return Container(
-      width: 200,
-      height: 40,
+      width: 400,
+      height: 50,
       child: ElevatedButton(
         onPressed: () {
-          context
-              .read<OrdersManager>()
-              .addOrders(cart.products, cart.totalAmount, cart.totalQuantity, snapshot.data['name'], snapshot.data['phone'], snapshot.data['address']);
+          context.read<OrdersManager>().addOrders(
+              cart.products,
+              cart.totalAmount,
+              cart.totalQuantity,
+              snapshot.data['name'],
+              snapshot.data['phone'],
+              snapshot.data['address']);
           // cart.clear();
           showMyDialog(context, cart);
           // Navigator.of(context).pushNamed(OrdersScreen.routeName);
@@ -238,10 +287,78 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.red,
         ),
-        child: const Text('Thanh toán',
+        child: const Text('Thanh toán bằng tiền mặt',
             style: TextStyle(
               color: Colors.white,
             )),
+      ),
+    );
+  }
+
+  Widget paymentZaloPay(snapshot, cart) {
+    return Container(
+      width: 400,
+      height: 50,
+      child: GestureDetector(
+        onTap: () async {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              });
+          int amount = cart.totalAmount.toInt();
+          var result = await createOrder(amount);
+          if (result != null) {
+            Navigator.pop(context);
+            zpTransToken = result.zptranstoken;
+            setState(() {
+              zpTransToken = result.zptranstoken;
+            });
+          }
+          FlutterZaloPaySdk.payOrder(zpToken: zpTransToken).then((event) {
+            setState(() {
+              switch (event) {
+                case FlutterZaloPayStatus.cancelled:
+                  payResult = "User Huỷ Thanh Toán";
+                  break;
+                case FlutterZaloPayStatus.success:
+                  payResult = "Thanh toán thành công";
+                  break;
+                case FlutterZaloPayStatus.failed:
+                  payResult = "Thanh toán thất bại";
+                  break;
+                default:
+                  payResult = "Thanh toán thất bại";
+                  break;
+              }
+            });
+          });
+          print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa');
+          print('${payResult}' +"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBS");
+          print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+          // context.read<OrdersManager>().addOrders(
+          //     cart.products,
+          //     cart.totalAmount,
+          //     cart.totalQuantity,
+          //     snapshot.data['name'],
+          //     snapshot.data['phone'],
+          //     snapshot.data['address']);
+          cart.clear();
+          // showMyDialog(context, cart);
+          // Navigator.of(context).pushNamed(OrdersScreen.routeName);
+          Navigator.of(context).pushReplacementNamed('/');
+        },
+        child: Container(
+            height: 50.0,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Colors.blue[600],
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: Text("Thanh toán bằng VN Pay",
+                style: TextStyle(color: Colors.white, fontSize: 20.0))),
       ),
     );
   }

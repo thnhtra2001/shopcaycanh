@@ -20,7 +20,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Chi tiết đơn'),
+          title: Text('Lịch sử đơn hàng'),
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,

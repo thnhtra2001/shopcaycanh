@@ -9,8 +9,6 @@ import 'package:shopcaycanh/ui/products/top_right_badge.dart';
 import '../../models/product.dart';
 import '../cart/cart_manager.dart';
 
-import '../payment_detail/payment_screen.dart';
-
 class ProductDetailScreen extends StatelessWidget {
   static const routeName = '/product-detail';
   const ProductDetailScreen(
