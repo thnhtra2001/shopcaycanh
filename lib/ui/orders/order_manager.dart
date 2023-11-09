@@ -32,8 +32,4 @@ class OrdersManager with ChangeNotifier {
     );
     notifyListeners();
   }
-  // void addOrders(OrderItem orders){
-  //   _orders.add(orders);
-  //   notifyListeners();
-  // }
 }

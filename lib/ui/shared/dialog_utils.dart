@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopcaycanh/ui/cart/cart_manager.dart';
+import 'package:shopcaycanh/ui/orders/order_screen.dart';
 
 Future<bool?> showConfirmDialog(BuildContext context, String message) {
   return showDialog(
@@ -24,16 +25,33 @@ Future<bool?> showConfirmDialog(BuildContext context, String message) {
     ),
   );
 }
+Future<bool?> showConfirmDialogZalo(BuildContext context, String message) {
+  return showDialog(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      title: const Text('Thông báo'),
+      content: Text(message),
+      actions: <Widget>[
+        TextButton(
+          child: const Text('Ok'),
+          onPressed: () {
+            Navigator.of(context).pushNamed(OrdersScreen.routeName);
+          },
+        ),
+      ],
+    ),
+  );
+}
 
 Future<void> showErrorDialog(BuildContext context, String message) {
   return showDialog(
     context: context,
     builder: (ctx) => AlertDialog(
-      title: const Text('An Error Occurred!'),
+      title: const Text('Có lỗi xảy ra!'),
       content: Text(message),
       actions: <Widget>[
         TextButton(
-          child: const Text('Okay'),
+          child: const Text('Ok'),
           onPressed: () {
             Navigator.of(context).pop();
           },

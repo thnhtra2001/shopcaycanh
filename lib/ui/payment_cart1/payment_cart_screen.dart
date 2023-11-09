@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_zalopay_sdk/flutter_zalopay_sdk.dart';
 import 'package:shopcaycanh/models/cart_item.dart';
@@ -28,7 +27,7 @@ class PaymentCartScreen1 extends StatefulWidget {
 class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
   String zpTransToken = "";
   String payResult = "";
-    final valueStyle = TextStyle(
+  final valueStyle = TextStyle(
       color: AppColor.accentColor, fontSize: 18.0, fontWeight: FontWeight.w400);
   late Future<Map<String, dynamic>> _futureFetchUserInformation;
   @override
@@ -103,6 +102,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                         children: [
                           paymentNow(snapshot, cart),
                           paymentZaloPay(snapshot, cart),
+                          statusPayZalo(),
                         ],
                       )),
                 );
@@ -110,20 +110,21 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
               return const Center(child: CircularProgressIndicator());
             },
           ),
-
         ],
       ),
     );
   }
-  Widget statusPayZalo (){
-              return Container(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
-            child: Text(
-              payResult ?? "clm",
-              style: valueStyle,
-            ),
-          );
+
+  Widget statusPayZalo() {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      child: Text(
+        '${payResult} + aaaaaaaaaaaa',
+        style: valueStyle,
+      ),
+    );
   }
+
   Widget inforPhoneUser(data) {
     return Row(
       children: [
@@ -313,6 +314,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
           if (result != null) {
             Navigator.pop(context);
             zpTransToken = result.zptranstoken;
+            print("zpTransTokenAAAAAAAAAAAA $zpTransToken'.");
             setState(() {
               zpTransToken = result.zptranstoken;
             });
@@ -322,36 +324,52 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
               switch (event) {
                 case FlutterZaloPayStatus.cancelled:
                   payResult = "User Huỷ Thanh Toán";
+            showConfirmDialogZalo(context, payResult);
+
+                  print(payResult+'aaaa');
                   break;
                 case FlutterZaloPayStatus.success:
                   payResult = "Thanh toán thành công";
+            showConfirmDialogZalo(context, payResult);
+
+                  print(payResult);
+                  print(payResult+'aaaa');
+
                   break;
                 case FlutterZaloPayStatus.failed:
                   payResult = "Thanh toán thất bại";
+            showConfirmDialogZalo(context, payResult);
+
+                  print(payResult);
+                  print(payResult+'aaaa');
+
                   break;
                 default:
                   payResult = "Thanh toán thất bại";
+            showConfirmDialogZalo(context, payResult);
+
+                  print(payResult);
+                  print(payResult+'aaaa');
                   break;
               }
             });
           });
-          print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa');
-          print('${payResult}' +"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBS");
-          print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-          // context.read<OrdersManager>().addOrders(
-          //     cart.products,
-          //     cart.totalAmount,
-          //     cart.totalQuantity,
-          //     snapshot.data['name'],
-          //     snapshot.data['phone'],
-          //     snapshot.data['address']);
-          cart.clear();
+          context.read<OrdersManager>().addOrders(
+              cart.products,
+              cart.totalAmount,
+              cart.totalQuantity,
+              snapshot.data['name'],
+              snapshot.data['phone'],
+              snapshot.data['address']);
+            // showConfirmDialogZalo(context, payResult);
+          // cart.clear();
           // showMyDialog(context, cart);
           // Navigator.of(context).pushNamed(OrdersScreen.routeName);
-          Navigator.of(context).pushReplacementNamed('/');
+          // Navigator.of(context).pushReplacementNamed('/');
         },
         child: Container(
-            height: 50.0,
+            height: 50,
+            width: 300,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: Colors.blue[600],

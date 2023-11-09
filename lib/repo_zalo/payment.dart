@@ -11,9 +11,9 @@ import '../utils_zalo/util.dart' as utils;
 import 'package:sprintf/sprintf.dart';
 
 class ZaloPayConfig {
-  static const String appId = "2554";
-  static const String key1 = "sdngKKJmqEMzvh5QQcdD2A9XBSKUNaYn";
-  static const String key2 = "trMrHtvjo6myautxDUiAcYsVtaeQ8nhf";
+  static const String appId = "2553";
+  static const String key1 = "PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL";
+  static const String key2 = "kLtgPl8HHhfvMuDHPwKfgfsY4Ydm9eIz";
 
   static const String appUser = "zalopaydemo";
   static int transIdDefault = 1;
