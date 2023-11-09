@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopcaycanh/ui/cart/cart_manager.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
+import 'package:shopcaycanh/ui/payment_cart1/payment_cart_screen.dart';
 
 Future<bool?> showConfirmDialog(BuildContext context, String message) {
   return showDialog(
@@ -25,7 +26,7 @@ Future<bool?> showConfirmDialog(BuildContext context, String message) {
     ),
   );
 }
-Future<bool?> showConfirmDialogZalo(BuildContext context, String message) {
+Future<bool?> showConfirmDialogZalo(BuildContext context, String message, CartManager cart) {
   return showDialog(
     context: context,
     builder: (ctx) => AlertDialog(
@@ -36,6 +37,24 @@ Future<bool?> showConfirmDialogZalo(BuildContext context, String message) {
           child: const Text('Ok'),
           onPressed: () {
             Navigator.of(context).pushNamed(OrdersScreen.routeName);
+            cart.clear();
+          },
+        ),
+      ],
+    ),
+  );
+}
+Future<bool?> showConfirmDialogZaloCancel(BuildContext context, String message) {
+  return showDialog(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      title: const Text('Thông báo'),
+      content: Text(message),
+      actions: <Widget>[
+        TextButton(
+          child: const Text('Ok'),
+          onPressed: () {
+            Navigator.of(context).pop();
           },
         ),
       ],
@@ -78,7 +97,7 @@ Future<void> showMyDialog(BuildContext context, CartManager cart) async {
           TextButton(
             child: const Text('Ok'),
             onPressed: () {
-              Navigator.of(context).pushReplacementNamed('/');
+              Navigator.of(context).pushNamed(OrdersScreen.routeName);
               cart.clear();
             },
           ),

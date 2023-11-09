@@ -102,7 +102,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                         children: [
                           paymentNow(snapshot, cart),
                           paymentZaloPay(snapshot, cart),
-                          statusPayZalo(),
+                          // statusPayZalo(),
                         ],
                       )),
                 );
@@ -115,15 +115,15 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
     );
   }
 
-  Widget statusPayZalo() {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 5.0),
-      child: Text(
-        '${payResult} + aaaaaaaaaaaa',
-        style: valueStyle,
-      ),
-    );
-  }
+  // Widget statusPayZalo() {
+  //   return Container(
+  //     padding: const EdgeInsets.symmetric(vertical: 5.0),
+  //     child: Text(
+  //       '${payResult} + aaaaaaaaaaaa',
+  //       style: valueStyle,
+  //     ),
+  //   );
+  // }
 
   Widget inforPhoneUser(data) {
     return Row(
@@ -324,44 +324,53 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
               switch (event) {
                 case FlutterZaloPayStatus.cancelled:
                   payResult = "User Huỷ Thanh Toán";
-            showConfirmDialogZalo(context, payResult);
-
-                  print(payResult+'aaaa');
+                  showConfirmDialogZaloCancel(context, payResult);
+                  print(payResult + 'aaaa');
                   break;
                 case FlutterZaloPayStatus.success:
                   payResult = "Thanh toán thành công";
-            showConfirmDialogZalo(context, payResult);
-
+                  context.read<OrdersManager>().addOrders(
+                      cart.products,
+                      cart.totalAmount,
+                      cart.totalQuantity,
+                      snapshot.data['name'],
+                      snapshot.data['phone'],
+                      snapshot.data['address']);
+                  showConfirmDialogZalo(context, payResult, cart);
                   print(payResult);
-                  print(payResult+'aaaa');
-
+                  print(payResult + 'aaaa');
                   break;
                 case FlutterZaloPayStatus.failed:
                   payResult = "Thanh toán thất bại";
-            showConfirmDialogZalo(context, payResult);
-
+                  context.read<OrdersManager>().addOrders(
+                      cart.products,
+                      cart.totalAmount,
+                      cart.totalQuantity,
+                      snapshot.data['name'],
+                      snapshot.data['phone'],
+                      snapshot.data['address']);
+                  showConfirmDialogZalo(context, payResult, cart);
                   print(payResult);
-                  print(payResult+'aaaa');
-
+                  print(payResult + 'aaaa');
                   break;
                 default:
-                  payResult = "Thanh toán thất bại";
-            showConfirmDialogZalo(context, payResult);
-
+                  payResult = "Thanh toán đang được xử lý";
+                  context.read<OrdersManager>().addOrders(
+                      cart.products,
+                      cart.totalAmount,
+                      cart.totalQuantity,
+                      snapshot.data['name'],
+                      snapshot.data['phone'],
+                      snapshot.data['address']);
+                  showConfirmDialogZalo(context, payResult, cart);
                   print(payResult);
-                  print(payResult+'aaaa');
+                  print(payResult + 'aaaa');
                   break;
               }
             });
           });
-          context.read<OrdersManager>().addOrders(
-              cart.products,
-              cart.totalAmount,
-              cart.totalQuantity,
-              snapshot.data['name'],
-              snapshot.data['phone'],
-              snapshot.data['address']);
-            // showConfirmDialogZalo(context, payResult);
+
+          // showConfirmDialogZalo(context, payResult);
           // cart.clear();
           // showMyDialog(context, cart);
           // Navigator.of(context).pushNamed(OrdersScreen.routeName);
