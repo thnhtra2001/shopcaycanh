@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopcaycanh/models/payment.dart';
 import 'package:shopcaycanh/ui/cart/cart_manager.dart';
 import 'package:shopcaycanh/ui/cart/cart_screen.dart';
 import 'package:shopcaycanh/ui/orders/order_manager.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
-import 'package:shopcaycanh/ui/payment/payment_manager.dart';
-import 'package:shopcaycanh/ui/payment/payment_screen.dart';
+import 'package:shopcaycanh/ui/payment_cart1/payment_cart_screen.dart';
 import 'package:shopcaycanh/ui/products/product_detail_screen.dart';
 import 'package:shopcaycanh/ui/products/product_overview_screen.dart';
 import 'package:shopcaycanh/ui/products/products_manager.dart';
@@ -20,6 +18,7 @@ import 'package:provider/provider.dart';
 import 'ui/screens.dart';
 import 'ui/personal/personal_screen.dart';
 
+
 Future<void> main() async {
   await dotenv.load();
   runApp(const MyApp());
@@ -32,20 +31,13 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => ProductsManager()),
-          // ChangeNotifierProxyProvider<AuthManager, ProductsManager>(
-          //     create: (context) => ProductsManager(),
-          //     update: (context, authManager, productsManager) {
-          //       productsManager!.authToken = authManager.authToken;
-          //       return productsManager;
-          //     }),
           ChangeNotifierProvider(create: (context) => CartManager()),
           ChangeNotifierProvider(create: (context) => OrdersManager()),
           ChangeNotifierProvider(create: (context) => AuthManager()),
-          ChangeNotifierProvider(create: (contex) => PaymentManager()),
         ],
         child: Consumer<AuthManager>(builder: (context, authManager, child) {
           return MaterialApp(
-            title: 'Book Shop',
+            title: 'B1910315',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               fontFamily: 'Lato',
@@ -76,7 +68,9 @@ class MyApp extends StatelessWidget {
               UserProductsScreen.routeName: (context) =>
                   const UserProductsScreen(),
               PersonalScreen.routeName: (context) => const PersonalScreen(),
-              PaymentScreen.routeName: (context) => const PaymentScreen(),
+              PaymentCartScreen1.routeName: (context) => const PaymentCartScreen1(),
+
+
             },
             onGenerateRoute: (settings) {
               if (settings.name == ProductDetailScreen.routeName) {
@@ -95,12 +89,6 @@ class MyApp extends StatelessWidget {
                         ? context.read<ProductsManager>().findById(productId)
                         : null,
                   );
-                });
-              }
-              if (settings.name == PaymentScreen.routeName) {
-                final args = settings.arguments as Product?;
-                return MaterialPageRoute(builder: (context) {
-                  return PaymentScreen();
                 });
               }
               return null;

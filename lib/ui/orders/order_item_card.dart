@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shopcaycanh/models/payment_cart.dart';
 
 import '../../models/order_item.dart';
 
@@ -14,17 +15,12 @@ class OrderItemCard extends StatefulWidget {
 }
 
 class _OrderItemCardState extends State<OrderItemCard> {
-  var _expanded = false;
-
   @override
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.all(10),
       child: Column(
-        children: <Widget>[
-          buildOrderSummary(),
-          if (_expanded) buildOrderDetails()
-        ],
+        children: <Widget>[buildOrderSummary(), buildOrderDetails()],
       ),
     );
   }
@@ -36,18 +32,18 @@ class _OrderItemCardState extends State<OrderItemCard> {
       child: ListView(
         children: widget.order.products
             .map(
-              (products) => Row(
+              (prod) => Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    products.title,
+                    prod.title,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    '${products.quantity}x\$${products.price}',
+                    '${prod.quantity}x${prod.price}',
                     style: const TextStyle(
                       fontSize: 18,
                       color: Colors.grey,
@@ -63,17 +59,9 @@ class _OrderItemCardState extends State<OrderItemCard> {
 
   Widget buildOrderSummary() {
     return ListTile(
-      title: Text('\$${widget.order.amount}'),
+      title: Text('${widget.order.amount} VND'),
       subtitle: Text(
         DateFormat('dd/MM/yyyy hh:mm').format(widget.order.dateTime),
-      ),
-      trailing: IconButton(
-        icon: Icon(_expanded ? Icons.expand_less : Icons.expand_more),
-        onPressed: () {
-          setState(() {
-            _expanded = !_expanded;
-          });
-        },
       ),
     );
   }

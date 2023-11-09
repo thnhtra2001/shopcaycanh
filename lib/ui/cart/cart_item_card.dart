@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopcaycanh/ui/cart/cart_manager.dart';
 
 import '../../models/cart_item.dart';
 import '../shared/dialog_utils.dart';
+import 'cart_manager.dart';
 
 class CartItemCard extends StatelessWidget {
   final String productId;
@@ -37,7 +37,7 @@ class CartItemCard extends StatelessWidget {
       confirmDismiss: (directiion) {
         return showConfirmDialog(
           context,
-          'Bạn chắc chứ?',
+          'Bạn có chắc muốn xóa sản phẩm này?',
         );
       },
       onDismissed: (direction) {
@@ -60,8 +60,8 @@ class CartItemCard extends StatelessWidget {
             backgroundImage: NetworkImage(cardItem.imageUrl),
           ),
           title: Text(cardItem.title),
-          subtitle: Text('Total: \$${(cardItem.price * cardItem.quantity)}'),
-          trailing: Text('${cardItem.quantity}x'),
+          subtitle: Text('Giá: ${(cardItem.price * cardItem.quantity)}'),
+          trailing: Text('SL: ${cardItem.quantity}'),
         ),
       ),
     );

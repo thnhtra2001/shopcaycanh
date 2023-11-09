@@ -6,14 +6,7 @@ import 'package:flutter/foundation.dart';
 import '../../models/product.dart';
 
 class CartManager with ChangeNotifier {
-  Map<String, CartItem> _items = {
-    // 'p1': CartItem(
-    //   id: 'c1',
-    //   title: 'Red Shirt',
-    //   price: 29.99,
-    //   quantity: 2,
-    // ),
-  };
+  Map<String, CartItem> _items = {};
   int get productCount {
     return _items.length;
   }
@@ -32,6 +25,13 @@ class CartManager with ChangeNotifier {
       total += cartItem.price * cartItem.quantity;
     });
     return total;
+  }
+    int get totalQuantity {
+    var totalQuantity = 0;
+    _items.forEach((key, cartItem) {
+      totalQuantity +=  cartItem.quantity;
+    });
+    return totalQuantity;
   }
 
   void addItem(Product product) {
