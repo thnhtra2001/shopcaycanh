@@ -79,8 +79,8 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
             const SizedBox(height: 20),
             buildTotalAmountRow(),
             const SizedBox(height: 20),
-            // buildPayRow(),
-            // const SizedBox(height: 20),
+            buildStatusPayment(),
+            const SizedBox(height: 20),
           ],
         ));
   }
@@ -222,6 +222,28 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
           alignment: Alignment.centerRight,
           padding: EdgeInsets.only(right: 20),
           child: Text('${widget.order.totalQuantity}',
+              style: TextStyle(fontSize: 16, color: Colors.black)),
+        ),
+      ],
+    );
+  }
+    Widget buildStatusPayment() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Container(
+            padding: EdgeInsets.only(left: 20),
+            child: Text(
+              'Trạng thái',
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: 20,
+              ),
+            )),
+        Container(
+          alignment: Alignment.centerRight,
+          padding: EdgeInsets.only(right: 20),
+          child: Text('${widget.order.payResult}',
               style: TextStyle(fontSize: 16, color: Colors.black)),
         ),
       ],

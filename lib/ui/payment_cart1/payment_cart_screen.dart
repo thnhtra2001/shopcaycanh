@@ -26,7 +26,7 @@ class PaymentCartScreen1 extends StatefulWidget {
 
 class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
   String zpTransToken = "";
-  String payResult = "";
+  String payResult = "Thanh toán khi nhận hàng";
   final valueStyle = TextStyle(
       color: AppColor.accentColor, fontSize: 18.0, fontWeight: FontWeight.w400);
   late Future<Map<String, dynamic>> _futureFetchUserInformation;
@@ -280,7 +280,9 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
               cart.totalQuantity,
               snapshot.data['name'],
               snapshot.data['phone'],
-              snapshot.data['address']);
+              snapshot.data['address'],
+              payResult,
+              );
           // cart.clear();
           showMyDialog(context, cart);
           // Navigator.of(context).pushNamed(OrdersScreen.routeName);
@@ -335,7 +337,9 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                       cart.totalQuantity,
                       snapshot.data['name'],
                       snapshot.data['phone'],
-                      snapshot.data['address']);
+                      snapshot.data['address'],
+                      payResult,
+                      );
                   showConfirmDialogZalo(context, payResult, cart);
                   print(payResult);
                   print(payResult + 'aaaa');
@@ -348,7 +352,9 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                       cart.totalQuantity,
                       snapshot.data['name'],
                       snapshot.data['phone'],
-                      snapshot.data['address']);
+                      snapshot.data['address'],
+                      payResult,
+                      );
                   showConfirmDialogZalo(context, payResult, cart);
                   print(payResult);
                   print(payResult + 'aaaa');
@@ -361,7 +367,9 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                       cart.totalQuantity,
                       snapshot.data['name'],
                       snapshot.data['phone'],
-                      snapshot.data['address']);
+                      snapshot.data['address'],
+                      payResult,
+                      );
                   showConfirmDialogZalo(context, payResult, cart);
                   print(payResult);
                   print(payResult + 'aaaa');

@@ -12,6 +12,7 @@ class OrderItem {
   late String name;
   late String phone;
   late String address;
+  late String payResult;
 
   int get productCount {
     return products.length;
@@ -24,6 +25,7 @@ class OrderItem {
     required this.name,
     required this.phone,
     required this.address,
+    required this.payResult,
     DateTime? dateTime,
   }) : dateTime = dateTime ?? DateTime.now();
 
@@ -37,6 +39,7 @@ class OrderItem {
     String? name,
     String? phone,
     String? address,
+    String? payResult,
   }) {
     return OrderItem(
       id: id ?? this.id,
@@ -47,8 +50,9 @@ class OrderItem {
       name: name ?? this.name,
       phone: phone ?? this.phone,
       address: address ?? this.address,
+      payResult: payResult ?? this.payResult,
     );
   }
 
-  void add(int i, OrderItem paymentItem, int totalQuantity, String name, String phone, String address) {}
+  void add(int i, OrderItem paymentItem, int totalQuantity, String name, String phone, String address, String payResult) {}
 }

@@ -16,7 +16,7 @@ class OrdersManager with ChangeNotifier {
   List<OrderItem> get orders {
     return [..._orders];
   }
-  void addOrders(List<CartItem> cartProducts, double total, int totalQuantity, String name, String phone, String address) async {
+  void addOrders(List<CartItem> cartProducts, double total, int totalQuantity, String name, String phone, String address, String payResult) async {
     _orders.insert(
       0,
       OrderItem(
@@ -27,7 +27,8 @@ class OrdersManager with ChangeNotifier {
         totalQuantity: totalQuantity,
         name:  name,
         phone: phone,
-        address: address
+        address: address,
+        payResult: payResult
       ),
     );
     notifyListeners();
