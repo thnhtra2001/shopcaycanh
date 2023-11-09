@@ -26,7 +26,7 @@ class PaymentCartScreen1 extends StatefulWidget {
 
 class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
   String zpTransToken = "";
-  String payResult = "Thanh toán khi nhận hàng";
+  String payResult = "Thanh toán bằng tiền mặt";
   final valueStyle = TextStyle(
       color: AppColor.accentColor, fontSize: 18.0, fontWeight: FontWeight.w400);
   late Future<Map<String, dynamic>> _futureFetchUserInformation;
@@ -77,6 +77,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                         children: [
                           paymentAddress(snapshot.data!['address']),
                           inforNameUser(snapshot.data!['name']),
+                          const SizedBox(height: 20),
                           inforPhoneUser(snapshot.data!['phone'])
                         ],
                       )),
@@ -101,7 +102,10 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                       child: Column(
                         children: [
                           paymentNow(snapshot, cart),
+                          SizedBox(height: 20),
                           paymentZaloPay(snapshot, cart),
+                          SizedBox(height: 20),
+
                           // statusPayZalo(),
                         ],
                       )),
@@ -138,6 +142,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
           padding: const EdgeInsets.only(left: 20),
           color: Colors.white,
           height: 50,
+          width: 290,
           child: Row(
             children: [
               // Container(
@@ -176,20 +181,33 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
       ),
       Container(
-          height: 40,
-          margin: const EdgeInsets.only(bottom: 8),
-          child: TextFormField(
-            initialValue: data,
-            decoration: const InputDecoration(
-                border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        width: 1, color: Colors.red, style: BorderStyle.solid),
-                    borderRadius: BorderRadius.all(Radius.circular(8))),
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                prefixIcon: Icon(Icons.location_city_outlined)),
-            style: const TextStyle(fontSize: 18),
-          ))
+        padding: const EdgeInsets.all(10),
+        height: 60,
+        width: 400,
+        margin: const EdgeInsets.only(bottom: 0),
+        decoration: BoxDecoration(
+            border: Border.all(
+                color: const Color.fromARGB(255, 64, 59, 59),
+                width: 0,
+                style: BorderStyle.solid),
+            borderRadius: BorderRadius.circular(0)),
+        child: Text(
+          data,
+          style: TextStyle(fontSize: 16),
+        ),
+        // child: TextFormField(
+        //   initialValue: data,
+        //   decoration: const InputDecoration(
+        //       border: OutlineInputBorder(
+        //           borderSide: BorderSide(
+        //               width: 1, color: Colors.red, style: BorderStyle.solid),
+        //           borderRadius: BorderRadius.all(Radius.circular(8))),
+        //       contentPadding:
+        //           EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+        //       prefixIcon: Icon(Icons.location_city_outlined)),
+        //   style: const TextStyle(fontSize: 18),
+        // )
+      )
     ]);
   }
 
@@ -205,7 +223,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
         Container(
           padding: const EdgeInsets.only(left: 20),
           color: Colors.white,
-          height: 90,
+          height: 60,
           child: Row(
             children: [
               Container(
@@ -218,7 +236,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                     )),
                 child: Image.asset(
                   'assets/Images/user-icon.png',
-                  color: Colors.black12,
+                  color: Colors.black,
                   height: 23,
                   width: 23,
                 ),
@@ -268,32 +286,69 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
     );
   }
 
+  // Widget paymentNow(snapshot, cart) {
+  //   return Container(
+  //     width: 400,
+  //     height: 50,
+  //     child: ElevatedButton(
+  //       onPressed: () {
+  //         context.read<OrdersManager>().addOrders(
+  //             cart.products,
+  //             cart.totalAmount,
+  //             cart.totalQuantity,
+  //             snapshot.data['name'],
+  //             snapshot.data['phone'],
+  //             snapshot.data['address'],
+  //             payResult,
+  //             );
+  //         // cart.clear();
+  //         showMyDialog(context, cart);
+  //         // Navigator.of(context).pushNamed(OrdersScreen.routeName);
+  //       },
+  //       style: ElevatedButton.styleFrom(
+  //         backgroundColor: Colors.red,
+  //       ),
+  //       child: const Text('Thanh toán bằng tiền mặt',
+  //           style: TextStyle(
+  //             color: Colors.white,
+  //           )),
+  //     ),
+  //   );
+  // }
   Widget paymentNow(snapshot, cart) {
     return Container(
       width: 400,
       height: 50,
-      child: ElevatedButton(
-        onPressed: () {
+      child: GestureDetector(
+        onTap: () async {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              });
           context.read<OrdersManager>().addOrders(
-              cart.products,
-              cart.totalAmount,
-              cart.totalQuantity,
-              snapshot.data['name'],
-              snapshot.data['phone'],
-              snapshot.data['address'],
-              payResult,
+                cart.products,
+                cart.totalAmount,
+                cart.totalQuantity,
+                snapshot.data['name'],
+                snapshot.data['phone'],
+                snapshot.data['address'],
+                payResult,
               );
           // cart.clear();
           showMyDialog(context, cart);
           // Navigator.of(context).pushNamed(OrdersScreen.routeName);
         },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.red,
-        ),
-        child: const Text('Thanh toán bằng tiền mặt',
-            style: TextStyle(
-              color: Colors.white,
-            )),
+        child: Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(1.0),
+            ),
+            child: Text("Thanh toán bằng tiền mặt",
+                style: TextStyle(color: Colors.white, fontSize: 16))),
       ),
     );
   }
@@ -332,13 +387,13 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                 case FlutterZaloPayStatus.success:
                   payResult = "Thanh toán thành công";
                   context.read<OrdersManager>().addOrders(
-                      cart.products,
-                      cart.totalAmount,
-                      cart.totalQuantity,
-                      snapshot.data['name'],
-                      snapshot.data['phone'],
-                      snapshot.data['address'],
-                      payResult,
+                        cart.products,
+                        cart.totalAmount,
+                        cart.totalQuantity,
+                        snapshot.data['name'],
+                        snapshot.data['phone'],
+                        snapshot.data['address'],
+                        payResult,
                       );
                   showConfirmDialogZalo(context, payResult, cart);
                   print(payResult);
@@ -347,13 +402,13 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                 case FlutterZaloPayStatus.failed:
                   payResult = "Thanh toán thất bại";
                   context.read<OrdersManager>().addOrders(
-                      cart.products,
-                      cart.totalAmount,
-                      cart.totalQuantity,
-                      snapshot.data['name'],
-                      snapshot.data['phone'],
-                      snapshot.data['address'],
-                      payResult,
+                        cart.products,
+                        cart.totalAmount,
+                        cart.totalQuantity,
+                        snapshot.data['name'],
+                        snapshot.data['phone'],
+                        snapshot.data['address'],
+                        payResult,
                       );
                   showConfirmDialogZalo(context, payResult, cart);
                   print(payResult);
@@ -362,13 +417,13 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                 default:
                   payResult = "Thanh toán đang được xử lý";
                   context.read<OrdersManager>().addOrders(
-                      cart.products,
-                      cart.totalAmount,
-                      cart.totalQuantity,
-                      snapshot.data['name'],
-                      snapshot.data['phone'],
-                      snapshot.data['address'],
-                      payResult,
+                        cart.products,
+                        cart.totalAmount,
+                        cart.totalQuantity,
+                        snapshot.data['name'],
+                        snapshot.data['phone'],
+                        snapshot.data['address'],
+                        payResult,
                       );
                   showConfirmDialogZalo(context, payResult, cart);
                   print(payResult);
@@ -385,15 +440,15 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
           // Navigator.of(context).pushReplacementNamed('/');
         },
         child: Container(
-            height: 50,
-            width: 300,
+            // height: 50,
+            // width: 300,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: Colors.blue[600],
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(1.0),
             ),
-            child: Text("Thanh toán bằng VN Pay",
-                style: TextStyle(color: Colors.white, fontSize: 20.0))),
+            child: Text("Thanh toán bằng ZaloPay",
+                style: TextStyle(color: Colors.white, fontSize: 16))),
       ),
     );
   }
