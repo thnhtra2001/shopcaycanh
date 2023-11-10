@@ -1,9 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shopcaycanh/models/cart_item.dart';
 
 import 'cart_item.dart';
 
-class OrderItem {
+class OrderItem with ChangeNotifier {
   late  String? id;
   late double amount;
   late List<CartItem> products;
@@ -55,4 +57,29 @@ class OrderItem {
   }
 
   void add(int i, OrderItem paymentItem, int totalQuantity, String name, String phone, String address, String payResult) {}
+  Map<String, dynamic> toJson (){
+    return {
+      'amount': amount,
+      'products': products == null ? null: List<dynamic>.from(products!.map((e) => e.toJson())),
+      'dateTime': dateTime.toString(),
+      'totalQuantity': totalQuantity,
+      'name': name,
+      'phone': phone,
+      'address': address,
+      'payResult': payResult,
+    };
+  }
+  static OrderItem fromJson (Map<String, dynamic> json){
+    return OrderItem(
+      id: json['id'],
+      amount: json['amount'],
+      products: List<CartItem>.from(json['products'].map((x)=> CartItem.fromJson(x))),
+      dateTime: DateTime.parse(json['dateTime']),
+      totalQuantity: json['totalQuantity'],
+      name: json['name'],
+      phone: json['phone'],
+      address: json['address'],
+      payResult: json['payResult'],
+    );
+  }
 }

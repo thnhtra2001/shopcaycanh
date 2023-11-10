@@ -97,7 +97,10 @@ Future<void> showMyDialog(BuildContext context, CartManager cart) async {
           TextButton(
             child: const Text('Ok'),
             onPressed: () {
-              Navigator.of(context).pushNamed(OrdersScreen.routeName);
+              // Navigator.of(context).pushNamed(OrdersScreen.routeName);
+            
+              Navigator.of(context).pushReplacementNamed('/');
+
               cart.clear();
             },
           ),
