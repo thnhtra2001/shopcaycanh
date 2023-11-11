@@ -175,7 +175,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
         Container(
           alignment: Alignment.centerRight,
           padding: EdgeInsets.only(right: 20),
-          child: Text(widget.order.products.first.title,
+          child: Text(widget.order.products.first!.title,
               style: TextStyle(fontSize: 16, color: Colors.black)),
         ),
       ],

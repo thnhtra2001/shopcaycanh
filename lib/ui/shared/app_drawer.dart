@@ -57,9 +57,9 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.exit_to_app),
             title: const Text('Đăng xuất'),
             onTap: () {
-              Navigator.of(context)
-                ..pop()
-                ..pushReplacementNamed('/');
+              // Navigator.of(context)
+              //   ..pop()
+              //   ..pushReplacementNamed('/');
               context.read<AuthManager>().logout();
             },
           )

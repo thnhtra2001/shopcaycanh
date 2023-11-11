@@ -24,7 +24,8 @@ class _AuthCardState extends State<AuthCard> {
     'email': '',
     'password': '',
     'phone': '',
-    'name': ''
+    'name': '',
+    'address':'',
   };
   final _isSubmitting = ValueNotifier<bool>(false);
   final _passwordController = TextEditingController();

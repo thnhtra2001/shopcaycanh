@@ -18,7 +18,6 @@ import 'package:provider/provider.dart';
 import 'ui/screens.dart';
 import 'ui/personal/personal_screen.dart';
 
-
 Future<void> main() async {
   await dotenv.load();
   runApp(const MyApp());
@@ -37,7 +36,7 @@ class MyApp extends StatelessWidget {
         ],
         child: Consumer<AuthManager>(builder: (context, authManager, child) {
           return MaterialApp(
-            title: 'B1910315',
+            title: 'CayCanh',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               fontFamily: 'Lato',
@@ -45,32 +44,26 @@ class MyApp extends StatelessWidget {
                 primarySwatch: Colors.purple,
               ).copyWith(secondary: Colors.deepOrange),
             ),
-            home:
-                // const ProductOverviewScreen(),
-                authManager.isAuth
-                    ?
-                    // const ProductOverviewScreen()
-                    (context.read<AuthManager>().authToken?.role == "admin"
-                        ? UserProductsScreen()
-                        : const ProductOverviewScreen())
-                    : FutureBuilder(
-                        future: authManager.tryAutoLogin(),
-                        builder: (context, snapshot) {
-                          return snapshot.connectionState ==
-                                  ConnectionState.waiting
-                              ? const SplashScreen()
-                              : const AuthScreen();
-                        },
-                      ),
+            home: authManager.isAuth
+                ? (context.read<AuthManager>().authToken?.role == "admin"
+                    ? UserProductsScreen()
+                    : const ProductOverviewScreen())
+                : FutureBuilder(
+                    future: authManager.tryAutoLogin(),
+                    builder: (context, snapshot) {
+                      return snapshot.connectionState == ConnectionState.waiting
+                          ? const SplashScreen()
+                          : const AuthScreen();
+                    },
+                  ),
             routes: {
               CartScreen.routeName: (context) => const CartScreen(),
               OrdersScreen.routeName: (context) => const OrdersScreen(),
               UserProductsScreen.routeName: (context) =>
                   const UserProductsScreen(),
               PersonalScreen.routeName: (context) => const PersonalScreen(),
-              PaymentCartScreen1.routeName: (context) => const PaymentCartScreen1(),
-
-
+              PaymentCartScreen1.routeName: (context) =>
+                  const PaymentCartScreen1(),
             },
             onGenerateRoute: (settings) {
               if (settings.name == ProductDetailScreen.routeName) {

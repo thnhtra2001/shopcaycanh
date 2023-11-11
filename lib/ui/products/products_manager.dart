@@ -10,8 +10,7 @@ import '../../services/products_service.dart';
 
 class ProductsManager with ChangeNotifier {
   final ProductsService _productsService = ProductsService();
-  List<Product> _items = [
-  ];
+  List<Product> _items = [];
 
   int get itemCount {
     return _items.length;

@@ -16,10 +16,18 @@ class ProductsService extends FirebaseService {
     final List<Product> products = [];
     try {
       final authToken = (await AuthService().loadSavedAuthToken())!.token;
+      // print("authToken:");
+      // print(authToken);
       final productUrl =
           Uri.parse('$databaseUrl/products.json?auth=$authToken');
+      // print("productUrl");
+      // print(productUrl);
       final response = await http.get(productUrl);
+      // print("response");
+      // print(response);
       final productsMap = json.decode(response.body) as Map<String, dynamic>;
+      print("productMap");
+      print(productsMap);
       if (response.statusCode != 200) {
         return products;
       }
@@ -29,6 +37,8 @@ class ProductsService extends FirebaseService {
           ...product,
         }));
       });
+      // print("products");
+      // print(products);
       return products;
     } catch (error) {
       print(error);
