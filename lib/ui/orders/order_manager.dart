@@ -21,8 +21,6 @@ class OrdersManager with ChangeNotifier {
 
   Future<void> fetchOrders() async {
     _orders = await _orderService.fetchOrders();
-    print("orders:_____________________");
-    print(_orders);
     notifyListeners();
   }
   Future <void> addOrders(OrderItem order) async {

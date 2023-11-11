@@ -60,11 +60,12 @@ class OrderItem with ChangeNotifier {
     );
   }
 
-  void add(int i, OrderItem paymentItem, int totalQuantity, String name, String phone, String address, String payResult) {}
+  void add(int i, OrderItem paymentItem, int totalQuantity, String name, String phone, String address, String payResult, String customerId) {}
   Map<String, dynamic> toJson (){
     return {
       'amount': amount,
-      'products': products == null ? null: List<dynamic>.from(products!.map((e) => e.toJson())),
+      'products': [],
+      // products == null ? null: List<CartItem>.from(products!.map((e) => e.toJson())),
       'dateTime': dateTime.toString(),
       'totalQuantity': totalQuantity,
       'name': name,
@@ -78,7 +79,8 @@ class OrderItem with ChangeNotifier {
     return OrderItem(
       id: json['id'],
       amount: json['amount'],
-      products: List<CartItem>.from(json['products'].map((x)=> CartItem.fromJson(x))),
+      products: [],
+      // json['product'] = List<CartItem>.from(json['products'].map((x)=> CartItem.fromJson(x))),
       dateTime: DateTime.parse(json['dateTime']),
       totalQuantity: json['totalQuantity'],
       name: json['name'],
