@@ -22,8 +22,6 @@ class ProductGridTile extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ProductDetailScreen(product)));
-              print(product.title);
-              // print(product.id);
             },
             child: Image.network(
               product.imageUrl,

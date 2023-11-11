@@ -20,6 +20,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
   void initState() {
     super.initState();
     _fetchOrders = context.read<OrdersManager>().fetchOrders();
+    print("-------------------------------");
+    print(_fetchOrders);
+    print('-----------------------------');
   }
 
   @override

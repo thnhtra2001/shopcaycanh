@@ -4,6 +4,7 @@ import 'package:shopcaycanh/ui/auth/auth_manager.dart';
 
 import '../orders/order_screen.dart';
 import '../admin/user_product_screen.dart';
+import '../personal/personal_screen.dart';
 
 class AdminAppDrawer extends StatelessWidget {
   const AdminAppDrawer({super.key});
@@ -17,22 +18,30 @@ class AdminAppDrawer extends StatelessWidget {
             title: const Text(''),
             automaticallyImplyLeading: false,
           ),
-          const Divider(),
           ListTile(
-            leading: const Icon(Icons.add),
-            title: const Text('Shop'),
+            leading: const Icon(Icons.admin_panel_settings),
+            title: const Text('Admin'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/');
+            },
+          ),
+                    const Divider(),
+          ListTile(
+            leading: const Icon(Icons.account_circle),
+            title: const Text('Trang cá nhân'),
+            onTap: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(PersonalScreen.routeName);
             },
           ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.exit_to_app),
-            title: const Text('Logout'),
+            title: const Text('Đăng xuất'),
             onTap: () {
-              Navigator.of(context)
-                ..pop()
-                ..pushReplacementNamed('/');
+              // Navigator.of(context)
+              //   ..pop()
+              //   ..pushReplacementNamed('/');
               context.read<AuthManager>().logout();
             },
           )

@@ -15,6 +15,7 @@ class OrderItem with ChangeNotifier {
   late String phone;
   late String address;
   late String payResult;
+  late String customerId;
 
   int get productCount {
     return products.length;
@@ -28,6 +29,7 @@ class OrderItem with ChangeNotifier {
     required this.phone,
     required this.address,
     required this.payResult,
+    required this.customerId,
     DateTime? dateTime,
   }) : dateTime = dateTime ?? DateTime.now();
 
@@ -42,6 +44,7 @@ class OrderItem with ChangeNotifier {
     String? phone,
     String? address,
     String? payResult,
+    String? customerId,
   }) {
     return OrderItem(
       id: id ?? this.id,
@@ -53,10 +56,11 @@ class OrderItem with ChangeNotifier {
       phone: phone ?? this.phone,
       address: address ?? this.address,
       payResult: payResult ?? this.payResult,
+      customerId: customerId ?? this.customerId,
     );
   }
 
-  void add(int i, OrderItem paymentItem, int totalQuantity, String name, String phone, String address, String payResult) {}
+  void add(int i, OrderItem paymentItem, int totalQuantity, String name, String phone, String address, String payResult, String customerId) {}
   Map<String, dynamic> toJson (){
     return {
       'amount': amount,
@@ -67,6 +71,7 @@ class OrderItem with ChangeNotifier {
       'phone': phone,
       'address': address,
       'payResult': payResult,
+      'customerId': customerId,
     };
   }
   static OrderItem fromJson (Map<String, dynamic> json){
@@ -80,6 +85,7 @@ class OrderItem with ChangeNotifier {
       phone: json['phone'],
       address: json['address'],
       payResult: json['payResult'],
+      customerId: json['customerId'],
     );
   }
 }

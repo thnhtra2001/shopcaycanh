@@ -6,36 +6,38 @@ import 'auth_service.dart';
 import 'package:flutter/services.dart';
 
 class OrderService extends FirebaseService{
-  OrderService(): super();
+  // OrderService(): super();
 
   Future<List<OrderItem>> fetchOrders() async{
     final List<OrderItem> orders = [];
     try{
-      // print("authToken:");
+      print("authToken:");
       final authToken = (await AuthService().loadSavedAuthToken())!.token;
-      // print(authToken);
+      print(authToken);
       final uid = (await AuthService().loadSavedAuthToken())!.userId;
-      // print("uid:");
-      // print(uid);
-      // print("ordersUrl:");
-      final ordersUrl = Uri.parse('$databaseUrl/orders.json?auth=$authToken&orderBy="customerId"&equalTo="$uid"');
-      // print(ordersUrl);
+      print("uid:");
+      print(uid);
+      print("ordersUrl:");
+      final ordersUrl = Uri.parse('$databaseUrl/orders.json?&orderBy="customerId"&equalTo="$uid"&auth=$authToken');
+      print(ordersUrl);
       print("AAAAAAAAAAAA");
       await Clipboard.setData(ClipboardData(text: ordersUrl.toString()));
-      // print("response body:");
+      print("response body:");
       final response = await http.get(ordersUrl);
       // final response = await http.get(Uri.parse('https://shopcaycanh-8b3ff-default-rtdb.firebaseio.com/orders/-NirY3Zw28H48usGcRgF'));
-      // print(response.body);
-      // print("ordersMap:");
+      print(response.body);
+      print("ordersMap:");
       final ordersMap = json.decode(response.body) as Map<String, dynamic>;
-      // print(ordersMap);
-      // print("orders:");
+      print(ordersMap);
+      print("orders:");
+      print(orders);
 
       if(response.statusCode != 200){
         print(ordersMap['error']);
         return orders;
       }
-      // print(orders);
+      print("length:______________________________");
+      print(orders.length);
       ordersMap.forEach((id, order) { 
         orders.add(
           OrderItem.fromJson({

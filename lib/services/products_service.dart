@@ -26,8 +26,8 @@ class ProductsService extends FirebaseService {
       // print("response");
       // print(response);
       final productsMap = json.decode(response.body) as Map<String, dynamic>;
-      // print("response body");
-      // print(productsMap);
+      print("productMap");
+      print(productsMap);
       if (response.statusCode != 200) {
         return products;
       }

@@ -337,6 +337,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
               name: snapshot.data['name'],
               phone: snapshot.data['phone'],
               address: snapshot.data['address'],
+              customerId: snapshot.data['uid'],
               payResult: payResult);
           context.read<OrdersManager>().addOrders(_order);
           // cart.clear();
@@ -395,6 +396,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                       name: snapshot.data['name'],
                       phone: snapshot.data['phone'],
                       address: snapshot.data['address'],
+                      customerId: snapshot.data['uid'],
                       payResult: payResult);
                   context.read<OrdersManager>().addOrders(_order);
                   showConfirmDialogZalo(context, payResult, cart);
@@ -410,6 +412,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                       name: snapshot.data['name'],
                       phone: snapshot.data['phone'],
                       address: snapshot.data['address'],
+                      customerId: snapshot.data['uid'],
                       payResult: payResult);
                   context.read<OrdersManager>().addOrders(_order);
                   showConfirmDialogZalo(context, payResult, cart);
@@ -425,6 +428,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                       name: snapshot.data['name'],
                       phone: snapshot.data['phone'],
                       address: snapshot.data['address'],
+                      customerId: snapshot.data['uid'],
                       payResult: payResult);
                   context.read<OrdersManager>().addOrders(_order);
                   showConfirmDialogZalo(context, payResult, cart);
