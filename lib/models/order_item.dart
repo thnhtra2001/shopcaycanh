@@ -60,7 +60,7 @@ class OrderItem with ChangeNotifier {
     );
   }
 
-  void add(int i, OrderItem paymentItem, int totalQuantity, String name, String phone, String address, String payResult, String customerId) {}
+  void add(int i, OrderItem paymentItem, int totalQuantity, String name, String phone, String address, String payResult) {}
   Map<String, dynamic> toJson (){
     return {
       'amount': amount,
