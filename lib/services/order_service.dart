@@ -19,7 +19,7 @@ class OrderService extends FirebaseService {
       await Clipboard.setData(ClipboardData(text: ordersUrl.toString()));
       ;
       final response = await http.get(ordersUrl);
-      print(response);
+      // print(response);
       final ordersMap = json.decode(response.body) as Map<dynamic, dynamic>;
       if (response.statusCode != 200) {
         print(ordersMap['error']);
@@ -27,6 +27,7 @@ class OrderService extends FirebaseService {
       }
       ordersMap.forEach((id, order) {
         orders.add(OrderItem.fromJson({'id': id, ...order}));
+        print(orders.first.name);
       });
       return orders;
     } catch (error) {

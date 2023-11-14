@@ -64,14 +64,14 @@ class OrderItem with ChangeNotifier {
       String phone, String address, String payResult, String customerId, List<CartItem> products) {}
 
 
-  Map toJson() {
+  Map<String, dynamic>  toJson() {
     List<Map>? products = this.products != null
         ? this.products.map((i) => i.toJson()).toList()
         : null;
     return {
       'amount': amount,
       'products': products,
-      'dateTime': dateTime.toString(),
+      // 'dateTime': dateTime.toString() ?? null,
       'totalQuantity': totalQuantity,
       'name': name,
       'phone': phone,
@@ -82,15 +82,15 @@ class OrderItem with ChangeNotifier {
   }
 
   factory OrderItem.fromJson(dynamic json) {
-    if (json['products' != null]) {
-      var proObJson = (json.decode['products']) as List;
-      List<CartItem> _products =
-          proObJson.map((pOs) => CartItem.fromJson(jsonDecode(pOs))).toList();
-        print(_products.first.title);
+    // if (json['products' != null]) {
+    //   var proObJson = (json.decode['products']) as List;
+    //   List<CartItem> _products =
+    //       proObJson.map((pOs) => CartItem.fromJson(pOs)).toList();
+    //     print(_products.first.title);
       return OrderItem(
         id: json['id'],
         amount: json['amount'],
-        products: _products,
+        products: (json['products'] as List<dynamic>).map((item) => CartItem.fromJson(item)).toList(),
         dateTime: DateTime.parse(json['dateTime']),
         totalQuantity: json['totalQuantity'],
         name: json['name'],
@@ -99,22 +99,22 @@ class OrderItem with ChangeNotifier {
         payResult: json['payResult'],
         customerId: json['customerId'],
       );
-    } else {
-      return OrderItem(
-          id: json['id'] as String,
-          amount: json['amount'],
-          dateTime: DateTime.parse(json['dateTime']),
-          totalQuantity: json['totalQuantity'],
-          name: json['name'],
-          phone: json['phone'],
-          address: json['address'],
-          payResult: json['payResult'],
-          customerId: json['customerId'],
-          products: []);
-    }
+    // } else {
+    //   return OrderItem(
+    //       id: json['id'] as String,
+    //       amount: json['amount'],
+    //       // dateTime: DateTime.parse(json['dateTime']),
+    //       totalQuantity: json['totalQuantity'],
+    //       name: json['name'],
+    //       phone: json['phone'],
+    //       address: json['address'],
+    //       payResult: json['payResult'],
+    //       customerId: json['customerId'],
+    //       products: []);
+    // }
   }
-  @override
-  String toString(){
-    return '{ ${this.id}, ${this.amount}, ${this.dateTime}, ${this.totalQuantity}, ${this.name}, ${this.phone}, ${this.address}, ${this.payResult}, ${this.customerId}, ${this.products}}';
-  }
+  // @override
+  // String toString(){
+  //   return '{ ${this.id}, ${this.amount}, ${this.dateTime}, ${this.totalQuantity}, ${this.name}, ${this.phone}, ${this.address}, ${this.payResult}, ${this.customerId}, ${this.products}}';
+  // }
 }

@@ -32,15 +32,16 @@ class CartItem with ChangeNotifier {
     );
   }
 
-  Map toJson() => {
-        'title': title,
-        'quantity': quantity,
-        'price': price,
-        'imageUrl': imageUrl
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'quantity': quantity,
+      'price': price,
+      'imageUrl': imageUrl
+    };
+  }
 
-      
-  factory CartItem.fromJson(dynamic json) {
+  factory CartItem.fromJson(Map<String, dynamic> json) {
     return CartItem(
         id: json['id'],
         title: json['title'],
@@ -48,8 +49,8 @@ class CartItem with ChangeNotifier {
         price: json['price'],
         imageUrl: json['imageUrl']);
   }
-  @override
-  String toString(){
-    return '{${this.id}, ${this.title}, ${this.quantity},${this.price}, ${this.imageUrl}}';
-  }
+  // @override
+  // String toString() {
+  //   return '{${this.id}, ${this.title}, ${this.quantity},${this.price}, ${this.imageUrl}}';
+  // }
 }

@@ -54,7 +54,7 @@ class CartManager with ChangeNotifier {
           imageUrl: product.imageUrl,
         ),
       );
-      _items.forEach((key, value) => print('${key}+ ${value} +AAAAAAAAAAAAAAAAAAAAAAAAa'));
+      // _items.forEach((key, value) => print('${key}+ ${value} +AAAAAAAAAAAAAAAAAAAAAAAAa'));
     }
     notifyListeners();
   }
