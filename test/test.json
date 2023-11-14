@@ -1,0 +1,32 @@
+{
+    "-Nj6DdJAmIMSBWkv8FEX": {
+        "address": "tphcmaaaaa",
+        "amount": 7222.0,
+        "customerId": "UjJYJsVdeIVyCqiFTDCBQrTfX2p2",
+        "dateTime": "2023-11-13 12:49:46.465433",
+        "name": "tran Thanh tra",
+        "payResult": "Thanh toán bằng tiền mặt",
+        "phone": "0354653950",
+        "products": [
+            {
+                "imageUrl": "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg",
+                "price": 222.0,
+                "quantity": 1,
+                "title": "afaddddkkk"
+            },
+            {
+                "imageUrl": "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg",
+                "price": 2000.0,
+                "quantity": 1,
+                "title": "san pham 3"
+            },
+            {
+                "imageUrl": "https://live.staticflickr.com/4043/4438260868_cc79b3369d_z.jpg",
+                "price": 5000.0,
+                "quantity": 1,
+                "title": "San pham 2"
+            }
+        ],
+        "totalQuantity": 3
+    }
+}

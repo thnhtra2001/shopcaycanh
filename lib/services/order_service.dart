@@ -11,42 +11,23 @@ class OrderService extends FirebaseService {
   Future<List<OrderItem>> fetchOrders() async {
     late List<OrderItem> orders = [];
     try {
-      print("authToken:");
       final authToken = (await AuthService().loadSavedAuthToken())!.token;
-      print(authToken);
       final uid = (await AuthService().loadSavedAuthToken())!.userId;
-      print("uid:");
-      print(uid);
-      print("ordersUrl:");
       final ordersUrl = Uri.parse(
           '$databaseUrl/orders.json?orderBy="customerId"&equalTo="$uid"&auth=$authToken');
-      print(ordersUrl);
-      print("AAAAAAAAAAAA");
+      // print(ordersUrl);
       await Clipboard.setData(ClipboardData(text: ordersUrl.toString()));
-      print("response:");
+      ;
       final response = await http.get(ordersUrl);
-      // final response = await http.get(Uri.parse('https://shopcaycanh-8b3ff-default-rtdb.firebaseio.com/orders/-NirY3Zw28H48usGcRgF'));
       print(response);
-      print("ordersMap key:");
       final ordersMap = json.decode(response.body) as Map<dynamic, dynamic>;
-      print(ordersMap.keys.length);
-
-      // if (response.statusCode != 200) {
-      //   return orders;
-      // }else {
-      //   print("Some thing went wrong! Co loi xay ra.....");
-      // }
-      print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
       if (response.statusCode != 200) {
         print(ordersMap['error']);
         return orders;
       }
-      print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
-      // ordersMap.values.map((e) => orders.add(e));
       ordersMap.forEach((id, order) {
         orders.add(OrderItem.fromJson({'id': id, ...order}));
       });
-      // print(ordersMap.values);
       return orders;
     } catch (error) {
       print(error);

@@ -14,7 +14,7 @@ class ProductsService extends FirebaseService {
   Future<List<Product>> fetchProducts([bool filterByUser = false]) async {
     final List<Product> products = [];
     try {
-            final filters =
+      final filters =
           filterByUser ? 'orderby="creatorId"&equalTo="$userId"' : '';
       final authToken = (await AuthService().loadSavedAuthToken())!.token;
       final productUrl =
