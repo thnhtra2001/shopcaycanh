@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/ui/cart/cart_manager.dart';
 import 'package:shopcaycanh/ui/cart/cart_screen.dart';
+import 'package:shopcaycanh/ui/orders/order_detail_screen.dart';
 import 'package:shopcaycanh/ui/orders/order_manager.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
 import 'package:shopcaycanh/ui/payment_cart1/payment_cart_screen.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => CartManager()),
           ChangeNotifierProvider(create: (context) => OrdersManager()),
           ChangeNotifierProvider(create: (context) => AuthManager()),
+
         ],
         child: Consumer<AuthManager>(builder: (context, authManager, child) {
           return MaterialApp(

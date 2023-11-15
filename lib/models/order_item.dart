@@ -64,14 +64,14 @@ class OrderItem with ChangeNotifier {
       String phone, String address, String payResult, String customerId, List<CartItem> products) {}
 
 
-  Map<String, dynamic>  toJson() {
-    List<Map>? products = this.products != null
-        ? this.products.map((i) => i.toJson()).toList()
-        : null;
+  Map toJson() {
+    // List<dynamic>? products = this.products != null
+    //     ? this.products.map((i) => i.toJson()).toList()
+    //     : null;
     return {
       'amount': amount,
-      'products': products,
-      // 'dateTime': dateTime.toString() ?? null,
+      'products': products.map((item) => item.toJson()).toList(),
+      'dateTime': dateTime.toString(),
       'totalQuantity': totalQuantity,
       'name': name,
       'phone': phone,
@@ -90,7 +90,8 @@ class OrderItem with ChangeNotifier {
       return OrderItem(
         id: json['id'],
         amount: json['amount'],
-        products: (json['products'] as List<dynamic>).map((item) => CartItem.fromJson(item)).toList(),
+        products:
+        (json['products'] as List<dynamic>).map((item) => CartItem.fromJson(item)).toList(),
         dateTime: DateTime.parse(json['dateTime']),
         totalQuantity: json['totalQuantity'],
         name: json['name'],

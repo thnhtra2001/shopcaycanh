@@ -11,6 +11,7 @@ import '../../services/order_service.dart';
 class OrdersManager with ChangeNotifier {
   final OrderService _orderService = OrderService();
   late List<OrderItem> _orders = [];
+
   int get ordersCount {
     return _orders.length;
   }
@@ -21,15 +22,23 @@ class OrdersManager with ChangeNotifier {
 
   Future<void> fetchOrders() async {
     _orders = await _orderService.fetchOrders();
+    print(_orders.length);
     notifyListeners();
   }
   Future <void> addOrders(OrderItem order) async {
     final newOrder = await _orderService.addOrder(order);
     if (newOrder != null) {
-      _orders.add(newOrder);
+    //         _orders.insert(
+    //   0,
+    //   order
+    // );
+    _orders.add(newOrder);
       notifyListeners();
     }
-    // _orders.add(order);
-    // notifyListeners();
   }
+    //   _orders.insert(
+    //   0,
+    //   order
+    // );
+  // notifyListeners();
 }

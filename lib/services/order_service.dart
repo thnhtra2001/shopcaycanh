@@ -15,19 +15,20 @@ class OrderService extends FirebaseService {
       final uid = (await AuthService().loadSavedAuthToken())!.userId;
       final ordersUrl = Uri.parse(
           '$databaseUrl/orders.json?orderBy="customerId"&equalTo="$uid"&auth=$authToken');
-      // print(ordersUrl);
+      print(ordersUrl);
       await Clipboard.setData(ClipboardData(text: ordersUrl.toString()));
       ;
       final response = await http.get(ordersUrl);
-      // print(response);
+      print(response);
       final ordersMap = json.decode(response.body) as Map<dynamic, dynamic>;
+      print("order map: ");
+      print(ordersMap.keys);
       if (response.statusCode != 200) {
         print(ordersMap['error']);
         return orders;
       }
-      ordersMap.forEach((id, order) {
-        orders.add(OrderItem.fromJson({'id': id, ...order}));
-        print(orders.first.name);
+      ordersMap.forEach((keys, value) {
+        orders.add(OrderItem.fromJson({'id': keys, ...value}));
       });
       return orders;
     } catch (error) {
