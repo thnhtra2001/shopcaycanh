@@ -28,11 +28,11 @@ class OrdersManager with ChangeNotifier {
   Future <void> addOrders(OrderItem order) async {
     final newOrder = await _orderService.addOrder(order);
     if (newOrder != null) {
-    //         _orders.insert(
-    //   0,
-    //   order
-    // );
-    _orders.add(newOrder);
+            _orders.insert(
+      0,
+      newOrder
+    );
+    // _orders.add(newOrder);
       notifyListeners();
     }
   }

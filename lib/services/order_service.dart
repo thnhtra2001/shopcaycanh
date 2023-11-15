@@ -28,7 +28,7 @@ class OrderService extends FirebaseService {
         return orders;
       }
       ordersMap.forEach((keys, value) {
-        orders.add(OrderItem.fromJson({'id': keys, ...value}));
+        orders.insert(0, OrderItem.fromJson({'id': keys, ...value}));
       });
       return orders;
     } catch (error) {
