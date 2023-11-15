@@ -6,42 +6,30 @@ import 'auth_service.dart';
 import 'package:flutter/services.dart';
 
 class OrderService extends FirebaseService {
-  // OrderService(): super();
+  OrderService() : super();
 
   Future<List<OrderItem>> fetchOrders() async {
-    final List<OrderItem> orders = [];
+    late List<OrderItem> orders = [];
     try {
-      print("authToken:");
       final authToken = (await AuthService().loadSavedAuthToken())!.token;
-      print(authToken);
       final uid = (await AuthService().loadSavedAuthToken())!.userId;
-      print("uid:");
-      print(uid);
-      print("ordersUrl:");
       final ordersUrl = Uri.parse(
-          '$databaseUrl/orders.json?&orderBy="customerId"&equalTo="$uid"&auth=$authToken');
+          '$databaseUrl/orders.json?orderBy="customerId"&equalTo="$uid"&auth=$authToken');
       print(ordersUrl);
-      print("AAAAAAAAAAAA");
       await Clipboard.setData(ClipboardData(text: ordersUrl.toString()));
-      print("response body:");
+      ;
       final response = await http.get(ordersUrl);
-      // final response = await http.get(Uri.parse('https://shopcaycanh-8b3ff-default-rtdb.firebaseio.com/orders/-NirY3Zw28H48usGcRgF'));
-      print(response.body);
-      print("ordersMap:");
-      final ordersMap = json.decode(response.body) as Map<String, dynamic>;
-      print(ordersMap.values.last);
-
+      print(response);
+      final ordersMap = json.decode(response.body) as Map<dynamic, dynamic>;
+      print("order map: ");
+      print(ordersMap.keys);
       if (response.statusCode != 200) {
+        print(ordersMap['error']);
         return orders;
       }
-
-      ordersMap.forEach((id, order) {
-        orders.add(OrderItem.fromJson({'id': id, ...order}));
+      ordersMap.forEach((keys, value) {
+        orders.insert(0, OrderItem.fromJson({'id': keys, ...value}));
       });
-      print("orders:");
-      print(orders);
-      print("length:______________________________");
-      print(orders.length);
       return orders;
     } catch (error) {
       print(error);

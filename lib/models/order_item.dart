@@ -6,7 +6,7 @@ import 'package:shopcaycanh/models/cart_item.dart';
 import 'cart_item.dart';
 
 class OrderItem with ChangeNotifier {
-  late  String? id;
+  late String? id;
   late double amount;
   late List<CartItem> products;
   late DateTime dateTime;
@@ -20,6 +20,7 @@ class OrderItem with ChangeNotifier {
   int get productCount {
     return products.length;
   }
+
   OrderItem({
     this.id,
     required this.amount,
@@ -37,7 +38,6 @@ class OrderItem with ChangeNotifier {
     String? id,
     double? amount,
     List<CartItem>? products,
-    OrderItem? payments,
     DateTime? dateTime,
     int? totalQuantity,
     String? name,
@@ -60,11 +60,17 @@ class OrderItem with ChangeNotifier {
     );
   }
 
-  void add(int i, OrderItem paymentItem, int totalQuantity, String name, String phone, String address, String payResult) {}
-  Map<String, dynamic> toJson (){
+  void add(int i, OrderItem paymentItem, int totalQuantity, String name,
+      String phone, String address, String payResult, String customerId, List<CartItem> products) {}
+
+
+  Map toJson() {
+    // List<dynamic>? products = this.products != null
+    //     ? this.products.map((i) => i.toJson()).toList()
+    //     : null;
     return {
       'amount': amount,
-      'products': products == null ? null: List<dynamic>.from(products!.map((e) => e.toJson())),
+      'products': products.map((item) => item.toJson()).toList(),
       'dateTime': dateTime.toString(),
       'totalQuantity': totalQuantity,
       'name': name,
@@ -74,18 +80,42 @@ class OrderItem with ChangeNotifier {
       'customerId': customerId,
     };
   }
-  static OrderItem fromJson (Map<String, dynamic> json){
-    return OrderItem(
-      id: json['id'],
-      amount: json['amount'],
-      products: List<CartItem>.from(json['products'].map((x)=> CartItem.fromJson(x))),
-      dateTime: DateTime.parse(json['dateTime']),
-      totalQuantity: json['totalQuantity'],
-      name: json['name'],
-      phone: json['phone'],
-      address: json['address'],
-      payResult: json['payResult'],
-      customerId: json['customerId'],
-    );
+
+  factory OrderItem.fromJson(dynamic json) {
+    // if (json['products' != null]) {
+    //   var proObJson = (json.decode['products']) as List;
+    //   List<CartItem> _products =
+    //       proObJson.map((pOs) => CartItem.fromJson(pOs)).toList();
+    //     print(_products.first.title);
+      return OrderItem(
+        id: json['id'],
+        amount: json['amount'],
+        products:
+        (json['products'] as List<dynamic>).map((item) => CartItem.fromJson(item)).toList(),
+        dateTime: DateTime.parse(json['dateTime']),
+        totalQuantity: json['totalQuantity'],
+        name: json['name'],
+        phone: json['phone'],
+        address: json['address'],
+        payResult: json['payResult'],
+        customerId: json['customerId'],
+      );
+    // } else {
+    //   return OrderItem(
+    //       id: json['id'] as String,
+    //       amount: json['amount'],
+    //       // dateTime: DateTime.parse(json['dateTime']),
+    //       totalQuantity: json['totalQuantity'],
+    //       name: json['name'],
+    //       phone: json['phone'],
+    //       address: json['address'],
+    //       payResult: json['payResult'],
+    //       customerId: json['customerId'],
+    //       products: []);
+    // }
   }
+  // @override
+  // String toString(){
+  //   return '{ ${this.id}, ${this.amount}, ${this.dateTime}, ${this.totalQuantity}, ${this.name}, ${this.phone}, ${this.address}, ${this.payResult}, ${this.customerId}, ${this.products}}';
+  // }
 }

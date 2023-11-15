@@ -3,14 +3,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 class CartItem with ChangeNotifier {
-  final String id;
+  final String? id;
   final String title;
   final int quantity;
   final double price;
   final String imageUrl;
 
   CartItem({
-    required this.id,
+    this.id,
     required this.title,
     required this.quantity,
     required this.price,
@@ -41,7 +41,7 @@ class CartItem with ChangeNotifier {
     };
   }
 
-  static CartItem fromJson(Map<String, dynamic> json) {
+  factory CartItem.fromJson(Map<String, dynamic> json) {
     return CartItem(
         id: json['id'],
         title: json['title'],
@@ -49,4 +49,8 @@ class CartItem with ChangeNotifier {
         price: json['price'],
         imageUrl: json['imageUrl']);
   }
+  // @override
+  // String toString() {
+  //   return '{${this.id}, ${this.title}, ${this.quantity},${this.price}, ${this.imageUrl}}';
+  // }
 }

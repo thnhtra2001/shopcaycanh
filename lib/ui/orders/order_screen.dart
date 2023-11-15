@@ -33,7 +33,14 @@ class _OrdersScreenState extends State<OrdersScreen> {
           title: const Text('Đơn đã đặt'),
         ),
         drawer: const AppDrawer(),
-        body: FutureBuilder(
+        body: 
+        // Consumer<OrdersManager>(builder: (ctx, ordersManager, child) {
+        //   return ListView.builder(
+        //     itemCount: ordersManager.ordersCount,
+        //     itemBuilder: (ctx, i) => OrderItemCard(ordersManager.orders[i]),
+        //   );
+        // })
+        FutureBuilder(
             future: _fetchOrders,
             builder: (contex, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
@@ -57,7 +64,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
               }
                         return const Center(
             child: CircularProgressIndicator()
-          ); 
-            }));
+          );
+            })
+        );
   }
 }

@@ -10,35 +10,35 @@ import '../models/auth_token.dart';
 import 'firebase_service.dart';
 
 class ProductsService extends FirebaseService {
-  // ProductsService() : super();
-  ProductsService([AuthToken? authToken]) : super(authToken);
-  Future<List<Product>> fetchProducts() async {
+  ProductsService() : super();
+  Future<List<Product>> fetchProducts([bool filterByUser = false]) async {
     final List<Product> products = [];
     try {
+      final filters =
+          filterByUser ? 'orderby="creatorId"&equalTo="$userId"' : '';
       final authToken = (await AuthService().loadSavedAuthToken())!.token;
-      // print("authToken:");
-      // print(authToken);
       final productUrl =
           Uri.parse('$databaseUrl/products.json?auth=$authToken');
-      // print("productUrl");
-      // print(productUrl);
       final response = await http.get(productUrl);
-      // print("response");
-      // print(response);
       final productsMap = json.decode(response.body) as Map<String, dynamic>;
-      print("productMap");
-      print(productsMap);
       if (response.statusCode != 200) {
         return products;
       }
+      final userFavoriteUrl =
+          Uri.parse('$databaseUrl/userFavorites/$userId.json?auth=$token');
+
+      final userFavoritesResponse = await http.get(userFavoriteUrl);
+
+      final userFavoritesMap = json.decode(userFavoritesResponse.body);
       productsMap.forEach((id, product) {
-        products.add(Product.fromJson({
+        final isFavorite = (userFavoritesMap == null)
+            ? false
+            : (userFavoritesMap[id] ?? false);
+        products.add(Product.fromJson({ 
           'id': id,
           ...product,
-        }));
+        }).copyWith(isFavorite: isFavorite));
       });
-      // print("products");
-      // print(products);
       return products;
     } catch (error) {
       print(error);
@@ -63,7 +63,6 @@ class ProductsService extends FirebaseService {
     }
   }
 
-// products.forEach((id, element) => print(element));
   Future<bool> updateProduct(Product product) async {
     try {
       final url =
@@ -91,6 +90,26 @@ class ProductsService extends FirebaseService {
         throw Exception(json.decode(response.body)['error']);
       }
 
+      return true;
+    } catch (error) {
+      print(error);
+      return false;
+    }
+  }
+
+  Future<bool> saveFavoriteStatus(Product product) async {
+    try {
+      final url = Uri.parse(
+          '$databaseUrl/userFavorites/$userId/${product.id}.json?auth=$token');
+      final response = await http.put(
+        url,
+        body: json.encode(
+          product.isFavorite,
+        ),
+      );
+      if (response.statusCode != 200) {
+        throw Exception(json.decode(response.body)['error']);
+      }
       return true;
     } catch (error) {
       print(error);
