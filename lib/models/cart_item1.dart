@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 
@@ -6,7 +7,7 @@ class CartItem with ChangeNotifier {
   final String? id;
   final String? productId;
   final String title;
-  late final int quantity;
+  final int quantity;
   final double price;
   final String imageUrl;
 
@@ -28,7 +29,7 @@ class CartItem with ChangeNotifier {
       String? imageUrl}) {
     return CartItem(
       id: id ?? this.id,
-      productId: productId ?? this.productId,
+      productId: productId,
       title: title ?? this.title,
       quantity: quantity ?? this.quantity,
       price: price ?? this.price,
@@ -38,7 +39,7 @@ class CartItem with ChangeNotifier {
 
   Map<String, dynamic> toJson() {
     return {
-      'productId': productId,
+      'id': productId,
       'title': title,
       'quantity': quantity,
       'price': price,

@@ -7,6 +7,7 @@ import 'package:shopcaycanh/ui/products/top_right_badge.dart';
 
 import '../../models/product.dart';
 import '../cart/cart_manager.dart';
+import '../cart/cart_manager1.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   static const routeName = '/product-detail';
@@ -49,6 +50,7 @@ class ProductDetailScreen extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 final cart = context.read<CartManager>();
+                // cart.addCart(product.id, product.title, product.price, product.imageUrl, 1);
                 cart.addItem(product);
                 Navigator.of(context).pushNamed(PaymentCartScreen1.routeName);
                 //   print(product.title);
@@ -85,13 +87,19 @@ class ProductDetailScreen extends StatelessWidget {
   }
 
   Widget buildShoppingCartIcon() {
-    return Consumer<CartManager>(
+    return Consumer<CartManager1>(
       builder: (context, cartManager, child) {
         return Container(
           child: IconButton(
               onPressed: () {
-                final cart = context.read<CartManager>();
-                cart.addItem(product);
+
+                //them vao cart
+                final cart = context.read<CartManager1>();
+                // cart.addItem(product);
+                cart.addCart(product.id, product.title, product.price, product.imageUrl, 1);
+                //thong bao
+
+
                 ScaffoldMessenger.of(context)
                   ..hideCurrentSnackBar()
                   ..showSnackBar(SnackBar(

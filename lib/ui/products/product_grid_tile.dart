@@ -4,6 +4,7 @@ import 'package:shopcaycanh/ui/cart/cart_manager.dart';
 
 import '../../models/product.dart';
 
+import '../cart/cart_manager1.dart';
 import 'product_detail_screen.dart';
 import 'products_manager.dart';
 
@@ -60,7 +61,15 @@ class ProductGridTile extends StatelessWidget {
         ),
         onPressed: () {
           final cart = context.read<CartManager>();
-          cart.addItem(product);
+                // cart.addCart(product.id, product.title, product.price, product.imageUrl, 1);
+                cart.addItem(product);
+
+          // if(product.id ==null){
+          //       cart.addCart(product.id, product.title, product.price, product.imageUrl, 1);
+          // } else {
+          //       cart.updateCart(1);
+            
+          // }
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
