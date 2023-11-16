@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:shopcaycanh/models/cart_item.dart';
 import 'package:shopcaycanh/models/product.dart';
 
+import '../models/cart_item1.dart';
 import '../models/order_item.dart';
 import './firebase_service.dart';
 import 'package:http/http.dart' as http;
@@ -10,8 +11,8 @@ import 'auth_service.dart';
 class CartService extends FirebaseService{
   CartService(): super();
 
-  Future<List<CartItem>> fetchCarts() async{
-    final List<CartItem> _cartItem = [];
+  Future<Map<String, dynamic>> fetchCarts() async{
+    final Map<String, dynamic> _cartItem = {};
 
     try{
       final authToken = (await AuthService().loadSavedAuthToken())!.token;
@@ -25,10 +26,10 @@ class CartService extends FirebaseService{
         return _cartItem;
       }
 
-      ordersMap.forEach((id, carts) { 
-        _cartItem.add(CartItem.fromJson({'id':id, ...carts}));
+      // ordersMap.forEach((id, carts) { 
+      //   _cartItem.putIfAbsent(id, CartItem.fromJson({'id':id, ...carts}));
 
-      });
+      // });
 
       return _cartItem;
     }catch(error){
@@ -43,7 +44,7 @@ class CartService extends FirebaseService{
       final response = await http.post(
         url,
         body: json.encode(
-          cart.toJson()
+          cart.toJson(),
         )
       );
 

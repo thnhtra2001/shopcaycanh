@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/ui/auth/auth_manager.dart';
 
+import '../cart/cart_manager.dart';
+import '../cart/cart_screen.dart';
 import '../orders/order_screen.dart';
 import '../admin/user_product_screen.dart';
 import '../personal/personal_screen.dart';
+import '../products/top_right_badge.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -36,6 +39,32 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           const Divider(),
+          // Consumer<CartManager>(
+          //   builder: (context, cartManager, child) {
+          //     return TopRightBadge(
+          //       data: cartManager.productCount,
+          //       child: Row(
+          //         children: [
+          //           IconButton(
+          //               onPressed: () {
+          //                 Navigator.of(context).pushNamed(CartScreen.routeName);
+          //               },
+          //               icon: const Icon(Icons.shopping_cart)),
+                    
+          //           Text('Gio hang')
+          //         ],
+          //       ),
+          //     );
+          //   },
+          // ),
+          ListTile(
+            leading: const Icon(Icons.shopping_cart),
+            title: const Text('Giỏ hàng'),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(CartScreen.routeName);
+            },
+          ),
+          const Divider(),
           ListTile(
               leading: const Icon(Icons.payment),
               title: const Text('Đơn đã đặt'),
@@ -43,15 +72,6 @@ class AppDrawer extends StatelessWidget {
                 Navigator.of(context)
                     .pushReplacementNamed(OrdersScreen.routeName);
               }),
-          // const Divider(),
-          // ListTile(
-          //   leading: const Icon(Icons.edit),
-          //   title: const Text('Admin'),
-          //   onTap: () {
-          //     Navigator.of(context)
-          //         .pushReplacementNamed(UserProductsScreen.routeName);
-          //   },
-          // ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.exit_to_app),

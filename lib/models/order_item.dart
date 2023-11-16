@@ -65,9 +65,6 @@ class OrderItem with ChangeNotifier {
 
 
   Map toJson() {
-    // List<dynamic>? products = this.products != null
-    //     ? this.products.map((i) => i.toJson()).toList()
-    //     : null;
     return {
       'amount': amount,
       'products': products.map((item) => item.toJson()).toList(),
@@ -82,11 +79,6 @@ class OrderItem with ChangeNotifier {
   }
 
   factory OrderItem.fromJson(dynamic json) {
-    // if (json['products' != null]) {
-    //   var proObJson = (json.decode['products']) as List;
-    //   List<CartItem> _products =
-    //       proObJson.map((pOs) => CartItem.fromJson(pOs)).toList();
-    //     print(_products.first.title);
       return OrderItem(
         id: json['id'],
         amount: json['amount'],
@@ -100,19 +92,6 @@ class OrderItem with ChangeNotifier {
         payResult: json['payResult'],
         customerId: json['customerId'],
       );
-    // } else {
-    //   return OrderItem(
-    //       id: json['id'] as String,
-    //       amount: json['amount'],
-    //       // dateTime: DateTime.parse(json['dateTime']),
-    //       totalQuantity: json['totalQuantity'],
-    //       name: json['name'],
-    //       phone: json['phone'],
-    //       address: json['address'],
-    //       payResult: json['payResult'],
-    //       customerId: json['customerId'],
-    //       products: []);
-    // }
   }
   // @override
   // String toString(){

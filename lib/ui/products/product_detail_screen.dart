@@ -87,16 +87,16 @@ class ProductDetailScreen extends StatelessWidget {
   }
 
   Widget buildShoppingCartIcon() {
-    return Consumer<CartManager1>(
+    return Consumer<CartManager>(
       builder: (context, cartManager, child) {
         return Container(
           child: IconButton(
               onPressed: () {
 
                 //them vao cart
-                final cart = context.read<CartManager1>();
-                // cart.addItem(product);
-                cart.addCart(product.id, product.title, product.price, product.imageUrl, 1);
+                final cart = context.read<CartManager>();
+                cart.addItem(product);
+                // cart.addCart(product.id, product.title, product.price, product.imageUrl, 1);
                 //thong bao
 
 
@@ -106,7 +106,7 @@ class ProductDetailScreen extends StatelessWidget {
                     content: const Text('Da them vao gio hang'),
                     duration: const Duration(seconds: 2),
                     action: SnackBarAction(
-                      label: 'UNDO',
+                      label: 'Xoa',
                       onPressed: () {
                         cart.removeSingleItem(product.id!);
                       },
