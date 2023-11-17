@@ -46,6 +46,8 @@ class _SearchScreenState extends State<SearchScreen> {
           .where((element) =>
               element.title!.toLowerCase().contains(value.toLowerCase()))
           .toList();
+      print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAtra");
+      print(display_product);
       // result = display_list
       //     .where((element) =>
       //         element.title!.toLowerCase().contains(element.title))
@@ -96,7 +98,10 @@ class _SearchScreenState extends State<SearchScreen> {
                   ? const Center(
                       child: Text(
                       'Tìm không thấy sản phẩm',
-                      style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
                     ))
                   : ListView.builder(
                       itemCount: display_product!.length,
