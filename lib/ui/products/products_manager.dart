@@ -75,23 +75,17 @@ class ProductsManager with ChangeNotifier {
   }
 
   ///////////////////////////////////////
-  ///
-  ///
   List<Product> updateList(String value) {
     _display_product = _items
         .where((element) =>
             element.title.toLowerCase().contains(value.toLowerCase()))
         .toList();
-    print("AAAAAAAAAAAAAAAAAAA");
-    print(value);
-    print(_display_product);
     return _display_product;
   }
 
   int get display_product_Count {
     return _display_product.length;
   }
-
   List<Product> get display_product {
     return [..._display_product];
   }

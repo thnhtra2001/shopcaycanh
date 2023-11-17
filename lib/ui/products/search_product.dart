@@ -18,15 +18,13 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     super.initState();
     setState(() {
-      final productsManager = context.read<ProductsManager>();
-      late List<Product> product = productsManager.display_product;
+      // final productsManager = context.read<ProductsManager>();
+      // late List<Product> product = productsManager.display_product;
       // print(product.length);
       //// lay tu day de hien thi xuong listview
-      display_product = product;
+      // display_product = product;
     });
   }
-
-  // _fetchProducts = context.read<ProductsManager>().fetchProducts();
   // }
   // truyen vao chuoi dua vao do de loc ra title
   // void updateList(String value) {
@@ -76,11 +74,14 @@ class _SearchScreenState extends State<SearchScreen> {
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,
-                          fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.normal),
                     ))
                   : ListView.builder(
                       itemCount: productsManager.display_product_Count,
                       itemBuilder: (context, index) => ListTile(
+                        onTap: () {
+                          print("on tap now");
+                        },
                         title: Text(
                           product[index].title,
                           style: TextStyle(color: Colors.black),

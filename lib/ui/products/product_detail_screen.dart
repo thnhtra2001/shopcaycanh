@@ -103,10 +103,10 @@ class ProductDetailScreen extends StatelessWidget {
                 ScaffoldMessenger.of(context)
                   ..hideCurrentSnackBar()
                   ..showSnackBar(SnackBar(
-                    content: const Text('Da them vao gio hang'),
+                    content: const Text('Đã thêm vào giỏ hàng!'),
                     duration: const Duration(seconds: 2),
                     action: SnackBarAction(
-                      label: 'Xoa',
+                      label: 'Xóa',
                       onPressed: () {
                         cart.removeSingleItem(product.id!);
                       },
