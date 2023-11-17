@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/models/cart_item.dart';
@@ -21,12 +22,6 @@ class ProductGridTile extends StatefulWidget {
 }
 
 class _ProductGridTileState extends State<ProductGridTile> {
-  // late Product _cart1;
-  // @override
-  // void initState(){
-  //   _cart1 = widget.product;
-  //    super.initState();
-  // }
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
