@@ -65,7 +65,7 @@ class _ProductGridTileState extends State<ProductGridTile> {
       ),
       trailing: IconButton(
         icon: const Icon(
-          Icons.shopping_bag_outlined,
+          Icons.shopping_cart,
         ),
         onPressed: () {
           final cart = context.read<CartManager>();

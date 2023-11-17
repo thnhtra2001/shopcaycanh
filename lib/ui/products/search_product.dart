@@ -49,14 +49,13 @@ class _SearchScreenState extends State<SearchScreen> {
         (productsManager) => productsManager.display_product);
     return Scaffold(
         appBar: AppBar(
-          title: const Text(''),
+          title: const Text('Tìm kiếm'),
         ),
         body: Column(children: [
           TextField(
             onChanged: (value) =>
             setState(() {
                 context.read<ProductsManager>().updateList(value);
-              
             }),
             decoration: InputDecoration(
                 filled: true,
