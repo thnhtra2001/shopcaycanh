@@ -70,7 +70,7 @@ class _SearchScreenState extends State<SearchScreen> {
     final product = context.select<ProductsManager, List<Product>>(
         (productsManager) => productsManager.display_product);
     print("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
-    print(product.last.title);
+    // print(product.last.title);
     return Scaffold(
         appBar: AppBar(
           title: const Text('Tìm sản phẩm'),
