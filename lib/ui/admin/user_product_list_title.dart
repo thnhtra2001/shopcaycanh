@@ -4,6 +4,7 @@ import 'package:shopcaycanh/ui/admin/edit_product_screen.dart';
 import 'package:shopcaycanh/ui/products/products_manager.dart';
 
 import '../../models/product.dart';
+import '../products/product_detail_screen.dart';
 
 class UserProductListTile extends StatelessWidget {
   static const routeName = '/admin-products';

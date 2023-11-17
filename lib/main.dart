@@ -9,8 +9,10 @@ import 'package:shopcaycanh/ui/payment_cart1/payment_cart_screen.dart';
 import 'package:shopcaycanh/ui/products/product_detail_screen.dart';
 import 'package:shopcaycanh/ui/products/product_overview_screen.dart';
 import 'package:shopcaycanh/ui/products/products_manager.dart';
+import 'package:shopcaycanh/ui/products/search_product.dart';
 import 'package:shopcaycanh/ui/screens.dart';
 import 'models/product.dart';
+import 'ui/cart/cart_manager1.dart';
 import 'ui/products/product_overview_screen.dart';
 
 import 'ui/admin/user_product_screen.dart';
@@ -34,6 +36,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => CartManager()),
           ChangeNotifierProvider(create: (context) => OrdersManager()),
           ChangeNotifierProvider(create: (context) => AuthManager()),
+          ChangeNotifierProvider(create: (context) => CartManager1()),
+
 
         ],
         child: Consumer<AuthManager>(builder: (context, authManager, child) {
@@ -66,6 +70,7 @@ class MyApp extends StatelessWidget {
               PersonalScreen.routeName: (context) => const PersonalScreen(),
               PaymentCartScreen1.routeName: (context) =>
                   const PaymentCartScreen1(),
+              SearchScreen.routeName:(context) => const SearchScreen()
             },
             onGenerateRoute: (settings) {
               if (settings.name == ProductDetailScreen.routeName) {

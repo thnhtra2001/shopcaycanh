@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shopcaycanh/ui/cart/cart_manager.dart';
 import 'package:shopcaycanh/ui/cart/cart_screen.dart';
 import 'package:shopcaycanh/ui/products/products_manager.dart';
+import 'package:shopcaycanh/ui/products/search_product.dart';
 import 'package:shopcaycanh/ui/products/top_right_badge.dart';
 import 'package:shopcaycanh/ui/shared/app_drawer.dart';
 
@@ -25,9 +26,6 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
   void initState() {
     super.initState();
     _fetchProducts = context.read<ProductsManager>().fetchProducts();
-    // print('=========================');
-    // print(_fetchProducts.toString().length);
-    // print('=========================');
   }
 
   @override
@@ -37,7 +35,8 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
           title: const Text('Shop cây cảnh'),
           actions: <Widget>[
             buildProductFilterMenu(),
-            buildShoppingCartIcon(),
+            // buildShoppingCartIcon(),
+            searchProduct(),
           ],
         ),
         drawer: const AppDrawer(),
@@ -57,6 +56,14 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
             );
           },
         ));
+  }
+
+  Widget searchProduct() {
+    return IconButton(
+        onPressed: () {
+          Navigator.of(context).pushNamed(SearchScreen.routeName);
+        },
+        icon: const Icon(Icons.search));
   }
 
   Widget buildShoppingCartIcon() {
@@ -99,3 +106,52 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
     );
   }
 }
+
+// class MySearch extends SearchDelegate {
+//       List<String> searchResult = [
+//       'Brazil',
+//       'VietNam',
+//       'China',
+//       'Korea',
+//       'Japanse'
+//     ];
+//   @override
+//   Widget buildLeading(BuildContext context) => IconButton(
+//       icon: const Icon(Icons.arrow_back),
+//       onPressed: () => close(context, null));
+//   @override
+//   List<Widget>? buildActions(BuildContext context) => [
+//         IconButton.filled(
+//             onPressed: () {
+//               if (query.isEmpty) {
+//                 close(context, null);
+//               } else {
+//                 query = '';
+//               }
+//             },
+//             icon: const Icon(Icons.clear))
+//       ];
+//   @override
+//   Widget buildResults(BuildContext context) => Center(
+//         child: Text(
+//           query,
+//           style: TextStyle(color: Colors.yellow, fontSize: 50),
+//         ),
+//       );
+//   @override
+//   Widget buildSuggestions(BuildContext context) {
+//     List<String> suggestions = ['Vietnam'];
+//     return ListView.builder(
+//         itemCount: suggestions.length,
+//         itemBuilder: (context, index) {
+//           final suggestion = suggestions[index];
+//           return ListTile(
+//             title: Text(suggestion),
+//             onTap: () {
+//               query = suggestion;
+//               showResults(context);
+//             },
+//           );
+//         });
+//   }
+// }

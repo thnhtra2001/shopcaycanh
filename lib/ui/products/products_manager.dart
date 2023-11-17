@@ -11,6 +11,7 @@ import '../../services/products_service.dart';
 class ProductsManager with ChangeNotifier {
   final ProductsService _productsService = ProductsService();
   List<Product> _items = [];
+  List<Product> _display_product = [];
 
   int get itemCount {
     return _items.length;
@@ -71,5 +72,27 @@ class ProductsManager with ChangeNotifier {
     if (!await _productsService.saveFavoriteStatus(product)) {
       product.isFavorite = savedStatus;
     }
+  }
+
+  ///////////////////////////////////////
+  ///
+  ///
+  List<Product> updateList(String value) {
+    _display_product = _items
+        .where((element) =>
+            element.title.toLowerCase().contains(value.toLowerCase()))
+        .toList();
+    print("AAAAAAAAAAAAAAAAAAA");
+    print(value);
+    print(_display_product);
+    return _display_product;
+  }
+
+  int get display_product_Count {
+    return _display_product.length;
+  }
+
+  List<Product> get display_product {
+    return [..._display_product];
   }
 }

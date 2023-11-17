@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 
 class CartItem with ChangeNotifier {
   final String? id;
+  final String? productId;
   final String title;
-  final int quantity;
+  late final int quantity;
   final double price;
   final String imageUrl;
 
   CartItem({
     this.id,
+    required this.productId,
     required this.title,
     required this.quantity,
     required this.price,
@@ -19,12 +21,14 @@ class CartItem with ChangeNotifier {
 
   CartItem copyWith(
       {String? id,
+      String? productId,
       String? title,
       int? quantity,
       double? price,
       String? imageUrl}) {
     return CartItem(
       id: id ?? this.id,
+      productId: productId ?? this.productId,
       title: title ?? this.title,
       quantity: quantity ?? this.quantity,
       price: price ?? this.price,
@@ -34,6 +38,7 @@ class CartItem with ChangeNotifier {
 
   Map<String, dynamic> toJson() {
     return {
+      'productId': productId,
       'title': title,
       'quantity': quantity,
       'price': price,
@@ -44,6 +49,7 @@ class CartItem with ChangeNotifier {
   factory CartItem.fromJson(Map<String, dynamic> json) {
     return CartItem(
         id: json['id'],
+        productId: json['productId'],
         title: json['title'],
         quantity: json['quantity'],
         price: json['price'],

@@ -6,7 +6,8 @@ import '../../models/cart_item.dart';
 import 'package:flutter/foundation.dart';
 import '../../models/product.dart';
 
-class CartManager with ChangeNotifier {
+class CartManager2 with ChangeNotifier {
+  final CartService _cartService = CartService();
   Map<String, CartItem> _cartitems = {};
   int get productCount {
     return _cartitems.length;
@@ -27,10 +28,11 @@ class CartManager with ChangeNotifier {
     });
     return total;
   }
-    int get totalQuantity {
+
+  int get totalQuantity {
     var totalQuantity = 0;
     _cartitems.forEach((key, cartItem) {
-      totalQuantity +=  cartItem.quantity;
+      totalQuantity += cartItem.quantity;
     });
     return totalQuantity;
   }
@@ -39,7 +41,14 @@ class CartManager with ChangeNotifier {
     print(_cartitems.length);
     notifyListeners();
   }
+
   Future<void> addItem(Product product) async {
+    // final addCarts = await _cartService.addCarts(CartItem(
+    //     productId: product.id,
+    //     title: product.title,
+    //     quantity: 1,
+    //     price: product.price,
+    //     imageUrl: product.imageUrl));
     if (_cartitems.containsKey(product.id)) {
       _cartitems.update(
         product.id!,
@@ -63,7 +72,7 @@ class CartManager with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> removeItem(String productId) async{
+  Future<void> removeItem(String productId) async {
     _cartitems.remove(productId);
     notifyListeners();
   }
