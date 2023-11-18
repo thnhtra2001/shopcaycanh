@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shopcaycanh/ui/products/products_manager.dart';
 
 import '../../models/product.dart';
+import 'product_detail_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   static const routeName = '/search';
@@ -19,14 +20,13 @@ class _SearchScreenState extends State<SearchScreen> {
     super.initState();
     setState(() {
       final productsManager = context.read<ProductsManager>();
-      late List<Product> product = productsManager.display_product;
-      // print(product.length);
-      //// lay tu day de hien thi xuong listview
+      late List<Product> product = productsManager.items;
+      print("AAAAAAAAAAAAAAAAAAAA");
+      print(product.length);
+      // lay tu day de hien thi xuong listview
       display_product = product;
     });
   }
-
-  // _fetchProducts = context.read<ProductsManager>().fetchProducts();
   // }
   // truyen vao chuoi dua vao do de loc ra title
   // void updateList(String value) {
@@ -53,9 +53,8 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
         body: Column(children: [
           TextField(
-            onChanged: (value) =>
-            setState(() {
-                context.read<ProductsManager>().updateList(value);
+            onChanged: (value) => setState(() {
+              context.read<ProductsManager>().updateList(value);
             }),
             decoration: InputDecoration(
                 filled: true,
@@ -76,11 +75,16 @@ class _SearchScreenState extends State<SearchScreen> {
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,
-                          fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.normal),
                     ))
                   : ListView.builder(
                       itemCount: productsManager.display_product_Count,
                       itemBuilder: (context, index) => ListTile(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  ProductDetailScreen(product[index])));
+                        },
                         title: Text(
                           product[index].title,
                           style: TextStyle(color: Colors.black),
