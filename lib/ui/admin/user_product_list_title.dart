@@ -55,7 +55,7 @@ class UserProductListTile extends StatelessWidget {
           ..hideCurrentMaterialBanner()
           ..showSnackBar(const SnackBar(
               content: Text(
-            'Sản phẩm đã được xóa !',
+            'Sản phẩm đã được xóa!',
             textAlign: TextAlign.center,
           )));
       },

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shopcaycanh/ui/products/products_manager.dart';
 
 import '../../models/product.dart';
+import 'product_detail_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   static const routeName = '/search';
@@ -18,11 +19,12 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     super.initState();
     setState(() {
-      // final productsManager = context.read<ProductsManager>();
-      // late List<Product> product = productsManager.display_product;
-      // print(product.length);
-      //// lay tu day de hien thi xuong listview
-      // display_product = product;
+      final productsManager = context.read<ProductsManager>();
+      late List<Product> product = productsManager.items;
+      print("AAAAAAAAAAAAAAAAAAAA");
+      print(product.length);
+      // lay tu day de hien thi xuong listview
+      display_product = product;
     });
   }
   // }
@@ -51,9 +53,8 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
         body: Column(children: [
           TextField(
-            onChanged: (value) =>
-            setState(() {
-                context.read<ProductsManager>().updateList(value);
+            onChanged: (value) => setState(() {
+              context.read<ProductsManager>().updateList(value);
             }),
             decoration: InputDecoration(
                 filled: true,
@@ -80,7 +81,9 @@ class _SearchScreenState extends State<SearchScreen> {
                       itemCount: productsManager.display_product_Count,
                       itemBuilder: (context, index) => ListTile(
                         onTap: () {
-                          print("on tap now");
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  ProductDetailScreen(product[index])));
                         },
                         title: Text(
                           product[index].title,
