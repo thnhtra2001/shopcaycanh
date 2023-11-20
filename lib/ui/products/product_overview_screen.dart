@@ -9,7 +9,7 @@ import 'package:shopcaycanh/ui/shared/app_drawer.dart';
 
 import 'product_grid.dart';
 
-enum FilterOptions { favorites, all }
+enum FilterOptions {favorites, all}
 
 class ProductOverviewScreen extends StatefulWidget {
   const ProductOverviewScreen({super.key});
@@ -26,6 +26,7 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
   void initState() {
     super.initState();
     _fetchProducts = context.read<ProductsManager>().fetchProducts();
+    print(_fetchProducts);
   }
 
   @override

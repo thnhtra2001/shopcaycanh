@@ -9,6 +9,9 @@ class CartItem with ChangeNotifier {
   late final int quantity;
   final double price;
   final String imageUrl;
+  final String owner;
+  final String origin;
+  final String status;
 
   CartItem({
     this.id,
@@ -17,6 +20,9 @@ class CartItem with ChangeNotifier {
     required this.quantity,
     required this.price,
     required this.imageUrl,
+    required this.owner,
+    required this.origin,
+    required this.status,
   });
 
   CartItem copyWith(
@@ -25,7 +31,11 @@ class CartItem with ChangeNotifier {
       String? title,
       int? quantity,
       double? price,
-      String? imageUrl}) {
+      String? imageUrl,
+      String? owner,
+      String? origin,
+      String? status
+      }) {
     return CartItem(
       id: id ?? this.id,
       productId: productId ?? this.productId,
@@ -33,6 +43,9 @@ class CartItem with ChangeNotifier {
       quantity: quantity ?? this.quantity,
       price: price ?? this.price,
       imageUrl: imageUrl ?? this.imageUrl,
+      owner: owner ?? this.owner,
+      origin: origin ?? this.origin,
+      status: status ?? this.status,
     );
   }
 
@@ -42,7 +55,10 @@ class CartItem with ChangeNotifier {
       'title': title,
       'quantity': quantity,
       'price': price,
-      'imageUrl': imageUrl
+      'imageUrl': imageUrl,
+      'owner': owner,
+      'origin': origin,
+      'status': status,
     };
   }
 
@@ -53,7 +69,11 @@ class CartItem with ChangeNotifier {
         title: json['title'],
         quantity: json['quantity'],
         price: json['price'],
-        imageUrl: json['imageUrl']);
+        imageUrl: json['imageUrl'],
+        owner: json['owner'],
+        origin: json['origin'],
+        status: json['status']
+        );
   }
   // @override
   // String toString() {

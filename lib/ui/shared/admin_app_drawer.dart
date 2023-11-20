@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopcaycanh/ui/admin/personal_screen.dart';
 import 'package:shopcaycanh/ui/auth/auth_manager.dart';
 
 import '../orders/order_screen.dart';
@@ -31,7 +32,7 @@ class AdminAppDrawer extends StatelessWidget {
             title: const Text('Trang cá nhân'),
             onTap: () {
               Navigator.of(context)
-                  .pushReplacementNamed(PersonalScreen.routeName);
+                  .pushReplacementNamed(PersonalScreenAdmin.routeName);
             },
           ),
           const Divider(),

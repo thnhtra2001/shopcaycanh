@@ -22,6 +22,9 @@ class EditProductScreen extends StatefulWidget {
         price: 0,
         description: '',
         imageUrl: '',
+        owner: '',
+        origin: '',
+        status: ''
       );
     } else {
       this.product = product;
@@ -101,7 +104,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit product'),
+        title: const Text('Chỉnh sửa'),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.save),
@@ -120,6 +123,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 child: ListView(
                   children: <Widget>[
                     buildTitleField(),
+                    buildOwnerField(),
+                    buildOriginField(),
+                    buildStatusField(),
                     buildPriceField(),
                     buildDescriptionField(),
                     buildProductPreview(),
@@ -133,7 +139,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   TextFormField buildTitleField() {
     return TextFormField(
       initialValue: _editedProduct.title,
-      decoration: const InputDecoration(labelText: 'Title'),
+      decoration: const InputDecoration(labelText: 'Tên cây cảnh'),
       textInputAction: TextInputAction.next,
       autofocus: true,
       validator: (value) {
@@ -148,10 +154,63 @@ class _EditProductScreenState extends State<EditProductScreen> {
     );
   }
 
+    TextFormField buildOwnerField() {
+    return TextFormField(
+      initialValue: _editedProduct.owner,
+      decoration: const InputDecoration(labelText: 'Người bán'),
+      textInputAction: TextInputAction.next,
+      autofocus: true,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please provide a value';
+        }
+        return null;
+      },
+      onSaved: (value) {
+        _editedProduct = _editedProduct.copyWith(owner: value);
+      },
+    );
+  }
+
+    TextFormField buildOriginField() {
+    return TextFormField(
+      initialValue: _editedProduct.origin,
+      decoration: const InputDecoration(labelText: 'Xuất xứ'),
+      textInputAction: TextInputAction.next,
+      autofocus: true,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please provide a value';
+        }
+        return null;
+      },
+      onSaved: (value) {
+        _editedProduct = _editedProduct.copyWith(origin: value);
+      },
+    );
+  }
+    TextFormField buildStatusField() {
+    return TextFormField(
+      initialValue: _editedProduct.title,
+      decoration: const InputDecoration(labelText: 'Tình trạng'),
+      textInputAction: TextInputAction.next,
+      autofocus: true,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please provide a value';
+        }
+        return null;
+      },
+      onSaved: (value) {
+        _editedProduct = _editedProduct.copyWith(status: value);
+      },
+    );
+  }
+
   TextFormField buildPriceField() {
     return TextFormField(
       initialValue: _editedProduct.price.toString(),
-      decoration: const InputDecoration(labelText: 'Price'),
+      decoration: const InputDecoration(labelText: 'Giá'),
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.number,
       validator: (value) {
@@ -175,7 +234,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   TextFormField buildDescriptionField() {
     return TextFormField(
       initialValue: _editedProduct.description,
-      decoration: const InputDecoration(labelText: 'Description'),
+      decoration: const InputDecoration(labelText: 'Mô tả'),
       maxLines: 3,
       keyboardType: TextInputType.multiline,
       validator: (value) {
@@ -228,7 +287,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
   TextFormField buildImageURLField() {
     return TextFormField(
-      decoration: const InputDecoration(labelText: 'Image URL'),
+      decoration: const InputDecoration(labelText: 'Image URL cây cảnh'),
       keyboardType: TextInputType.url,
       textInputAction: TextInputAction.done,
       controller: _imageUrlController,

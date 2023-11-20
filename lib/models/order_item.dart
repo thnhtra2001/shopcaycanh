@@ -16,6 +16,9 @@ class OrderItem with ChangeNotifier {
   late String address;
   late String payResult;
   late String customerId;
+  // late String owner;
+  // late String origin;
+  // late String status;
 
   int get productCount {
     return products.length;
@@ -31,6 +34,9 @@ class OrderItem with ChangeNotifier {
     required this.address,
     required this.payResult,
     required this.customerId,
+    // required this.owner,
+    // required this.origin,
+    // required this.status,
     DateTime? dateTime,
   }) : dateTime = dateTime ?? DateTime.now();
 
@@ -45,6 +51,9 @@ class OrderItem with ChangeNotifier {
     String? address,
     String? payResult,
     String? customerId,
+    String? owner,
+    String? origin,
+    String? status,
   }) {
     return OrderItem(
       id: id ?? this.id,
@@ -57,12 +66,26 @@ class OrderItem with ChangeNotifier {
       address: address ?? this.address,
       payResult: payResult ?? this.payResult,
       customerId: customerId ?? this.customerId,
+      // owner: owner ?? this.owner,
+      // origin: origin ?? this.origin,
+      // status: status ?? this.status,
     );
   }
 
-  void add(int i, OrderItem paymentItem, int totalQuantity, String name,
-      String phone, String address, String payResult, String customerId, List<CartItem> products) {}
-
+  void add(
+      int i,
+      OrderItem paymentItem,
+      int totalQuantity,
+      String name,
+      String phone,
+      String address,
+      String payResult,
+      String customerId,
+      List<CartItem> products,
+      String owner,
+      String origin,
+      String status
+      ) {}
 
   Map toJson() {
     return {
@@ -75,23 +98,30 @@ class OrderItem with ChangeNotifier {
       'address': address,
       'payResult': payResult,
       'customerId': customerId,
+      // 'owner': owner,
+      // 'origin': origin,
+      // 'status': status
     };
   }
 
   factory OrderItem.fromJson(dynamic json) {
-      return OrderItem(
-        id: json['id'],
-        amount: json['amount'],
-        products:
-        (json['products'] as List<dynamic>).map((item) => CartItem.fromJson(item)).toList(),
-        dateTime: DateTime.parse(json['dateTime']),
-        totalQuantity: json['totalQuantity'],
-        name: json['name'],
-        phone: json['phone'],
-        address: json['address'],
-        payResult: json['payResult'],
-        customerId: json['customerId'],
-      );
+    return OrderItem(
+      id: json['id'],
+      amount: json['amount'],
+      products: (json['products'] as List<dynamic>)
+          .map((item) => CartItem.fromJson(item))
+          .toList(),
+      dateTime: DateTime.parse(json['dateTime']),
+      totalQuantity: json['totalQuantity'],
+      name: json['name'],
+      phone: json['phone'],
+      address: json['address'],
+      payResult: json['payResult'],
+      customerId: json['customerId'],
+      // owner: json['owner'],
+      // origin: json['origin'],
+      // status: json['status'],
+    );
   }
   // @override
   // String toString(){

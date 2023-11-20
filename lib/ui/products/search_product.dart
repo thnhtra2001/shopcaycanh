@@ -41,7 +41,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
   //   });
   // }
-
   @override
   Widget build(BuildContext context) {
     final productsManager = context.read<ProductsManager>();
@@ -71,7 +70,7 @@ class _SearchScreenState extends State<SearchScreen> {
               child: product!.length == 0
                   ? const Center(
                       child: Text(
-                      'Tìm không thấy sản phẩm',
+                      '',
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,

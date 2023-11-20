@@ -31,7 +31,7 @@ class _ProductGridTileState extends State<ProductGridTile> {
           child: GestureDetector(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ProductDetailScreen(widget.product)));
+                  builder: (context) => ProductDetailScreen(widget!.product!)));
             },
             child: Image.network(
               widget.product.imageUrl,

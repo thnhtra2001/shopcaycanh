@@ -2,7 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:shopcaycanh/models/cart_item.dart';
 import 'package:shopcaycanh/models/order_item.dart';
 
-
 import 'package:flutter/foundation.dart';
 
 import '../../models/product.dart';
@@ -25,20 +24,18 @@ class OrdersManager with ChangeNotifier {
     print(_orders.length);
     notifyListeners();
   }
-  Future <void> addOrders(OrderItem order) async {
+
+  Future<void> addOrders(OrderItem order) async {
     final newOrder = await _orderService.addOrder(order);
     if (newOrder != null) {
-            _orders.insert(
-      0,
-      newOrder
-    );
-    // _orders.add(newOrder);
+      _orders.insert(0, newOrder);
+      // _orders.add(newOrder);
       notifyListeners();
     }
   }
-    //   _orders.insert(
-    //   0,
-    //   order
-    // );
+  //   _orders.insert(
+  //   0,
+  //   order
+  // );
   // notifyListeners();
 }
