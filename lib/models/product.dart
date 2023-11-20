@@ -6,6 +6,9 @@ class Product {
   final String description;
   final double price;
   final String imageUrl;
+  late final String owner;
+  late final String origin;
+  late final String status;
   final ValueNotifier<bool> _isFavorite;
 
   Product({
@@ -14,6 +17,9 @@ class Product {
     required this.description,
     required this.price,
     required this.imageUrl,
+    required this.owner,
+    required this.origin,
+    required this.status,
     isFavorite = false,
   }) : _isFavorite = ValueNotifier(isFavorite);
 
@@ -35,6 +41,9 @@ class Product {
     String? description,
     double? price,
     String? imageUrl,
+    String? owner,
+    String? origin,
+    String? status,
     bool? isFavorite,
   }) {
     return Product(
@@ -43,7 +52,11 @@ class Product {
         description: description ?? this.description,
         price: price ?? this.price,
         imageUrl: imageUrl ?? this.imageUrl,
-        isFavorite: isFavorite ?? this.isFavorite);
+        owner: owner ?? this.owner,
+        origin: origin ?? this.origin,
+        status: status ?? this.status,
+        isFavorite: isFavorite ?? this.isFavorite,
+        );
   }
 
   Map<String, dynamic> toJson() {
@@ -52,7 +65,11 @@ class Product {
       'title': title,
       'description': description,
       'price': price,
-      'imageUrl': imageUrl
+      'imageUrl': imageUrl,
+      'owner': owner,
+      'origin': origin,
+      'status': status,
+      'isFavorite': isFavorite,
     };
   }
 
@@ -63,6 +80,10 @@ class Product {
       description: json['description'],
       price: json['price'],
       imageUrl: json['imageUrl'],
+      owner: json['owner'],
+      origin: json['origin'],
+      status: json['status'],
+      isFavorite: json['isFavorite'],
     );
   }
 }

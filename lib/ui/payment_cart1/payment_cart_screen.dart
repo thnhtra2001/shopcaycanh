@@ -331,14 +331,18 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                 );
               });
           _order = OrderItem(
-              amount: cart.totalAmount,
-              products: cart.products,
-              totalQuantity: cart.totalQuantity,
-              name: snapshot.data['name'],
-              phone: snapshot.data['phone'],
-              address: snapshot.data['address'],
-              customerId: snapshot.data['uid'],
-              payResult: payResult);
+            amount: cart.totalAmount,
+            products: cart.products,
+            totalQuantity: cart.totalQuantity,
+            name: snapshot.data['name'],
+            phone: snapshot.data['phone'],
+            address: snapshot.data['address'],
+            customerId: snapshot.data['uid'],
+            payResult: payResult,
+            // owner: cart.owner,
+            // origin: cart.origin,
+            // status: cart.status,
+          );
           context.read<OrdersManager>().addOrders(_order);
           // cart.clear();
           showMyDialog(context, cart);
@@ -390,14 +394,18 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                 case FlutterZaloPayStatus.success:
                   payResult = "Thanh toán thành công";
                   _order = OrderItem(
-                      amount: cart.totalAmount,
-                      products: cart.products,
-                      totalQuantity: cart.totalQuantity,
-                      name: snapshot.data['name'],
-                      phone: snapshot.data['phone'],
-                      address: snapshot.data['address'],
-                      customerId: snapshot.data['uid'],
-                      payResult: payResult);
+                    amount: cart.totalAmount,
+                    products: cart.products,
+                    totalQuantity: cart.totalQuantity,
+                    name: snapshot.data['name'],
+                    phone: snapshot.data['phone'],
+                    address: snapshot.data['address'],
+                    customerId: snapshot.data['uid'],
+                    payResult: payResult,
+                    // owner: cart.owner,
+                    // origin: cart.origin,
+                    // status: cart.status,
+                  );
                   context.read<OrdersManager>().addOrders(_order);
                   showConfirmDialogZalo(context, payResult, cart);
                   print(payResult);
@@ -406,14 +414,18 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                 case FlutterZaloPayStatus.failed:
                   payResult = "Thanh toán thất bại";
                   _order = OrderItem(
-                      amount: cart.totalAmount,
-                      products: cart.products,
-                      totalQuantity: cart.totalQuantity,
-                      name: snapshot.data['name'],
-                      phone: snapshot.data['phone'],
-                      address: snapshot.data['address'],
-                      customerId: snapshot.data['uid'],
-                      payResult: payResult);
+                    amount: cart.totalAmount,
+                    products: cart.products,
+                    totalQuantity: cart.totalQuantity,
+                    name: snapshot.data['name'],
+                    phone: snapshot.data['phone'],
+                    address: snapshot.data['address'],
+                    customerId: snapshot.data['uid'],
+                    payResult: payResult,
+                    // owner: cart.owner,
+                    // origin: cart.origin,
+                    // status: cart.status,
+                  );
                   context.read<OrdersManager>().addOrders(_order);
                   showConfirmDialogZalo(context, payResult, cart);
                   print(payResult);
@@ -422,14 +434,18 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                 default:
                   payResult = "Thanh toán đang được xử lý";
                   _order = OrderItem(
-                      amount: cart.totalAmount,
-                      products: cart.products,
-                      totalQuantity: cart.totalQuantity,
-                      name: snapshot.data['name'],
-                      phone: snapshot.data['phone'],
-                      address: snapshot.data['address'],
-                      customerId: snapshot.data['uid'],
-                      payResult: payResult);
+                    amount: cart.totalAmount,
+                    products: cart.products,
+                    totalQuantity: cart.totalQuantity,
+                    name: snapshot.data['name'],
+                    phone: snapshot.data['phone'],
+                    address: snapshot.data['address'],
+                    customerId: snapshot.data['uid'],
+                    payResult: payResult,
+                    // owner: cart.owner,
+                    // origin: cart.origin,
+                    // status: cart.status,
+                  );
                   context.read<OrdersManager>().addOrders(_order);
                   showConfirmDialogZalo(context, payResult, cart);
                   print(payResult);

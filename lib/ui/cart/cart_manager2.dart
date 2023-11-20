@@ -42,35 +42,35 @@ class CartManager2 with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addItem(Product product) async {
-    // final addCarts = await _cartService.addCarts(CartItem(
-    //     productId: product.id,
-    //     title: product.title,
-    //     quantity: 1,
-    //     price: product.price,
-    //     imageUrl: product.imageUrl));
-    if (_cartitems.containsKey(product.id)) {
-      _cartitems.update(
-        product.id!,
-        (existingCartItem) => existingCartItem.copyWith(
-          quantity: existingCartItem.quantity + 1,
-        ),
-      );
-    } else {
-      _cartitems.putIfAbsent(
-        product.id!,
-        () => CartItem(
-          id: 'c${DateTime.now().toIso8601String()}',
-          productId: product.id,
-          title: product.title,
-          price: product.price,
-          quantity: 1,
-          imageUrl: product.imageUrl,
-        ),
-      );
-    }
-    notifyListeners();
-  }
+  // Future<void> addItem(Product product) async {
+  //   // final addCarts = await _cartService.addCarts(CartItem(
+  //   //     productId: product.id,
+  //   //     title: product.title,
+  //   //     quantity: 1,
+  //   //     price: product.price,
+  //   //     imageUrl: product.imageUrl));
+  //   if (_cartitems.containsKey(product.id)) {
+  //     _cartitems.update(
+  //       product.id!,
+  //       (existingCartItem) => existingCartItem.copyWith(
+  //         quantity: existingCartItem.quantity + 1,
+  //       ),
+  //     );
+  //   } else {
+  //     _cartitems.putIfAbsent(
+  //       product.id!,
+  //       () => CartItem(
+  //         id: 'c${DateTime.now().toIso8601String()}',
+  //         productId: product.id,
+  //         title: product.title,
+  //         price: product.price,
+  //         quantity: 1,
+  //         imageUrl: product.imageUrl,
+  //       ),
+  //     );
+  //   }
+  //   notifyListeners();
+  // }
 
   Future<void> removeItem(String productId) async {
     _cartitems.remove(productId);

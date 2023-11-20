@@ -65,17 +65,22 @@ class CartManager1 with ChangeNotifier {
 
     // if (index == 0) {
     //   int quantity =1;
-      final newOrders = await _cartService.addCarts(CartItem(
-          id: productId,
-          productId: productId,
-          title: title,
-          quantity: quantity,
-          price: price,
-          imageUrl: imageUrl));
-      if (newOrders != null) {
-        _cartItem.add(newOrders);
-        notifyListeners();
-      }
+      // final newOrders = await _cartService.addCarts(CartItem(
+      //     id: productId,
+      //     productId: productId,
+      //     title: title,
+      //     quantity: quantity,
+      //     price: price,
+      //     imageUrl: imageUrl,
+      //     owner: owner,
+      //     origin: origin,
+      //     status: status,
+
+      //     ));
+      // if (newOrders != null) {
+      //   _cartItem.add(newOrders);
+      //   notifyListeners();
+      // }
     // } else {
     //     final newOrders = await _cartService.addCarts(CartItem(
     //       productId: productId,

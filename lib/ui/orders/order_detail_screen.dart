@@ -32,7 +32,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
                 children: <Widget>[
                   Container(
                       padding: EdgeInsets.only(left: 5),
-                      child: Text(
+                      child: const Text(
                         'Ngày đặt',
                         style: TextStyle(
                           color: Colors.black,
@@ -79,6 +79,12 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
             const SizedBox(height: 20),
             buildTotalAmountRow(),
             const SizedBox(height: 20),
+            buildOwnerRow(),
+            const SizedBox(height: 20),
+            buildOriginRow(),
+            const SizedBox(height: 20),
+            buildStatusRow(),
+            const SizedBox(height: 20),
             buildStatusPayment(),
             const SizedBox(height: 20),
           ],
@@ -91,7 +97,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
       children: <Widget>[
         Container(
             padding: EdgeInsets.only(left: 20),
-            child: Text(
+            child: const Text(
               'Họ và tên',
               style: TextStyle(
                 color: Colors.black54,
@@ -114,7 +120,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
       children: <Widget>[
         Container(
             padding: EdgeInsets.only(left: 20),
-            child: Text(
+            child: const Text(
               'Số điện thoại',
               style: TextStyle(
                 color: Colors.black54,
@@ -131,13 +137,82 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
     );
   }
 
+  Widget buildOwnerRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Container(
+            padding: EdgeInsets.only(left: 20),
+            child: const Text(
+              'Người bán',
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: 20,
+              ),
+            )),
+        Container(
+          alignment: Alignment.centerRight,
+          padding: EdgeInsets.only(right: 20),
+          child: Text('${widget.order.products.first.owner}',
+              style: TextStyle(fontSize: 16, color: Colors.black)),
+        ),
+      ],
+    );
+  }
+
+  Widget buildOriginRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Container(
+            padding: EdgeInsets.only(left: 20),
+            child: const Text(
+              'Xuất xứ',
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: 20,
+              ),
+            )),
+        Container(
+          alignment: Alignment.centerRight,
+          padding: EdgeInsets.only(right: 20),
+          child: Text('${widget.order.products.first.origin}',
+              style: TextStyle(fontSize: 16, color: Colors.black)),
+        ),
+      ],
+    );
+  }
+
+  Widget buildStatusRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Container(
+            padding: EdgeInsets.only(left: 20),
+            child: const Text(
+              'Trạng thái',
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: 20,
+              ),
+            )),
+        Container(
+          alignment: Alignment.centerRight,
+          padding: EdgeInsets.only(right: 20),
+          child: Text('${widget.order.products.first.status}',
+              style: TextStyle(fontSize: 16, color: Colors.black)),
+        ),
+      ],
+    );
+  }
+
   Widget buildAddressRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Container(
             padding: EdgeInsets.only(left: 20),
-            child: Text(
+            child: const Text(
               'Địa chỉ',
               style: TextStyle(
                 color: Colors.black54,
@@ -165,7 +240,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
       children: <Widget>[
         Container(
             padding: EdgeInsets.only(left: 20),
-            child: Text(
+            child: const Text(
               'Tên sản phẩm',
               style: TextStyle(
                 color: Colors.black54,
@@ -175,7 +250,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
         Container(
           alignment: Alignment.centerRight,
           padding: EdgeInsets.only(right: 20),
-          child: Text(widget.order.products.first!.title,
+          child: Text(widget.order.products.first.title,
               style: TextStyle(fontSize: 16, color: Colors.black)),
         ),
       ],
@@ -188,7 +263,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
       children: <Widget>[
         Container(
             padding: EdgeInsets.only(left: 20),
-            child: Text(
+            child: const Text(
               'Tổng tiền',
               style: TextStyle(
                 color: Colors.black54,
@@ -211,7 +286,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
       children: <Widget>[
         Container(
             padding: EdgeInsets.only(left: 20),
-            child: Text(
+            child: const Text(
               'Số lượng',
               style: TextStyle(
                 color: Colors.black54,
@@ -227,14 +302,15 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
       ],
     );
   }
-    Widget buildStatusPayment() {
+
+  Widget buildStatusPayment() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Container(
             padding: EdgeInsets.only(left: 20),
-            child: Text(
-              'Trạng thái',
+            child: const Text(
+              'Hình thức',
               style: TextStyle(
                 color: Colors.black54,
                 fontSize: 20,

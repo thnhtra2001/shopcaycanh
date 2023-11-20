@@ -22,7 +22,7 @@ class ProductDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(product.title),
+        title: Text(product!.title),
       ),
       body: SingleChildScrollView(
         child: Column(children: <Widget>[
@@ -36,7 +36,7 @@ class ProductDetailScreen extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            '${product.price}',
+            '${product!.price}',
             style: const TextStyle(
               color: Colors.grey,
               fontSize: 20,
