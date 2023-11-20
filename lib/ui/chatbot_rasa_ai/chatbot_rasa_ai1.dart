@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 // import 'package:flutter_dialogflow/dialogflow_v2.dart';
 import 'package:intl/intl.dart';
 import 'package:shopcaycanh/ui/shared/app_drawer.dart';
@@ -12,18 +15,30 @@ class ChatbotScreen1 extends StatefulWidget {
 }
 
 class _ChatbotScreen1State extends State<ChatbotScreen1> {
+
+  Future<http.Response> getBotResponse(String message) {
+  return http.post(Uri.parse('http://localhost:5005/webhooks/rest/webhook'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      // 'sender': senderId,
+      'message': message
+    }),
+  );
+}
   void response(query) async {
     // AuthGoogle authGoogle =
     //     await AuthGoogle(fileJson: "assets/service.json").build();
     // Dialogflow dialogflow =
     //     Dialogflow(authGoogle: authGoogle, language: Language.english);
     // AIResponse aiResponse = await dialogflow.detectIntent(query);
-    // setState(() {
-    //   message.insert(0, {
-    //     "data": 0,
-    //     "message": aiResponse.getListMessage()[0]["text"]["text"][0].toString()
-    //   });
-    // });
+    setState(() {
+      message.insert(0, {
+        "data": 1,
+        // "message": aiResponse.getListMessage()[0]["text"]["text"][0].toString()
+      });
+    });
 
     // print(aiResponse.getListMessage()[0]["text"]["text"][0].toString());
   }
@@ -57,10 +72,10 @@ class _ChatbotScreen1State extends State<ChatbotScreen1> {
                     itemBuilder: (context, index) => chat(
                         message[index]["message"].toString(),
                         message[index]["data"]))),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Divider(
+            const Divider(
               height: 5.0,
               color: Colors.greenAccent,
             ),
@@ -68,14 +83,14 @@ class _ChatbotScreen1State extends State<ChatbotScreen1> {
               child: ListTile(
                 title: Container(
                   height: 35,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                     color: Color.fromRGBO(220, 220, 220, 1),
                   ),
                   padding: EdgeInsets.only(left: 15),
                   child: TextFormField(
                     controller: messageInsert,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "Nhập câu hỏi...",
                       hintStyle: TextStyle(color: Colors.black26),
                       border: InputBorder.none,
@@ -89,7 +104,7 @@ class _ChatbotScreen1State extends State<ChatbotScreen1> {
                   ),
                 ),
                 trailing: IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.send,
                       size: 30.0,
                       color: Colors.black,
@@ -100,9 +115,9 @@ class _ChatbotScreen1State extends State<ChatbotScreen1> {
                       } else {
                         setState(() {
                           message.insert(
-                              0, {"data": 1, "message": messageInsert.text});
+                              0, {"data": 0, "message": messageInsert.text});
                         });
-                        response(messageInsert.text);
+                        getBotResponse(messageInsert.text);
                         messageInsert.clear();
                       }
                       FocusScopeNode currentFocus = FocusScope.of(context);
@@ -112,7 +127,7 @@ class _ChatbotScreen1State extends State<ChatbotScreen1> {
                     }),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15.0,
             )
           ],
@@ -132,9 +147,9 @@ class _ChatbotScreen1State extends State<ChatbotScreen1> {
         children: [
           data == 0
               ? Container(
-                  height: 60,
-                  width: 60,
-                  child: CircleAvatar(
+                  height: 40,
+                  width: 40,
+                  child: const CircleAvatar(
                     backgroundImage: AssetImage("assets/Images/user-icon.png"),
                   ),
                 )
@@ -144,23 +159,23 @@ class _ChatbotScreen1State extends State<ChatbotScreen1> {
             child: Bubble(
                 radius: Radius.circular(15.0),
                 color: data == 0
-                    ? Color.fromRGBO(23, 157, 139, 1)
-                    : Colors.grey,
+                    ? Colors.grey
+                    : Colors.green,
                 elevation: 0.0,
                 child: Padding(
                   padding: EdgeInsets.all(2.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      SizedBox(
+                      const SizedBox(
                         width: 10.0,
                       ),
                       Flexible(
                           child: Container(
-                        constraints: BoxConstraints(maxWidth: 200),
+                        constraints: BoxConstraints(maxWidth: 300),
                         child: Text(
                           message,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ))
@@ -170,10 +185,10 @@ class _ChatbotScreen1State extends State<ChatbotScreen1> {
           ),
           data == 1
               ? Container(
-                  height: 60,
-                  width: 60,
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage("assets/Images/user-icon.png"),
+                  height: 40,
+                  width: 40,
+                  child: const CircleAvatar(
+                    backgroundImage: AssetImage("assets/Images/logo.jpg"),
                   ),
                 )
               : Container(),
