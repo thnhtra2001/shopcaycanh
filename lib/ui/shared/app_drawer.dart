@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/ui/auth/auth_manager.dart';
+import 'package:shopcaycanh/ui/chatbot_rasa_ai/chatbot_rasa.dart';
+import 'package:shopcaycanh/ui/chatbot_rasa_ai/chatbot_rasa_ai1.dart';
 
 import '../cart/cart_manager.dart';
 import '../cart/cart_screen.dart';
@@ -50,7 +52,7 @@ class AppDrawer extends StatelessWidget {
           //                 Navigator.of(context).pushNamed(CartScreen.routeName);
           //               },
           //               icon: const Icon(Icons.shopping_cart)),
-                    
+
           //           Text('Gio hang')
           //         ],
           //       ),
@@ -71,6 +73,14 @@ class AppDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.of(context)
                     .pushReplacementNamed(OrdersScreen.routeName);
+              }),
+          const Divider(),
+          ListTile(
+              leading: const Icon(Icons.message_rounded),
+              title: const Text('Chatbot'),
+              onTap: () {
+                Navigator.of(context)
+                    .pushReplacementNamed(ChatbotScreen1.routeName);
               }),
           const Divider(),
           ListTile(
