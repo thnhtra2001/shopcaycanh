@@ -6,10 +6,10 @@ import 'package:shopcaycanh/ui/products/products_manager.dart';
 import 'package:shopcaycanh/ui/products/search_product.dart';
 import 'package:shopcaycanh/ui/products/top_right_badge.dart';
 import 'package:shopcaycanh/ui/shared/app_drawer.dart';
-
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'product_grid.dart';
 
-enum FilterOptions {favorites, all}
+enum FilterOptions { favorites, all }
 
 class ProductOverviewScreen extends StatefulWidget {
   const ProductOverviewScreen({super.key});
@@ -19,6 +19,7 @@ class ProductOverviewScreen extends StatefulWidget {
 }
 
 class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
+
   var _showOnlyFavorites = ValueNotifier<bool>(false);
   late Future<void> _fetchProducts;
 
@@ -32,31 +33,40 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Shop cây cảnh'),
-          actions: <Widget>[
-            buildProductFilterMenu(),
-            // buildShoppingCartIcon(),
-            searchProduct(),
-          ],
-        ),
-        drawer: const AppDrawer(),
-        body: FutureBuilder(
-          future: _fetchProducts,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              // return ProductsGrid(_showOnlyFavorites);
-              return ValueListenableBuilder<bool>(
-                  valueListenable: _showOnlyFavorites,
-                  builder: (context, onlyFavorites, child) {
-                    return ProductsGrid(onlyFavorites);
-                  });
-            }
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          },
-        ));
+      appBar: AppBar(
+        title: const Text('Shop cây cảnh'),
+        actions: <Widget>[
+          buildProductFilterMenu(),
+          // buildShoppingCartIcon(),
+          searchProduct(),
+        ],
+      ),
+      drawer: const AppDrawer(),
+      body: FutureBuilder(
+        future: _fetchProducts,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            // return ProductsGrid(_showOnlyFavorites);
+            return ValueListenableBuilder<bool>(
+                valueListenable: _showOnlyFavorites,
+                builder: (context, onlyFavorites, child) {
+                  return ProductsGrid(onlyFavorites);
+                });
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      // floatingActionButton: const SpeedDial(
+      //   icon: Icons.message,
+      //   activeIcon: Icons.close,
+      //   spacing: 3,
+      //   childPadding: const EdgeInsets.all(5),
+      //   spaceBetweenChildren: 4,
+      // ),
+    );
   }
 
   Widget searchProduct() {
