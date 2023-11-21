@@ -5,46 +5,63 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 // import 'package:flutter_dialogflow/dialogflow_v2.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:shopcaycanh/ui/chatbot_rasa_ai/message_manager.dart';
 import 'package:shopcaycanh/ui/shared/app_drawer.dart';
 
 class ChatbotScreen1 extends StatefulWidget {
   static const routeName = '/chatbot1';
-    const ChatbotScreen1({super.key});
+  const ChatbotScreen1({super.key});
   @override
   _ChatbotScreen1State createState() => _ChatbotScreen1State();
 }
 
 class _ChatbotScreen1State extends State<ChatbotScreen1> {
-
-  Future<http.Response> getBotResponse(String message) {
-  return http.post(Uri.parse('http://localhost:5005/webhooks/rest/webhook'),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-    body: jsonEncode(<String, String>{
-      // 'sender': senderId,
-      'message': message
-    }),
-  );
-}
-  void response(query) async {
-    // AuthGoogle authGoogle =
-    //     await AuthGoogle(fileJson: "assets/service.json").build();
-    // Dialogflow dialogflow =
-    //     Dialogflow(authGoogle: authGoogle, language: Language.english);
-    // AIResponse aiResponse = await dialogflow.detectIntent(query);
-    setState(() {
-      message.insert(0, {
-        "data": 1,
-        // "message": aiResponse.getListMessage()[0]["text"]["text"][0].toString()
-      });
-    });
-
-    // print(aiResponse.getListMessage()[0]["text"]["text"][0].toString());
-  }
-
   final messageInsert = TextEditingController();
   List<Map> message = [];
+  late String messBot;
+  late Future<void> _fetMess;
+
+  @override
+  void initState(){
+    super.initState();
+    _fetMess = context.read<MessageManager>().fetchMessage();
+    print("BBBBBBBBBBBBBBBBBBBb");
+    print(_fetMess);
+  }
+
+  // Future<String> getBotResponse(String messageInsert) async {
+  //   final response = await http.post(
+  //     Uri.parse('http://10.13.130.0:5005/webhooks/rest/webhook'),
+  //     headers: <String, String>{
+  //       'Content-Type': 'application/json; charset=UTF-8',
+  //     },
+  //     body: jsonEncode(<String, String>{'message': messageInsert}),
+  //   );
+  //   print("AAAAAAAAAAAAAAAAAAAAAAAAAAa");
+  //   print(response);
+  //   if (response.statusCode == 200) {
+  //     final responseData = jsonDecode(response.body);
+  //     final botResponse = responseData[0]['text'];
+  //     return botResponse;
+  //   }
+  //   return messBot;
+  // }
+  // void response(query) async {
+  // AuthGoogle authGoogle =
+  //     await AuthGoogle(fileJson: "assets/service.json").build();
+  // Dialogflow dialogflow =
+  //     Dialogflow(authGoogle: authGoogle, language: Language.english);
+  // AIResponse aiResponse = await dialogflow.detectIntent(query);
+  // setState(() {
+  // message.insert(0, {
+  // "data": 1,
+  // "message": aiResponse.getListMessage()[0]["text"]["text"][0].toString()
+  // });
+  // });
+
+  // print(aiResponse.getListMessage()[0]["text"]["text"][0].toString());
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -115,9 +132,10 @@ class _ChatbotScreen1State extends State<ChatbotScreen1> {
                       } else {
                         setState(() {
                           message.insert(
-                              0, {"data": 0, "message": messageInsert.text});
+                              0, {"data": 1, "message": messageInsert.text});
                         });
-                        getBotResponse(messageInsert.text);
+                        context.read<MessageManager>().addMessage('0', messageInsert.text);
+                        // getBotResponse(messageInsert.text);
                         messageInsert.clear();
                       }
                       FocusScopeNode currentFocus = FocusScope.of(context);
@@ -158,9 +176,7 @@ class _ChatbotScreen1State extends State<ChatbotScreen1> {
             padding: EdgeInsets.all(10.0),
             child: Bubble(
                 radius: Radius.circular(15.0),
-                color: data == 0
-                    ? Colors.grey
-                    : Colors.green,
+                color: data == 0 ? Colors.grey : Colors.green,
                 elevation: 0.0,
                 child: Padding(
                   padding: EdgeInsets.all(2.0),

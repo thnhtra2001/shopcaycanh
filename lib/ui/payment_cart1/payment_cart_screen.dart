@@ -4,7 +4,6 @@ import 'package:shopcaycanh/models/cart_item.dart';
 import 'package:shopcaycanh/models/order_item.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
 import 'package:shopcaycanh/ui/payment_cart1/payments_selectiton.dart';
-import 'package:shopcaycanh/utils_zalo/theme_data.dart';
 import '../../repo_zalo/payment.dart';
 import '../../services/user_service.dart';
 import '../screens.dart';
@@ -29,8 +28,6 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
   late OrderItem _order;
   String zpTransToken = "";
   String payResult = "Thanh toán bằng tiền mặt";
-  final valueStyle = TextStyle(
-      color: AppColor.accentColor, fontSize: 18.0, fontWeight: FontWeight.w400);
   late Future<Map<String, dynamic>> _futureFetchUserInformation;
   @override
   void initState() {

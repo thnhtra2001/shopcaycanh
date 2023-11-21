@@ -19,10 +19,10 @@ class OrderService extends FirebaseService {
       await Clipboard.setData(ClipboardData(text: ordersUrl.toString()));
       ;
       final response = await http.get(ordersUrl);
-      print(response);
+      // print(response);
       final ordersMap = json.decode(response.body) as Map<dynamic, dynamic>;
-      print("order map: ");
-      print(ordersMap.keys);
+      // print("order map: ");
+      // print(ordersMap.keys);
       if (response.statusCode != 200) {
         print(ordersMap['error']);
         return orders;

@@ -4,6 +4,7 @@ import 'package:shopcaycanh/ui/admin/personal_screen.dart';
 import 'package:shopcaycanh/ui/cart/cart_manager.dart';
 import 'package:shopcaycanh/ui/cart/cart_screen.dart';
 import 'package:shopcaycanh/ui/chatbot_rasa_ai/chatbot_rasa.dart';
+import 'package:shopcaycanh/ui/chatbot_rasa_ai/message_manager.dart';
 import 'package:shopcaycanh/ui/orders/order_detail_screen.dart';
 import 'package:shopcaycanh/ui/orders/order_manager.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => OrdersManager()),
           ChangeNotifierProvider(create: (context) => AuthManager()),
           ChangeNotifierProvider(create: (context) => CartManager1()),
+          ChangeNotifierProvider(create: (context) => MessageManager(),)
 
 
         ],
