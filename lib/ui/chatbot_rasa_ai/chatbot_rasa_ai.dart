@@ -1,16 +1,13 @@
 import 'dart:convert';
-
 import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-// import 'package:flutter_dialogflow/dialogflow_v2.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:shopcaycanh/ui/chatbot_rasa_ai/message_manager.dart';
 import 'package:shopcaycanh/ui/shared/app_drawer.dart';
 
 class ChatbotScreen1 extends StatefulWidget {
-  static const routeName = '/chatbot1';
+  static const routeName = '/chatbot';
   const ChatbotScreen1({super.key});
   @override
   _ChatbotScreen1State createState() => _ChatbotScreen1State();
@@ -18,56 +15,30 @@ class ChatbotScreen1 extends StatefulWidget {
 
 class _ChatbotScreen1State extends State<ChatbotScreen1> {
   final messageInsert = TextEditingController();
-  List<Map> message = [];
-  late String messBot;
-  late Future<void> _fetMess;
-
-  @override
-  void initState(){
-    super.initState();
-    _fetMess = context.read<MessageManager>().fetchMessage();
-    print("BBBBBBBBBBBBBBBBBBBb");
-    print(_fetMess);
+  List<Map> _message = [];
+  Future<void> _sendMessage(String message) async {
+    final http.Response response = await http.post(
+      Uri.parse('https://70db-113-174-99-64.ngrok.io/webhooks/rest/webhook'),
+          headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8'},
+      body: jsonEncode({"sender": "user", "message": message}),
+    );
+    if (response.statusCode == 200) {
+      final List<dynamic> responseData = jsonDecode(response.body);
+      setState(() {
+        // _response = responseData.isNotEmpty ? responseData.first['text'] : 'No response';
+        _message.insert(0, {"data": 0, "message": responseData.first['text']});
+      });
+    } else {
+      throw Exception('Failed to load response');
+    }
   }
-
-  // Future<String> getBotResponse(String messageInsert) async {
-  //   final response = await http.post(
-  //     Uri.parse('http://10.13.130.0:5005/webhooks/rest/webhook'),
-  //     headers: <String, String>{
-  //       'Content-Type': 'application/json; charset=UTF-8',
-  //     },
-  //     body: jsonEncode(<String, String>{'message': messageInsert}),
-  //   );
-  //   print("AAAAAAAAAAAAAAAAAAAAAAAAAAa");
-  //   print(response);
-  //   if (response.statusCode == 200) {
-  //     final responseData = jsonDecode(response.body);
-  //     final botResponse = responseData[0]['text'];
-  //     return botResponse;
-  //   }
-  //   return messBot;
-  // }
-  // void response(query) async {
-  // AuthGoogle authGoogle =
-  //     await AuthGoogle(fileJson: "assets/service.json").build();
-  // Dialogflow dialogflow =
-  //     Dialogflow(authGoogle: authGoogle, language: Language.english);
-  // AIResponse aiResponse = await dialogflow.detectIntent(query);
-  // setState(() {
-  // message.insert(0, {
-  // "data": 1,
-  // "message": aiResponse.getListMessage()[0]["text"]["text"][0].toString()
-  // });
-  // });
-
-  // print(aiResponse.getListMessage()[0]["text"]["text"][0].toString());
-  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Chatbot",
         ),
       ),
@@ -76,25 +47,25 @@ class _ChatbotScreen1State extends State<ChatbotScreen1> {
         child: Column(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(top: 15, bottom: 10),
+              padding: const EdgeInsets.only(top: 15, bottom: 10),
               child: Text(
                 "Hôm nay, ${DateFormat("Hm").format(DateTime.now())}",
-                style: TextStyle(fontSize: 20),
+                style:const TextStyle(fontSize: 15),
               ),
             ),
             Flexible(
                 child: ListView.builder(
                     reverse: true,
-                    itemCount: message.length,
+                    itemCount: _message.length,
                     itemBuilder: (context, index) => chat(
-                        message[index]["message"].toString(),
-                        message[index]["data"]))),
+                        _message[index]["data"],
+                        _message[index]["message"].toString()))),
             const SizedBox(
               height: 20,
             ),
             const Divider(
               height: 5.0,
-              color: Colors.greenAccent,
+              color: Colors.grey,
             ),
             Container(
               child: ListTile(
@@ -131,11 +102,11 @@ class _ChatbotScreen1State extends State<ChatbotScreen1> {
                         print("empty message");
                       } else {
                         setState(() {
-                          message.insert(
+                          _message.insert(
                               0, {"data": 1, "message": messageInsert.text});
                         });
-                        context.read<MessageManager>().addMessage('0', messageInsert.text);
-                        // getBotResponse(messageInsert.text);
+                        // context.read<MessageManager>().addMessage('0', messageInsert.text);
+                        _sendMessage(messageInsert.text);
                         messageInsert.clear();
                       }
                       FocusScopeNode currentFocus = FocusScope.of(context);
@@ -156,7 +127,7 @@ class _ChatbotScreen1State extends State<ChatbotScreen1> {
 
   //for better one i have use the bubble package check out the pubspec.yaml
 
-  Widget chat(String message, int data) {
+  Widget chat(int data, String message) {
     return Container(
       padding: EdgeInsets.only(left: 20, right: 20),
       child: Row(

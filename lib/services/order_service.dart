@@ -15,8 +15,8 @@ class OrderService extends FirebaseService {
       final uid = (await AuthService().loadSavedAuthToken())!.userId;
       final ordersUrl = Uri.parse(
           '$databaseUrl/orders.json?orderBy="customerId"&equalTo="$uid"&auth=$authToken');
-      print(ordersUrl);
-      await Clipboard.setData(ClipboardData(text: ordersUrl.toString()));
+      // print(ordersUrl);
+      // await Clipboard.setData(ClipboardData(text: ordersUrl.toString()));
       ;
       final response = await http.get(ordersUrl);
       // print(response);

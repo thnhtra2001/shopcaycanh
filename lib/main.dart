@@ -3,8 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shopcaycanh/ui/admin/personal_screen.dart';
 import 'package:shopcaycanh/ui/cart/cart_manager.dart';
 import 'package:shopcaycanh/ui/cart/cart_screen.dart';
-import 'package:shopcaycanh/ui/chatbot_rasa_ai/chatbot_rasa.dart';
-import 'package:shopcaycanh/ui/chatbot_rasa_ai/message_manager.dart';
+import 'package:shopcaycanh/ui/chat/chat.dart';
 import 'package:shopcaycanh/ui/orders/order_detail_screen.dart';
 import 'package:shopcaycanh/ui/orders/order_manager.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
@@ -16,7 +15,7 @@ import 'package:shopcaycanh/ui/products/search_product.dart';
 import 'package:shopcaycanh/ui/screens.dart';
 import 'models/product.dart';
 import 'ui/cart/cart_manager1.dart';
-import 'ui/chatbot_rasa_ai/chatbot_rasa_ai1.dart';
+import 'ui/chatbot_rasa_ai/chatbot_rasa_ai.dart';
 import 'ui/products/product_overview_screen.dart';
 
 import 'ui/admin/user_product_screen.dart';
@@ -41,7 +40,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => OrdersManager()),
           ChangeNotifierProvider(create: (context) => AuthManager()),
           ChangeNotifierProvider(create: (context) => CartManager1()),
-          ChangeNotifierProvider(create: (context) => MessageManager(),)
+          // ChangeNotifierProvider(create: (context) => MessageManager()),
 
 
         ],
@@ -69,6 +68,7 @@ class MyApp extends StatelessWidget {
                   ),
             routes: {
               CartScreen.routeName: (context) => const CartScreen(),
+              ChatScreen.routeName:(context) => ChatScreen(),
               OrdersScreen.routeName: (context) => const OrdersScreen(),
               UserProductsScreen.routeName: (context) =>
                   const UserProductsScreen(),
@@ -78,7 +78,6 @@ class MyApp extends StatelessWidget {
               PaymentCartScreen1.routeName: (context) =>
                   const PaymentCartScreen1(),
               SearchScreen.routeName:(context) => const SearchScreen(),
-              ChatbotScreen.routeName:(context) => const ChatbotScreen(),
               ChatbotScreen1.routeName:(context) => const ChatbotScreen1(),
 
             },

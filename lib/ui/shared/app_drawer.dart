@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/ui/auth/auth_manager.dart';
-import 'package:shopcaycanh/ui/chatbot_rasa_ai/chatbot_rasa.dart';
-import 'package:shopcaycanh/ui/chatbot_rasa_ai/chatbot_rasa_ai1.dart';
+import 'package:shopcaycanh/ui/chatbot_rasa_ai/chatbot_rasa_ai.dart';
 
 import '../cart/cart_manager.dart';
 import '../cart/cart_screen.dart';
+import '../chat/chat.dart';
 import '../orders/order_screen.dart';
 import '../admin/user_product_screen.dart';
 import '../personal/personal_screen.dart';
@@ -81,6 +81,14 @@ class AppDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.of(context)
                     .pushReplacementNamed(ChatbotScreen1.routeName);
+              }),
+          const Divider(),
+          ListTile(
+              leading: const Icon(Icons.message_sharp),
+              title: const Text('ChatAI'),
+              onTap: () {
+                Navigator.of(context)
+                    .pushReplacementNamed(ChatScreen.routeName);
               }),
           const Divider(),
           ListTile(
