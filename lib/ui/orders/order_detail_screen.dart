@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-
+import 'dart:math';
 import '../orders/order_manager.dart';
 import '../../models/order_item.dart';
 
@@ -72,9 +72,13 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
             buildPhoneRow(),
             const SizedBox(height: 20),
             buildAddressRow(),
-            const SizedBox(height: 20),
+            // const SizedBox(height: 20),
+            const Divider(),
             buildNameProductRow(),
-            const SizedBox(height: 20),
+            // const SizedBox(height: 20),
+            buildOrderDetails(),
+            const Divider(),
+            // const SizedBox(height: 20),
             buildTotalQuantity(),
             const SizedBox(height: 20),
             buildTotalAmountRow(),
@@ -91,6 +95,37 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
         ));
   }
 
+  Widget buildOrderDetails() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+      height: min(widget.order.productCount * 20.0 + 50, 150),
+      child: ListView(
+        children: widget.order.products
+            .map(
+              (prod) => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    prod.title,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    '${prod.quantity}x${prod.price}',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            )
+            .toList(),
+      ),
+    );
+  }
   Widget buildNameRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -190,7 +225,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
         Container(
             padding: EdgeInsets.only(left: 20),
             child: const Text(
-              'Trạng thái',
+              'Tình trạng',
               style: TextStyle(
                 color: Colors.black54,
                 fontSize: 20,
@@ -199,7 +234,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
         Container(
           alignment: Alignment.centerRight,
           padding: EdgeInsets.only(right: 20),
-          child: Text('${widget.order.products.first.status}',
+          child: Text('${widget.order.products.last.status}',
               style: TextStyle(fontSize: 16, color: Colors.black)),
         ),
       ],
@@ -250,7 +285,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
         Container(
           alignment: Alignment.centerRight,
           padding: EdgeInsets.only(right: 20),
-          child: Text(widget.order.products.first.title,
+          child: Text("Số lượng x giá",
               style: TextStyle(fontSize: 16, color: Colors.black)),
         ),
       ],
@@ -264,7 +299,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
         Container(
             padding: EdgeInsets.only(left: 20),
             child: const Text(
-              'Tổng tiền',
+              'Tổng thanh toán',
               style: TextStyle(
                 color: Colors.black54,
                 fontSize: 20,
@@ -287,7 +322,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
         Container(
             padding: EdgeInsets.only(left: 20),
             child: const Text(
-              'Số lượng',
+              'Tổng số lượng',
               style: TextStyle(
                 color: Colors.black54,
                 fontSize: 20,
