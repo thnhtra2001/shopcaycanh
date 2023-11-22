@@ -32,10 +32,10 @@ class AuthScreen extends StatelessWidget {
             child: SizedBox(
               height: deviceSize.height,
               width: deviceSize.width,
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const <Widget>[AppBanner(), AuthCard()],
+                children: <Widget>[AppBanner(), AuthCard()],
               ),
             ),
           ),

@@ -4,7 +4,6 @@ import 'package:shopcaycanh/models/cart_item.dart';
 import 'package:shopcaycanh/models/order_item.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
 import 'package:shopcaycanh/ui/payment_cart1/payments_selectiton.dart';
-import 'package:shopcaycanh/utils_zalo/theme_data.dart';
 import '../../repo_zalo/payment.dart';
 import '../../services/user_service.dart';
 import '../screens.dart';
@@ -29,8 +28,6 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
   late OrderItem _order;
   String zpTransToken = "";
   String payResult = "Thanh toán bằng tiền mặt";
-  final valueStyle = TextStyle(
-      color: AppColor.accentColor, fontSize: 18.0, fontWeight: FontWeight.w400);
   late Future<Map<String, dynamic>> _futureFetchUserInformation;
   @override
   void initState() {
@@ -47,27 +44,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
       ),
       body: Column(
         children: <Widget>[
-          // SizedBox(height: 20),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //   children: <Widget>[
-          //     Container(
-          //         padding: EdgeInsets.only(left: 5),
-          //         child: Text(
-          //           'Hình thức thanh toán:',
-          //           style: TextStyle(
-          //             color: Colors.black,
-          //             fontSize: 15,
-          //           ),
-          //         )),
-          //     Container(
-          //       alignment: Alignment.centerRight,
-          //       padding: EdgeInsets.only(right: 5),
-          //       child: PaymentSelectionDropdown(),
-          //     ),
-          //   ],
-          // ),
-          // const Divider(),
+          SizedBox(height: 20),
           FutureBuilder<Map<String, dynamic>>(
             future: _futureFetchUserInformation,
             builder: (context, snapshot) {
@@ -120,16 +97,6 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
       ),
     );
   }
-
-  // Widget statusPayZalo() {
-  //   return Container(
-  //     padding: const EdgeInsets.symmetric(vertical: 5.0),
-  //     child: Text(
-  //       '${payResult} + aaaaaaaaaaaa',
-  //       style: valueStyle,
-  //     ),
-  //   );
-  // }
 
   Widget inforPhoneUser(data) {
     return Row(
@@ -197,18 +164,6 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
           data,
           style: TextStyle(fontSize: 16),
         ),
-        // child: TextFormField(
-        //   initialValue: data,
-        //   decoration: const InputDecoration(
-        //       border: OutlineInputBorder(
-        //           borderSide: BorderSide(
-        //               width: 1, color: Colors.red, style: BorderStyle.solid),
-        //           borderRadius: BorderRadius.all(Radius.circular(8))),
-        //       contentPadding:
-        //           EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-        //       prefixIcon: Icon(Icons.location_city_outlined)),
-        //   style: const TextStyle(fontSize: 18),
-        // )
       )
     ]);
   }
@@ -288,35 +243,6 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
     );
   }
 
-  // Widget paymentNow(snapshot, cart) {
-  //   return Container(
-  //     width: 400,
-  //     height: 50,
-  //     child: ElevatedButton(
-  //       onPressed: () {
-  //         context.read<OrdersManager>().addOrders(
-  //             cart.products,
-  //             cart.totalAmount,
-  //             cart.totalQuantity,
-  //             snapshot.data['name'],
-  //             snapshot.data['phone'],
-  //             snapshot.data['address'],
-  //             payResult,
-  //             );
-  //         // cart.clear();
-  //         showMyDialog(context, cart);
-  //         // Navigator.of(context).pushNamed(OrdersScreen.routeName);
-  //       },
-  //       style: ElevatedButton.styleFrom(
-  //         backgroundColor: Colors.red,
-  //       ),
-  //       child: const Text('Thanh toán bằng tiền mặt',
-  //           style: TextStyle(
-  //             color: Colors.white,
-  //           )),
-  //     ),
-  //   );
-  // }
   Widget paymentNow(snapshot, cart) {
     return Container(
       width: 400,
@@ -459,7 +385,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
           // cart.clear();
           // showMyDialog(context, cart);
           // Navigator.of(context).pushNamed(OrdersScreen.routeName);
-          // Navigator.of(context).pushReplacementNamed('/');
+          Navigator.of(context).pushReplacementNamed('/');
         },
         child: Container(
             // height: 50,

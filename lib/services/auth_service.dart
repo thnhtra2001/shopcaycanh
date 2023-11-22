@@ -1,10 +1,8 @@
 import 'dart:convert';
 import 'dart:async';
-
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 import '../models/http_exception.dart';
 import '../models/auth_token.dart';
 import 'firebase_service.dart';
@@ -36,6 +34,8 @@ class AuthService {
         ),
       );
       final responseJson = json.decode(response.body);
+      print("AAAAAAAAAAAa");
+      print(response.body);
       if (responseJson['error'] != null) {
         throw HttpException.firebase(responseJson['error']['message']);
       }
@@ -55,7 +55,7 @@ class AuthService {
               'phone': phone,
               'address': address,
               'birthday': '',
-              'role': 'user'
+              'role': 'admin'
             }));
       }
 
@@ -90,7 +90,6 @@ class AuthService {
 
     if (response.statusCode == 200) {
       return user[user.keys.first]['role'];
-      return "user";
     }
 
     return 'user';
