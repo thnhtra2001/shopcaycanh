@@ -73,11 +73,11 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
             const SizedBox(height: 20),
             buildAddressRow(),
             // const SizedBox(height: 20),
-            const Divider(),
+            const Divider(color: Colors.black,),
             buildNameProductRow(),
             // const SizedBox(height: 20),
             buildOrderDetails(),
-            const Divider(),
+            const Divider(color: Colors.black,),
             // const SizedBox(height: 20),
             buildTotalQuantity(),
             const SizedBox(height: 20),
@@ -98,7 +98,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
   Widget buildOrderDetails() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
-      height: min(widget.order.productCount * 20.0 + 50, 150),
+      height: min(widget.order.productCount * 20.0 + 40, 150),
       child: ListView(
         children: widget.order.products
             .map(
