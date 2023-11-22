@@ -18,7 +18,7 @@ class _ChatbotScreen1State extends State<ChatbotScreen1> {
   List<Map> _message = [];
   Future<void> _sendMessage(String message) async {
     final http.Response response = await http.post(
-      Uri.parse('https://70db-113-174-99-64.ngrok.io/webhooks/rest/webhook'),
+      Uri.parse('https://98ba-123-28-165-104.ngrok.io/webhooks/rest/webhook'),
           headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8'},
       body: jsonEncode({"sender": "user", "message": message}),
@@ -139,7 +139,7 @@ class _ChatbotScreen1State extends State<ChatbotScreen1> {
                   height: 40,
                   width: 40,
                   child: const CircleAvatar(
-                    backgroundImage: AssetImage("assets/Images/user-icon.png"),
+                    backgroundImage: AssetImage("assets/Images/robot-icon.png"),
                   ),
                 )
               : Container(),
@@ -147,7 +147,7 @@ class _ChatbotScreen1State extends State<ChatbotScreen1> {
             padding: EdgeInsets.all(10.0),
             child: Bubble(
                 radius: Radius.circular(15.0),
-                color: data == 0 ? Colors.grey : Colors.green,
+                color: data == 0 ? Colors.grey : Colors.purple,
                 elevation: 0.0,
                 child: Padding(
                   padding: EdgeInsets.all(2.0),
@@ -175,7 +175,7 @@ class _ChatbotScreen1State extends State<ChatbotScreen1> {
                   height: 40,
                   width: 40,
                   child: const CircleAvatar(
-                    backgroundImage: AssetImage("assets/Images/logo.jpg"),
+                    backgroundImage: AssetImage("assets/Images/user-icon.png"),
                   ),
                 )
               : Container(),

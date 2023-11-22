@@ -76,20 +76,20 @@ class AppDrawer extends StatelessWidget {
               }),
           const Divider(),
           ListTile(
-              leading: const Icon(Icons.message_rounded),
-              title: const Text('Chatbot'),
+              leading: const Icon(Icons.message),
+              title: const Text('ChatAI'),
               onTap: () {
                 Navigator.of(context)
                     .pushReplacementNamed(ChatbotScreen1.routeName);
               }),
-          const Divider(),
-          ListTile(
-              leading: const Icon(Icons.message_sharp),
-              title: const Text('ChatAI'),
-              onTap: () {
-                Navigator.of(context)
-                    .pushReplacementNamed(ChatScreen.routeName);
-              }),
+          // const Divider(),
+          // ListTile(
+          //     leading: const Icon(Icons.message_sharp),
+          //     title: const Text('ChatAI'),
+          //     onTap: () {
+          //       Navigator.of(context)
+          //           .pushReplacementNamed(ChatScreen.routeName);
+          //     }),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.exit_to_app),

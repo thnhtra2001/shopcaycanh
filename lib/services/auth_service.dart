@@ -90,7 +90,6 @@ class AuthService {
 
     if (response.statusCode == 200) {
       return user[user.keys.first]['role'];
-      return "user";
     }
 
     return 'user';
