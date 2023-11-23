@@ -36,7 +36,7 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
       appBar: AppBar(
         title: const Text('Shop cây cảnh'),
         actions: <Widget>[
-          buildProductFilterMenu(),
+          // buildProductFilterMenu(),
           // buildShoppingCartIcon(),
           searchProduct(),
         ],
