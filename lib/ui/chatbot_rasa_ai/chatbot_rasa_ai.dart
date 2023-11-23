@@ -18,7 +18,7 @@ class _ChatbotScreen1State extends State<ChatbotScreen1> {
   List<Map> _message = [];
   Future<void> _sendMessage(String message) async {
     final http.Response response = await http.post(
-      Uri.parse('https://bd14-222-254-177-25.ngrok.io/webhooks/rest/webhook'),
+      Uri.parse('https://3806-2402-9d80-c06-a8aa-5561-9fd4-348a-fe4c.ngrok.io/webhooks/rest/webhook'),
           headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8'},
       body: jsonEncode({"sender": "user", "message": message}),
@@ -159,7 +159,7 @@ class _ChatbotScreen1State extends State<ChatbotScreen1> {
                       ),
                       Flexible(
                           child: Container(
-                        constraints: BoxConstraints(maxWidth: 300),
+                        constraints: BoxConstraints(maxWidth: 200),
                         child: Text(
                           message,
                           style: const TextStyle(

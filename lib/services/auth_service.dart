@@ -55,7 +55,7 @@ class AuthService {
               'phone': phone,
               'address': address,
               'birthday': '',
-              'role': 'admin'
+              'role': 'user'
             }));
       }
 
@@ -91,7 +91,6 @@ class AuthService {
     if (response.statusCode == 200) {
       return user[user.keys.first]['role'];
     }
-
     return 'user';
   }
 

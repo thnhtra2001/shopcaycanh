@@ -84,22 +84,7 @@ class _ProductGridTileState extends State<ProductGridTile> {
 
   Widget buildGridFooterBar(BuildContext context) {
     return GridTileBar(
-      backgroundColor: Colors.black87,
-      leading: ValueListenableBuilder<bool>(
-        valueListenable: widget.product.isFavoriteListenable,
-        builder: (context, isFavorite, child) {
-          return IconButton(
-            icon: Icon(
-              widget.product.isFavorite ? Icons.favorite : Icons.favorite_border,
-            ),
-            color: Theme.of(context).colorScheme.secondary,
-            onPressed: () {
-              // product.isFavorite = !isFavorite;
-              context.read<ProductsManager>().toggleFavoriteStatus(widget.product);
-            },
-          );
-        },
-      ),
+      backgroundColor: Colors.black54,
       title: Text(
         widget.product.title,
         textAlign: TextAlign.center,
