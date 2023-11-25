@@ -20,7 +20,7 @@ class AdminAppDrawer extends StatelessWidget {
             automaticallyImplyLeading: false,
           ),
           ListTile(
-            leading: const Icon(Icons.admin_panel_settings),
+            leading: const Icon(Icons.home),
             title: const Text('Admin'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/');

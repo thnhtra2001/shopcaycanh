@@ -22,6 +22,10 @@ class UserProductListTile extends StatelessWidget {
       leading: CircleAvatar(
         backgroundImage: NetworkImage(product.imageUrl),
       ),
+      subtitle: Text(
+        '${product.price}',
+        style: TextStyle(color: Colors.black),
+      ),
       trailing: SizedBox(
         width: 100,
         child: Row(
