@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/ui/admin/edit_product_screen.dart';
+import 'package:shopcaycanh/ui/admin/search_admin.dart';
 import 'package:shopcaycanh/ui/shared/admin_app_drawer.dart';
 
 import 'user_product_list_title.dart';
@@ -22,6 +23,7 @@ class UserProductsScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Admin'),
           actions: [
+            searchProduct(context),
             buildAddButton(context),
           ],
         ),
@@ -40,6 +42,14 @@ class UserProductsScreen extends StatelessWidget {
             );
           },
         ));
+  }
+
+    Widget searchProduct(context) {
+    return IconButton(
+        onPressed: () {
+          Navigator.of(context).pushNamed(SearchAdminScreen.routeName);
+        },
+        icon: const Icon(Icons.search));
   }
 
   Widget buildAddButton(BuildContext context) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/ui/admin/personal_screen.dart';
+import 'package:shopcaycanh/ui/admin/search_admin.dart';
 import 'package:shopcaycanh/ui/cart/cart_manager.dart';
 import 'package:shopcaycanh/ui/cart/cart_screen.dart';
 import 'package:shopcaycanh/ui/chat/chat.dart';
@@ -79,7 +80,7 @@ class MyApp extends StatelessWidget {
                   const PaymentCartScreen1(),
               SearchScreen.routeName:(context) => const SearchScreen(),
               ChatbotScreen1.routeName:(context) => const ChatbotScreen1(),
-
+              SearchAdminScreen.routeName: (context) => const SearchAdminScreen(),
             },
             onGenerateRoute: (settings) {
               if (settings.name == ProductDetailScreen.routeName) {
