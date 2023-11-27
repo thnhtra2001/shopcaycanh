@@ -1,11 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:shopcaycanh/services/products_service.dart';
 
+import '../../models/cart_item1.dart';
 import '../../models/product.dart';
 
 import 'package:flutter/foundation.dart';
 import '../../models/auth_token.dart';
 import '../../models/product.dart';
+import '../../services/cart_service.dart';
 import '../../services/products_service.dart';
 
 class ProductsManager with ChangeNotifier {
@@ -91,5 +93,16 @@ class ProductsManager with ChangeNotifier {
 
   List<Product> get display_product {
     return [..._display_product];
+  }
+
+  ///////////////////////////////
+  final CartService _cartService = CartService();
+  late List<CartItem1> _cartItem1 = [];
+  Future<void> fetchCarts() async {
+    _cartItem1 = await _cartService.fetchCarts();
+    notifyListeners();
+  }
+    List<CartItem1> get cartItem1 {
+    return [..._cartItem1];
   }
 }

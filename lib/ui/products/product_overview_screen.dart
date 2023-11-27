@@ -7,6 +7,7 @@ import 'package:shopcaycanh/ui/products/search_product.dart';
 import 'package:shopcaycanh/ui/products/top_right_badge.dart';
 import 'package:shopcaycanh/ui/shared/app_drawer.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import '../cart/cart_manager1.dart';
 import 'product_grid.dart';
 
 enum FilterOptions { favorites, all }
@@ -37,7 +38,7 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
         title: const Text('Shop cây cảnh'),
         actions: <Widget>[
           // buildProductFilterMenu(),
-          // buildShoppingCartIcon(),
+          buildShoppingCartIcon(),
           searchProduct(),
         ],
       ),
@@ -78,10 +79,10 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
   }
 
   Widget buildShoppingCartIcon() {
-    return Consumer<CartManager>(
-      builder: (context, cartManager, child) {
+    return Consumer<CartManager1>(
+      builder: (context, cartManager1, child) {
         return TopRightBadge(
-          data: cartManager.productCount,
+          data: cartManager1.cartCount,
           child: IconButton(
               onPressed: () {
                 Navigator.of(context).pushNamed(CartScreen.routeName);
