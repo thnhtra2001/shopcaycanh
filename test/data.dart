@@ -3,7 +3,6 @@ import 'package:shopcaycanh/models/product.dart';
 final List<Product> _items = [
   ///1
   Product(
-    id: 'p1',
     title: 'Bàng Singapore',
     description:
         'Bàng Singapore có đặc điểm lá lớn, tán lá rộng, tròn và đầy đặn, màu xanh tươi tốt quanh năm tượng trưng cho tiền tài giàu sang và mang đến nhiều may mắn.Bàng Sing thuộc nhóm cây dễ trồng nên cây có thể thích nghi với nhiều điều kiện ánh sáng, phát triển tốt trong nhà kính có ánh sáng, không thích hợp trồng trực tiếp nơi có ánh sáng quá gắt, lá sẽ sẽ phai màu.',
@@ -13,7 +12,6 @@ final List<Product> _items = [
     origin: 'Singapore',
     owner: 'thanhtratran',
     status: 'cây xanh, phát triển tốt',
-    isFavorite: true,
   ),
   /////2
   Product(

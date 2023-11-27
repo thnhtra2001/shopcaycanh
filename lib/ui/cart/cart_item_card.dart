@@ -1,13 +1,16 @@
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopcaycanh/ui/cart/cart_manager1.dart';
 
 import '../../models/cart_item.dart';
+import '../../models/cart_item1.dart';
 import '../shared/dialog_utils.dart';
 import 'cart_manager.dart';
 
 class CartItemCard extends StatelessWidget {
   final String productId;
-  final CartItem cardItem;
+  final CartItem1 cardItem;
 
   const CartItemCard({
     required this.productId,
@@ -41,7 +44,7 @@ class CartItemCard extends StatelessWidget {
         );
       },
       onDismissed: (direction) {
-        context.read<CartManager>().removeItem(productId);
+        context.read<CartManager1>().removeItem(cardItem);
       },
       child: buildItemCard(),
     );

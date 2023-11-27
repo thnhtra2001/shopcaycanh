@@ -45,6 +45,8 @@ class ProductsManager with ChangeNotifier {
 
   Future<void> updateProduct(Product product) async {
     final index = _items.indexWhere((item) => item.id == product.id);
+    print("tra index: ");
+    print(index);
     if (index >= 0) {
       if (await _productsService.updateProduct(product)) {
         _items[index] = product;
@@ -86,6 +88,7 @@ class ProductsManager with ChangeNotifier {
   int get display_product_Count {
     return _display_product.length;
   }
+
   List<Product> get display_product {
     return [..._display_product];
   }

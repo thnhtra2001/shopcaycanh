@@ -6,6 +6,7 @@ import 'package:shopcaycanh/ui/orders/order_screen.dart';
 import 'package:shopcaycanh/ui/payment_cart1/payments_selectiton.dart';
 import '../../repo_zalo/payment.dart';
 import '../../services/user_service.dart';
+import '../cart/cart_manager1.dart';
 import '../screens.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +38,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
 
   @override
   Widget build(BuildContext context) {
-    final cart = context.watch<CartManager>();
+    final cart = context.watch<CartManager1>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Trang thanh toán'),
@@ -67,8 +68,76 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
           ),
           // buildCartSummary(cart, context),
           const SizedBox(height: 10),
+          // Expanded(
+          //   child: buildCartDetails(cart),
+          // ),
           Expanded(
-            child: buildCartDetails(cart),
+            child: Consumer<CartManager1>(
+              builder: (ctx, cartManager1, child) {
+                return ListView.builder(
+                    itemCount: cartManager1.cartCount,
+                    itemBuilder: (ctx, i) => GestureDetector(
+                          child: Column(
+                            children: [
+                              Dismissible(
+                                  key: ValueKey(cartManager1.cartItem[i].id),
+                                  background: Container(
+                                    color: Theme.of(context).colorScheme.error,
+                                    alignment: Alignment.centerRight,
+                                    padding: const EdgeInsets.only(right: 20),
+                                    margin: const EdgeInsets.symmetric(
+                                      horizontal: 15,
+                                      vertical: 4,
+                                    ),
+                                    child: const Icon(
+                                      Icons.delete,
+                                      color: Colors.white,
+                                      size: 40,
+                                    ),
+                                  ),
+                                  direction: DismissDirection.endToStart,
+                                  confirmDismiss: (directiion) {
+                                    return showConfirmDialog(
+                                      context,
+                                      'Bạn có chắc muốn xóa sản phẩm này?',
+                                    );
+                                  },
+                                  onDismissed: (direction) {
+                                    context.read<CartManager1>().removeItem(
+                                        cartManager1.cartItem[i]
+                                            );
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Card(
+                                        margin: const EdgeInsets.symmetric(
+                                          horizontal: 15,
+                                          vertical: 4,
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8),
+                                          child: ListTile(
+                                            leading: CircleAvatar(
+                                              backgroundImage: NetworkImage(
+                                                  cartManager1
+                                                      .cartItem[i].imageUrl),
+                                            ),
+                                            title: Text(
+                                                cartManager1.cartItem[i].title),
+                                            subtitle: Text(
+                                                'Giá: ${(cartManager1.cartItem[i].price * cartManager1.cartItem[i].quantity)}'),
+                                            trailing: Text(
+                                                'SL: ${cartManager1.cartItem[i].quantity}'),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  )),
+                            ],
+                          ),
+                        ));
+              },
+            ),
           ),
           buildProductTotal(cart),
           FutureBuilder<Map<String, dynamic>>(
@@ -98,6 +167,25 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
     );
   }
 
+  // Widget buildItemCard() {
+  //   return Card(
+  //     margin: const EdgeInsets.symmetric(
+  //       horizontal: 15,
+  //       vertical: 4,
+  //     ),
+  //     child: Padding(
+  //       padding: const EdgeInsets.all(8),
+  //       child: ListTile(
+  //         leading: CircleAvatar(
+  //           backgroundImage: NetworkImage(cardItem.imageUrl),
+  //         ),
+  //         title: Text(cardItem.title),
+  //         subtitle: Text('Giá: ${(cardItem.price * cardItem.quantity)}'),
+  //         trailing: Text('SL: ${cardItem.quantity}'),
+  //       ),
+  //     ),
+  //   );
+  // }
   Widget inforPhoneUser(data) {
     return Row(
       children: [
@@ -210,20 +298,20 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
     );
   }
 
-  Widget buildCartDetails(CartManager cart) {
-    return ListView(
-      children: cart.productEntries
-          .map(
-            (entry) => CartItemCard(
-              productId: entry.key,
-              cardItem: entry.value,
-            ),
-          )
-          .toList(),
-    );
-  }
+  // Widget buildCartDetails(CartManager1 cart) {
+  //   return ListView(
+  //     children: cart.productEntries
+  //         .map(
+  //           (entry) => CartItemCard(
+  //             productId: entry.key,
+  //             cardItem: entry.value,
+  //           ),
+  //         )
+  //         .toList(),
+  //   );
+  // }
 
-  Widget buildProductTotal(CartManager cart) {
+  Widget buildProductTotal(CartManager1 cart) {
     return Container(
       height: 100,
       child: Container(

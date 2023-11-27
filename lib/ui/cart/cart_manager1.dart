@@ -10,13 +10,17 @@ import '../../models/product.dart';
 
 class CartManager1 with ChangeNotifier {
   final CartService _cartService = CartService();
-  late List<CartItem> _cartItem = [];
+  late List<CartItem1> _cartItem = [];
 
-  int get productCount {
+  int get cartCount {
     return _cartItem.length;
   }
 
-  List<CartItem> get products {
+  List<CartItem1> get products {
+    return _cartItem.toList();
+  }
+
+  List<CartItem1> get cartItem {
     return [..._cartItem];
   }
 
@@ -36,64 +40,63 @@ class CartManager1 with ChangeNotifier {
     return totalQuantity;
   }
 
-  // Future<void> fetchCarts() async {
-  //   _cartItem = await _cartService.fetchCarts();
-  //   print(_cartItem.length);
+  Future<void> fetchCarts() async {
+    _cartItem = await _cartService.fetchCarts();
+    notifyListeners();
+  }
+
+  Future<void> addCart(CartItem1 cart) async {
+    final newOrders = await _cartService.addCarts(cart);
+    print(newOrders);
+    if (newOrders != null) {
+      _cartItem.add(newOrders);
+      // print("BBBBBBBBBBBBBBBBBB");
+      // print(_cartItem.first.productId);
+      notifyListeners();
+    }
+  }
+
+  // Future<void> addCart(String? productId, String title, double price,
+  //     String imageUrl, int quantity) async {
+  // final index = _cartItem.indexWhere((cart) => cart.productId == productId);
+  // print("AAAAAAAAAAAAAAAAAAAAAAAA");
+  // print(index);
+  // // print("CCCCCCCCCCCCCCCCCCCCCCCCCC");
+  // // print(_cartItem.first.productId);
+  // // print("BBBBBBBBBBBBBBBBBBBBBBBBB");
+  // // print(_cartItem.first.id);
+
+  // if (index == 0) {
+  //   int quantity =1;
+  // final newOrders = await _cartService.addCarts(CartItem(
+  //     id: productId,
+  //     productId: productId,
+  //     title: title,
+  //     quantity: quantity,
+  //     price: price,
+  //     imageUrl: imageUrl,
+  //     owner: owner,
+  //     origin: origin,
+  //     status: status,
+
+  //     ));
+  // if (newOrders != null) {
+  //   _cartItem.add(newOrders);
   //   notifyListeners();
   // }
-
-  // Future<void> addCart(List<Product> product, int quantity) async {
-  //   final newOrders = await _cartService.addCarts(CartItem1(
-  //      products: product,
-  //      quantity: quantity,
-  //       ));
+  // } else {
+  //     final newOrders = await _cartService.addCarts(CartItem(
+  //       productId: productId,
+  //       title: title,
+  //       quantity: 1,
+  //       price: price,
+  //       imageUrl: imageUrl));
   //   if (newOrders != null) {
   //     _cartItem.add(newOrders);
   //     notifyListeners();
   //   }
   // }
-
-  Future<void> addCart(String? productId, String title, double price,
-      String imageUrl, int quantity) async {
-    // final index = _cartItem.indexWhere((cart) => cart.productId == productId);
-    // print("AAAAAAAAAAAAAAAAAAAAAAAA");
-    // print(index);
-    // // print("CCCCCCCCCCCCCCCCCCCCCCCCCC");
-    // // print(_cartItem.first.productId);
-    // // print("BBBBBBBBBBBBBBBBBBBBBBBBB");
-    // // print(_cartItem.first.id);
-
-    // if (index == 0) {
-    //   int quantity =1;
-      // final newOrders = await _cartService.addCarts(CartItem(
-      //     id: productId,
-      //     productId: productId,
-      //     title: title,
-      //     quantity: quantity,
-      //     price: price,
-      //     imageUrl: imageUrl,
-      //     owner: owner,
-      //     origin: origin,
-      //     status: status,
-
-      //     ));
-      // if (newOrders != null) {
-      //   _cartItem.add(newOrders);
-      //   notifyListeners();
-      // }
-    // } else {
-    //     final newOrders = await _cartService.addCarts(CartItem(
-    //       productId: productId,
-    //       title: title,
-    //       quantity: 1,
-    //       price: price,
-    //       imageUrl: imageUrl));
-    //   if (newOrders != null) {
-    //     _cartItem.add(newOrders);
-    //     notifyListeners();
-    //   }
-    // }
-  }
+  // }
 
   // Future<void> updateCart(CartItem cart) async {
   //   final index = _cartItem.indexWhere((cart) => cart.id == cart.productId);
@@ -105,8 +108,9 @@ class CartManager1 with ChangeNotifier {
   //   }
   // }
 
-  Future<void> removeItem(String productId) async {
-    _cartItem.remove(productId);
+  Future<void> removeItem(CartItem1 cart) async {
+    await _cartService.deleteCarts(cart);
+    _cartItem.remove(cart);
     notifyListeners();
   }
 
@@ -115,6 +119,7 @@ class CartManager1 with ChangeNotifier {
   }
 
   Future<void> clear() async {
+    await _cartService.deleteAllCarts();
     _cartItem = [];
     notifyListeners();
   }

@@ -2,13 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:shopcaycanh/models/cart_item.dart';
+import 'package:shopcaycanh/models/cart_item1.dart';
 
 import 'cart_item.dart';
 
 class OrderItem with ChangeNotifier {
   late String? id;
   late double amount;
-  late List<CartItem> products;
+  late List<CartItem1> products;
   late DateTime dateTime;
   late int totalQuantity;
   late String name;
@@ -43,7 +44,7 @@ class OrderItem with ChangeNotifier {
   OrderItem copyWith({
     String? id,
     double? amount,
-    List<CartItem>? products,
+    List<CartItem1>? products,
     DateTime? dateTime,
     int? totalQuantity,
     String? name,
@@ -109,7 +110,7 @@ class OrderItem with ChangeNotifier {
       id: json['id'],
       amount: json['amount'],
       products: (json['products'] as List<dynamic>)
-          .map((item) => CartItem.fromJson(item))
+          .map((item) => CartItem1.fromJson(item))
           .toList(),
       dateTime: DateTime.parse(json['dateTime']),
       totalQuantity: json['totalQuantity'],

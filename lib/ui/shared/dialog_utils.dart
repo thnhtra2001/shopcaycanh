@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopcaycanh/models/cart_item1.dart';
 import 'package:shopcaycanh/ui/cart/cart_manager.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
 import 'package:shopcaycanh/ui/payment_cart1/payment_cart_screen.dart';
+
+import '../cart/cart_manager1.dart';
 
 Future<bool?> showConfirmDialog(BuildContext context, String message) {
   return showDialog(
@@ -26,7 +30,9 @@ Future<bool?> showConfirmDialog(BuildContext context, String message) {
     ),
   );
 }
-Future<bool?> showConfirmDialogZalo(BuildContext context, String message, CartManager cart) {
+
+Future<bool?> showConfirmDialogZalo(
+    BuildContext context, String message, CartManager1 cart) {
   return showDialog(
     context: context,
     builder: (ctx) => AlertDialog(
@@ -44,7 +50,9 @@ Future<bool?> showConfirmDialogZalo(BuildContext context, String message, CartMa
     ),
   );
 }
-Future<bool?> showConfirmDialogZaloCancel(BuildContext context, String message) {
+
+Future<bool?> showConfirmDialogZaloCancel(
+    BuildContext context, String message) {
   return showDialog(
     context: context,
     builder: (ctx) => AlertDialog(
@@ -79,7 +87,8 @@ Future<void> showErrorDialog(BuildContext context, String message) {
     ),
   );
 }
-Future<void> showMyDialog(BuildContext context, CartManager cart) async {
+
+Future<void> showMyDialog(BuildContext context, CartManager1 cart) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
@@ -98,7 +107,7 @@ Future<void> showMyDialog(BuildContext context, CartManager cart) async {
             child: const Text('Ok'),
             onPressed: () {
               // Navigator.of(context).pushNamed(OrdersScreen.routeName);
-            
+
               Navigator.of(context).pushReplacementNamed('/');
 
               cart.clear();
