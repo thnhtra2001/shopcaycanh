@@ -37,7 +37,7 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
         title: const Text('Shop cây cảnh'),
         actions: <Widget>[
           // buildProductFilterMenu(),
-          // buildShoppingCartIcon(),
+          buildShoppingCartIcon(),
           searchProduct(),
         ],
       ),
