@@ -57,11 +57,12 @@ class CartManager1 with ChangeNotifier {
 
   Future<void> updateCart(CartItem1 cart,int index) async {
     if (index >= 0) {
+      if(await _cartService.updateCart(cart)){
       _cartItem[index] = cart;
       print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
       print(_cartItem[index].quantity);
       notifyListeners();
-      // }
+      }
     }
   }
 

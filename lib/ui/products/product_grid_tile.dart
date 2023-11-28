@@ -83,8 +83,10 @@ class _ProductGridTileState extends State<ProductGridTile> {
                       cartManager1.addCart(_cart);
                     } else {
                       final test = cartManager1.cartItem[index].quantity;
+                      final cartId = cartManager1.cartItem[index].id;
                       print(test);
                       _cart = CartItem1(
+                          id: cartId,
                           productId: widget.product.id,
                           title: widget.product.title,
                           quantity: test + 1,

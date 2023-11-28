@@ -54,7 +54,7 @@ class CartService extends FirebaseService {
   Future<bool> updateCart(CartItem1 cart) async {
     try {
       final url = Uri.parse('$databaseUrl/carts/${cart.id}.json?auth=$token');
-      final response = await http.patch(url, body: json.encode(cart.toJson()));
+      final response = await http.put(url, body: json.encode(cart.toJson()));
       if (response.statusCode != 200) {
         throw Exception(json.decode(response.body)['error']);
       }
