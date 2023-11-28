@@ -9,13 +9,12 @@ import 'package:flutter/foundation.dart';
 import '../../models/product.dart';
 
 class CartManager1 with ChangeNotifier {
-  final CartService _cartService = CartService();
-  late List<CartItem1> _cartItem = [];
+  CartService _cartService = CartService();
+  List<CartItem1> _cartItem = [];
 
   int get cartCount {
     return _cartItem.length;
   }
-  
 
   List<CartItem1> get products {
     return _cartItem.toList();
@@ -24,6 +23,7 @@ class CartManager1 with ChangeNotifier {
   List<CartItem1> get cartItem {
     return [..._cartItem];
   }
+
   double get totalAmount {
     var total = 0.0;
     _cartItem.forEach((cartItem) {
@@ -48,20 +48,26 @@ class CartManager1 with ChangeNotifier {
   Future<void> addCart(CartItem1 cart) async {
     final newOrders = await _cartService.addCarts(cart);
     if (newOrders != null) {
-      _cartItem.add(newOrders);
+      _cartItem.add(cart);
+
       notifyListeners();
     }
+    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa");
+    print(_cartItem);
+    print("----------------------------");
+    print(_cartItem.length);
+    print("AAAAAAAAAAAAAAAAAAAAAAAAA");
     _cartItem.add(cart);
     notifyListeners();
   }
 
-  Future<void> updateCart(CartItem1 cart,int index) async {
+  Future<void> updateCart(CartItem1 cart, int index) async {
     if (index >= 0) {
-      if(await _cartService.updateCart(cart)){
-      _cartItem[index] = cart;
-      print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
-      print(_cartItem[index].quantity);
-      notifyListeners();
+      if (await _cartService.updateCart(cart)) {
+        _cartItem[index] = cart;
+        print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+        print(_cartItem[index].quantity);
+        notifyListeners();
       }
     }
   }
