@@ -42,7 +42,8 @@ class _CartScreenState extends State<CartScreen> {
             future: _fetchCarts,
             builder: (contex, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                return Column(
+                return 
+                Column(
                   children: [
                     buildCartSummary(cart, context),
                     Expanded(
