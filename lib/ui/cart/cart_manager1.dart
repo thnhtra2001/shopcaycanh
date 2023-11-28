@@ -46,15 +46,16 @@ class CartManager1 with ChangeNotifier {
   }
 
   Future<void> addCart(CartItem1 cart) async {
-  // final index = _cartItem.indexWhere((cart) => cart.productId == productId);
+    // final index = _cartItem.indexWhere((cart) => cart.productId == productId);
     final newOrders = await _cartService.addCarts(cart);
+    print("AAAAAAAAAAAAAAAAAaaaaaaaaaaa");
     print(newOrders);
     if (newOrders != null) {
       _cartItem.add(newOrders);
-      // print("BBBBBBBBBBBBBBBBBB");
-      // print(_cartItem.first.productId);
       notifyListeners();
     }
+    _cartItem.add(cart);
+    notifyListeners();
   }
 
   // Future<void> addCart(String? productId, String title, double price,

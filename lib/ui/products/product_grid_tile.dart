@@ -32,10 +32,11 @@ class _ProductGridTileState extends State<ProductGridTile> {
   late CartItem1 _cart;
   @override
   Widget build(BuildContext context) {
+    final cartManager1 = CartManager1();
     return ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: GridTile(
-          footer: buildGridFooterBar(context),
+          footer: buildGridFooterBar(context, cartManager1),
           child: GestureDetector(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
@@ -49,16 +50,13 @@ class _ProductGridTileState extends State<ProductGridTile> {
         ));
   }
 
-  Widget buildGridFooterBar(BuildContext context) {
+  Widget buildGridFooterBar(BuildContext context, CartManager1 cartManager1) {
     // final cartManager = context.read<CartManager1>();
     // final cartItem = context.select<CartManager1, List<CartItem1>>((cartManager) => cartManager.cartItem);
     // print("AAAAAAAAAAA cartItem length");
     // print(cartItem.length);
-    // return FutureBuilder(
-    //   future: _fetchCarts,
-    //   builder: (context, snapshot) {
-    //     if (snapshot.connectionState == ConnectionState.done) {
-    //       return
+    return FutureBuilder(future: _fetchCarts, builder: (context, snapshot) {
+      if(snapshot.connectionState == ConnectionState.done ){
     return Consumer<CartManager1>(
       builder: (context, cartManager1, child) {
         return GridTileBar(
@@ -72,7 +70,7 @@ class _ProductGridTileState extends State<ProductGridTile> {
               Icons.shopping_cart,
             ),
             onPressed: () async {
-              final cartManager1 = context.read<CartManager1>();
+              // final cartManager1 = context.read<CartManager1>();
               // print("AAAAAAAAAAAAAAA");
               // print(widget.product.id);
               // final _cartStatus = cartManager.cartItem.first.title;
@@ -90,7 +88,6 @@ class _ProductGridTileState extends State<ProductGridTile> {
                   owner: widget.product.owner,
                   origin: widget.product.origin,
                   status: widget.product.status);
-
               cartManager1.addCart(_cart);
               // print("AAAAAAAAAAAAAAA");
               // print(widget.product.id);
@@ -115,6 +112,10 @@ class _ProductGridTileState extends State<ProductGridTile> {
         );
       },
     );
+      }
+      return Center(child: CircularProgressIndicator(),);
+    },);
+
     //     }
     //     return Center(
     //       child: CircularProgressIndicator(),
