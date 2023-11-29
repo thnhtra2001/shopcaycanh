@@ -57,8 +57,8 @@ class CartManager1 with ChangeNotifier {
     print("----------------------------");
     print(_cartItem.length);
     print("AAAAAAAAAAAAAAAAAAAAAAAAA");
-    _cartItem.add(cart);
-    notifyListeners();
+    // _cartItem.add(cart);
+    // notifyListeners();
   }
 
   Future<void> updateCart(CartItem1 cart, int index) async {

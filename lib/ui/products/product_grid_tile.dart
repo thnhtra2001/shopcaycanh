@@ -22,6 +22,12 @@ class ProductGridTile extends StatefulWidget {
 
 class _ProductGridTileState extends State<ProductGridTile> {
   late Future<void> _fetchCarts = Future(() => null);
+  int _sl = 0;
+  void setQuantity() {
+    setState(() {
+      _sl++;
+    });
+  }
 
   @override
   void initState() {
@@ -51,10 +57,10 @@ class _ProductGridTileState extends State<ProductGridTile> {
   }
 
   Widget buildGridFooterBar(BuildContext context, CartManager1 cartManager1) {
-    return FutureBuilder(
-      future: _fetchCarts,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
+    // return FutureBuilder(
+    //   future: _fetchCarts,
+    //   builder: (context, snapshot) {
+    //     if (snapshot.connectionState == ConnectionState.done) {
           return Consumer<CartManager1>(
             builder: (context, cartManager1, child) {
               return GridTileBar(
@@ -68,13 +74,16 @@ class _ProductGridTileState extends State<ProductGridTile> {
                     Icons.shopping_cart,
                   ),
                   onPressed: () async {
+                    setQuantity();
+                    print("Quantity Now:");
+                    print(_sl);
                     final index = cartManager1.cartItem.indexWhere(
                         (element) => element.productId == widget.product.id);
-                    if (index < 0) {
+                    if (_sl == 1) {
                       _cart = CartItem1(
                           productId: widget.product.id,
                           title: widget.product.title,
-                          quantity: 1,
+                          quantity: _sl,
                           price: widget.product.price,
                           imageUrl: widget.product.imageUrl,
                           owner: widget.product.owner,
@@ -82,14 +91,16 @@ class _ProductGridTileState extends State<ProductGridTile> {
                           status: widget.product.status);
                       cartManager1.addCart(_cart);
                     } else {
-                      final test = cartManager1.cartItem[index].quantity;
+                      print("Quantity Now Else:");
+                      print(_sl);
+                      // final test = cartManager1.cartItem[index].quantity;
                       final cartId = cartManager1.cartItem[index].id;
-                      print(test);
+                      // print(test);
                       _cart = CartItem1(
                           id: cartId,
                           productId: widget.product.id,
                           title: widget.product.title,
-                          quantity: test + 1,
+                          quantity: _sl,
                           price: widget.product.price,
                           imageUrl: widget.product.imageUrl,
                           owner: widget.product.owner,
@@ -116,12 +127,12 @@ class _ProductGridTileState extends State<ProductGridTile> {
               );
             },
           );
-        }
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    );
+    //     }
+    //     return Center(
+    //       child: CircularProgressIndicator(),
+    //     );
+    //   },
+    // );
 
     //     }
     //     return Center(

@@ -141,9 +141,9 @@ class _CartScreenState extends State<CartScreen> {
               onPressed: cart.totalAmount <= 0
                   ? null
                   : () {
-                      cart.clear();
-                      // Navigator.of(context)
-                      //     .pushNamed(PaymentCartScreen1.routeName);
+                      // cart.clear();
+                      Navigator.of(context)
+                          .pushNamed(PaymentCartScreen1.routeName);
                     },
               style: TextButton.styleFrom(
                 textStyle: TextStyle(color: Theme.of(context).primaryColor),
