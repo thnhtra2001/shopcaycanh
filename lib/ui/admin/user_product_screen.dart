@@ -36,21 +36,28 @@ class UserProductsScreen extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             }
-            return RefreshIndicator(
-              onRefresh: () => _refreshProduct(context),
-              child:Column(children: [
-              buildTotalProduct(productsManager),
-              SizedBox(height: 700,child: buildUserProductListView(productsManager)),
-
-              ],)
-              // buildTotalProduct(productsManager),
-              // SizedBox(child: buildUserProductListView(productsManager)),
+            return SingleChildScrollView(
+              child: RefreshIndicator(
+                  onRefresh: () => _refreshProduct(context),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 20,),
+                      buildTotalProduct(productsManager),
+                      const SizedBox(height: 20,),
+                      SizedBox(
+                          height: 700,
+                          child: buildUserProductListView(productsManager)),
+                    ],
+                  )
+                  // buildTotalProduct(productsManager),
+                  // SizedBox(child: buildUserProductListView(productsManager)),
+                  ),
             );
           },
         ));
   }
 
-    Widget searchProduct(context) {
+  Widget searchProduct(context) {
     return IconButton(
         onPressed: () {
           Navigator.of(context).pushNamed(SearchAdminScreen.routeName);
@@ -68,10 +75,15 @@ class UserProductsScreen extends StatelessWidget {
         icon: const Icon(Icons.add));
   }
 
-  Widget buildTotalProduct(ProductsManager productsManager){
+  Widget buildTotalProduct(ProductsManager productsManager) {
     return Consumer<ProductsManager>(
       builder: (context, productsManager, child) {
-        return Text("Tổng số sản phẩm là: ${productsManager.itemCount}");
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text("Tổng số sản phẩm là: ${productsManager.itemCount}", style: TextStyle(color: Colors.black, fontSize: 15),),
+          ],
+        );
       },
     );
   }

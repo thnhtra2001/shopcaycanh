@@ -3,7 +3,6 @@ import 'package:flutter_zalopay_sdk/flutter_zalopay_sdk.dart';
 import 'package:shopcaycanh/models/cart_item.dart';
 import 'package:shopcaycanh/models/order_item.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
-import 'package:shopcaycanh/ui/payment_cart1/payments_selectiton.dart';
 import '../../repo_zalo/payment.dart';
 import '../../services/user_service.dart';
 import '../screens.dart';
@@ -42,7 +41,8 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
       appBar: AppBar(
         title: const Text('Trang thanh toán'),
       ),
-      body: Column(
+      body: 
+      Column(
         children: <Widget>[
           SizedBox(height: 20),
           FutureBuilder<Map<String, dynamic>>(
