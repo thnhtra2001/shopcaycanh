@@ -38,7 +38,13 @@ class UserProductsScreen extends StatelessWidget {
             }
             return RefreshIndicator(
               onRefresh: () => _refreshProduct(context),
-              child: buildUserProductListView(productsManager),
+              child:Column(children: [
+              buildTotalProduct(productsManager),
+              SizedBox(height: 700,child: buildUserProductListView(productsManager)),
+
+              ],)
+              // buildTotalProduct(productsManager),
+              // SizedBox(child: buildUserProductListView(productsManager)),
             );
           },
         ));
@@ -60,6 +66,14 @@ class UserProductsScreen extends StatelessWidget {
           );
         },
         icon: const Icon(Icons.add));
+  }
+
+  Widget buildTotalProduct(ProductsManager productsManager){
+    return Consumer<ProductsManager>(
+      builder: (context, productsManager, child) {
+        return Text("Tổng số sản phẩm là: ${productsManager.itemCount}");
+      },
+    );
   }
 
   Widget buildUserProductListView(ProductsManager productsManager) {
