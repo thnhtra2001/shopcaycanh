@@ -38,68 +38,53 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
   Widget build(BuildContext context) {
     final cart = context.watch<CartManager>();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Trang thanh toán'),
-      ),
-      body: 
-      Column(
-        children: <Widget>[
-          SizedBox(height: 20),
-          FutureBuilder<Map<String, dynamic>>(
-            future: _futureFetchUserInformation,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                return Center(
-                  child: Container(
-                      alignment: Alignment.center,
-                      child: Column(
-                        children: [
-                          paymentAddress(snapshot.data!['address']),
-                          inforNameUser(snapshot.data!['name']),
-                          const SizedBox(height: 20),
-                          inforPhoneUser(snapshot.data!['phone'])
-                        ],
-                      )),
-                );
-              }
-              return const Center(child: CircularProgressIndicator());
-            },
+        appBar: AppBar(
+          title: const Text('Trang thanh toán'),
+        ),
+        body: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.all(15),
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: 20),
+                FutureBuilder<Map<String, dynamic>>(
+                  future: _futureFetchUserInformation,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return Center(
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: Column(
+                              children: [
+                                paymentAddress(snapshot.data!['address']),
+                                inforNameUser(snapshot.data!['name']),
+                                const SizedBox(height: 20),
+                                inforPhoneUser(snapshot.data!['phone']),
+                                const SizedBox(height: 10),
+                                SizedBox(
+                                  height: cart.productCount * 80,
+                                  child: buildCartDetails(cart),
+                                ),
+                                buildProductTotal(cart),
+                                paymentNow(snapshot, cart),
+                                SizedBox(height: 20),
+                                paymentZaloPay(snapshot, cart),
+                                SizedBox(height: 20),
+                              ],
+                            )),
+                      );
+                    }
+                    return const Center(child: CircularProgressIndicator());
+                  },
+                ),
+              ],
+            ),
           ),
-          // buildCartSummary(cart, context),
-          const SizedBox(height: 10),
-          Expanded(
-            child: buildCartDetails(cart),
-          ),
-          buildProductTotal(cart),
-          FutureBuilder<Map<String, dynamic>>(
-            future: _futureFetchUserInformation,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                return Center(
-                  child: Container(
-                      alignment: Alignment.center,
-                      child: Column(
-                        children: [
-                          paymentNow(snapshot, cart),
-                          SizedBox(height: 20),
-                          paymentZaloPay(snapshot, cart),
-                          SizedBox(height: 20),
-
-                          // statusPayZalo(),
-                        ],
-                      )),
-                );
-              }
-              return const Center(child: CircularProgressIndicator());
-            },
-          ),
-        ],
-      ),
-    );
+        ));
   }
 
   Widget inforPhoneUser(data) {
-    return Row(
+    return Column(
       children: [
         Container(
           height: 50,
@@ -110,25 +95,10 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
         Container(
           padding: const EdgeInsets.only(left: 20),
           color: Colors.white,
-          height: 50,
-          width: 290,
+          height: 60,
+          width: 400,
           child: Row(
             children: [
-              // Container(
-              //   padding: const EdgeInsets.all(12),
-              //   decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(100),
-              //       border: Border.all(
-              //         color: Colors.black,
-              //         width: 0.5,
-              //       )),
-              //   child: Image.asset(
-              //     'assets/Images/user-icon.png',
-              //     color: Colors.black12,
-              //     height: 23,
-              //     width: 23,
-              //   ),
-              // ),
               const SizedBox(width: 7),
               Text(
                 data ?? '',
@@ -385,7 +355,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
           // cart.clear();
           // showMyDialog(context, cart);
           // Navigator.of(context).pushNamed(OrdersScreen.routeName);
-          Navigator.of(context).pushReplacementNamed('/');
+          // Navigator.of(context).pushReplacementNamed('/');
         },
         child: Container(
             // height: 50,

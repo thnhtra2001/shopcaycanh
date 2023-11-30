@@ -73,11 +73,15 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
             const SizedBox(height: 20),
             buildAddressRow(),
             // const SizedBox(height: 20),
-            const Divider(color: Colors.black,),
+            const Divider(
+              color: Colors.black,
+            ),
             buildNameProductRow(),
             // const SizedBox(height: 20),
             buildOrderDetails(),
-            const Divider(color: Colors.black,),
+            const Divider(
+              color: Colors.black,
+            ),
             // const SizedBox(height: 20),
             buildTotalQuantity(),
             const SizedBox(height: 20),
@@ -96,36 +100,38 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
   }
 
   Widget buildOrderDetails() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
-      height: min(widget.order.productCount * 20.0 + 40, 150),
-      child: ListView(
-        children: widget.order.products
-            .map(
-              (prod) => Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    prod.title,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+    return SizedBox(
+        height: widget.order.productCount * 32,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+          child: ListView(
+            children: widget.order.products
+                .map(
+                  (prod) => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        prod.title,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        '${prod.quantity}x${prod.price}',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    '${prod.quantity}x${prod.price}',
-                    style: const TextStyle(
-                      fontSize: 18,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
-              ),
-            )
-            .toList(),
-      ),
-    );
+                )
+                .toList(),
+          ),
+        ));
   }
+
   Widget buildNameRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
 import 'package:shopcaycanh/ui/payment_cart1/payment_cart_screen.dart';
@@ -9,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'cart_manager.dart';
 import 'cart_item_card.dart';
 import '../orders/order_manager.dart';
-
 
 class CartScreen extends StatelessWidget {
   static const routeName = '/cart';
@@ -29,7 +27,13 @@ class CartScreen extends StatelessWidget {
           buildCartSummary(cart, context),
           const SizedBox(height: 10),
           Expanded(
-            child: buildCartDetails(cart),
+            child: cart.productCount == 0
+                ? const Center(
+                    child: Text(
+                    "Giỏ hàng trống!",
+                    style: TextStyle(color: Colors.grey, fontSize: 18),
+                  ))
+                : buildCartDetails(cart),
           )
         ],
       ),
@@ -75,7 +79,8 @@ class CartScreen extends StatelessWidget {
               onPressed: cart.totalAmount <= 0
                   ? null
                   : () {
-                      Navigator.of(context).pushNamed(PaymentCartScreen1.routeName);
+                      Navigator.of(context)
+                          .pushNamed(PaymentCartScreen1.routeName);
                     },
               style: TextButton.styleFrom(
                 textStyle: TextStyle(color: Theme.of(context).primaryColor),

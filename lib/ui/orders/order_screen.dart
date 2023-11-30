@@ -33,39 +33,46 @@ class _OrdersScreenState extends State<OrdersScreen> {
           title: const Text('Đơn đã đặt'),
         ),
         drawer: const AppDrawer(),
-        body: 
-        // Consumer<OrdersManager>(builder: (ctx, ordersManager, child) {
-        //   return ListView.builder(
-        //     itemCount: ordersManager.ordersCount,
-        //     itemBuilder: (ctx, i) => OrderItemCard(ordersManager.orders[i]),
-        //   );
-        // })
-        FutureBuilder(
-            future: _fetchOrders,
-            builder: (contex, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                return Consumer<OrdersManager>(
-                  builder: (ctx, ordersManager, child) {
-                    return ListView.builder(
-                        itemCount: ordersManager.ordersCount,
-                        itemBuilder: (ctx, i) => GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => OrderDetailScreen(
-                                          ordersManager.orders[i])),
-                                );
-                              },
-                              child: OrderItemCard(ordersManager.orders[i]),
-                            ));
-                  },
-                );
-              }
-                        return const Center(
-            child: CircularProgressIndicator()
-          );
-            })
-        );
+        body:
+            // Consumer<OrdersManager>(builder: (ctx, ordersManager, child) {
+            //   return ListView.builder(
+            //     itemCount: ordersManager.ordersCount,
+            //     itemBuilder: (ctx, i) => OrderItemCard(ordersManager.orders[i]),
+            //   );
+            // })
+            FutureBuilder(
+                future: _fetchOrders,
+                builder: (contex, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return Consumer<OrdersManager>(
+                      builder: (ctx, ordersManager, child) {
+                        return ListView.builder(
+                            itemCount: ordersManager.ordersCount,
+                            itemBuilder: (ctx, i) => GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              OrderDetailScreen(
+                                                  ordersManager.orders[i])),
+                                    );
+                                  },
+                                  child: ordersManager.orders.length == 0
+                                      ? const Center(
+                                          child: Text(
+                                            "Đơn hàng trống!",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 18),
+                                          ),
+                                        )
+                                      : OrderItemCard(ordersManager.orders[i]),
+                                ));
+                      },
+                    );
+                  }
+                  return const Center(child: CircularProgressIndicator());
+                }));
   }
 }
