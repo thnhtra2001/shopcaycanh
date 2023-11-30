@@ -34,12 +34,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
         ),
         drawer: const AppDrawer(),
         body:
-            // Consumer<OrdersManager>(builder: (ctx, ordersManager, child) {
-            //   return ListView.builder(
-            //     itemCount: ordersManager.ordersCount,
-            //     itemBuilder: (ctx, i) => OrderItemCard(ordersManager.orders[i]),
-            //   );
-            // })
             FutureBuilder(
                 future: _fetchOrders,
                 builder: (contex, snapshot) {

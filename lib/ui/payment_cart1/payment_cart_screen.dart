@@ -46,7 +46,6 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
             padding: EdgeInsets.all(15),
             child: Column(
               children: <Widget>[
-                SizedBox(height: 20),
                 FutureBuilder<Map<String, dynamic>>(
                   future: _futureFetchUserInformation,
                   builder: (context, snapshot) {
