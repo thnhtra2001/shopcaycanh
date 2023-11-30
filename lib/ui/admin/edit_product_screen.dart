@@ -24,7 +24,8 @@ class EditProductScreen extends StatefulWidget {
         imageUrl: '',
         owner: '',
         origin: '',
-        status: ''
+        status: '',
+        type: ''
       );
     } else {
       this.product = product;
@@ -124,6 +125,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   children: <Widget>[
                     buildTitleField(),
                     buildOwnerField(),
+                    buildTypeField(),
                     buildOriginField(),
                     buildStatusField(),
                     buildPriceField(),
@@ -168,6 +170,24 @@ class _EditProductScreenState extends State<EditProductScreen> {
       },
       onSaved: (value) {
         _editedProduct = _editedProduct.copyWith(owner: value);
+      },
+    );
+  }
+
+      TextFormField buildTypeField() {
+    return TextFormField(
+      initialValue: _editedProduct.type,
+      decoration: const InputDecoration(labelText: 'Loại cây'),
+      textInputAction: TextInputAction.next,
+      autofocus: true,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please provide a value';
+        }
+        return null;
+      },
+      onSaved: (value) {
+        _editedProduct = _editedProduct.copyWith(type: value);
       },
     );
   }
@@ -235,7 +255,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     return TextFormField(
       initialValue: _editedProduct.description,
       decoration: const InputDecoration(labelText: 'Mô tả'),
-      maxLines: 3,
+      maxLines: 5,
       keyboardType: TextInputType.multiline,
       validator: (value) {
         if (value!.isEmpty) {
@@ -270,7 +290,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
             ),
           ),
           child: _imageUrlController.text.isEmpty
-              ? const Text('Enter a URL')
+              ? const Text('Ảnh')
               : FittedBox(
                   child: Image.network(
                     _imageUrlController.text,

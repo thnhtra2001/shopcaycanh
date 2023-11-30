@@ -9,6 +9,7 @@ class Product {
   late final String owner;
   late final String origin;
   late final String status;
+  late final String type;
   final ValueNotifier<bool> _isFavorite;
 
   Product({
@@ -20,6 +21,7 @@ class Product {
     required this.owner,
     required this.origin,
     required this.status,
+    required this.type,
     isFavorite = false,
   }) : _isFavorite = ValueNotifier(isFavorite);
 
@@ -44,6 +46,7 @@ class Product {
     String? owner,
     String? origin,
     String? status,
+    String? type,
     bool? isFavorite,
   }) {
     return Product(
@@ -55,6 +58,7 @@ class Product {
         owner: owner ?? this.owner,
         origin: origin ?? this.origin,
         status: status ?? this.status,
+        type: type ?? this.type,
         isFavorite: isFavorite ?? this.isFavorite,
         );
   }
@@ -69,6 +73,7 @@ class Product {
       'owner': owner,
       'origin': origin,
       'status': status,
+      'type' : type,
       'isFavorite': isFavorite,
     };
   }
@@ -83,6 +88,7 @@ class Product {
       owner: json['owner'],
       origin: json['origin'],
       status: json['status'],
+      type: json['type'],
       isFavorite: json['isFavorite'],
     );
   }
