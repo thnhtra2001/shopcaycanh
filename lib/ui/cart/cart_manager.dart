@@ -39,27 +39,27 @@ class CartManager with ChangeNotifier {
     print(_cartitems.length);
     notifyListeners();
   }
-  Future<void> addItem(Product product) async {
-    if (_cartitems.containsKey(product.id)) {
+  Future<void> addItem(product) async {
+    if (_cartitems.containsKey(product['id'])) {
       _cartitems.update(
-        product.id!,
+        product['id']!,
         (existingCartItem) => existingCartItem.copyWith(
           quantity: existingCartItem.quantity + 1,
         ),
       );
     } else {
       _cartitems.putIfAbsent(
-        product.id!,
+        product['id'],
         () => CartItem(
           id: 'c${DateTime.now().toIso8601String()}',
-          productId: product.id,
-          title: product.title,
-          price: product.price,
+          productId: product['id'],
+          title: product['title'],
+          price: product['price'],
           quantity: 1,
-          imageUrl: product.imageUrl,
-          owner: product.owner,
-          origin: product.origin,
-          status: product.status
+          imageUrl: product['imageUrl'],
+          owner: product['owner'],
+          origin: product['origin'],
+          status: product['status']
         ),
       );
     }

@@ -36,7 +36,6 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
       appBar: AppBar(
         title: const Text('Shop cây cảnh'),
         actions: <Widget>[
-          // buildProductFilterMenu(),
           buildShoppingCartIcon(),
           searchProduct(),
         ],
@@ -46,7 +45,6 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
         future: _fetchProducts,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            // return ProductsGrid(_showOnlyFavorites);
             return ValueListenableBuilder<bool>(
                 valueListenable: _showOnlyFavorites,
                 builder: (context, onlyFavorites, child) {
@@ -58,14 +56,6 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
           );
         },
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      // floatingActionButton: const SpeedDial(
-      //   icon: Icons.message,
-      //   activeIcon: Icons.close,
-      //   spacing: 3,
-      //   childPadding: const EdgeInsets.all(5),
-      //   spaceBetweenChildren: 4,
-      // ),
     );
   }
 
@@ -117,52 +107,3 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
     );
   }
 }
-
-// class MySearch extends SearchDelegate {
-//       List<String> searchResult = [
-//       'Brazil',
-//       'VietNam',
-//       'China',
-//       'Korea',
-//       'Japanse'
-//     ];
-//   @override
-//   Widget buildLeading(BuildContext context) => IconButton(
-//       icon: const Icon(Icons.arrow_back),
-//       onPressed: () => close(context, null));
-//   @override
-//   List<Widget>? buildActions(BuildContext context) => [
-//         IconButton.filled(
-//             onPressed: () {
-//               if (query.isEmpty) {
-//                 close(context, null);
-//               } else {
-//                 query = '';
-//               }
-//             },
-//             icon: const Icon(Icons.clear))
-//       ];
-//   @override
-//   Widget buildResults(BuildContext context) => Center(
-//         child: Text(
-//           query,
-//           style: TextStyle(color: Colors.yellow, fontSize: 50),
-//         ),
-//       );
-//   @override
-//   Widget buildSuggestions(BuildContext context) {
-//     List<String> suggestions = ['Vietnam'];
-//     return ListView.builder(
-//         itemCount: suggestions.length,
-//         itemBuilder: (context, index) {
-//           final suggestion = suggestions[index];
-//           return ListTile(
-//             title: Text(suggestion),
-//             onTap: () {
-//               query = suggestion;
-//               showResults(context);
-//             },
-//           );
-//         });
-//   }
-// }

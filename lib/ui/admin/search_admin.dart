@@ -65,7 +65,8 @@ class _SearchAdminScreenState extends State<SearchAdminScreen> {
                     ))
                   : ListView.builder(
                       itemCount: productsManager.display_product_Count,
-                      itemBuilder: (context, index) => ListTile(
+                      itemBuilder: (context, index) => 
+                      ListTile(
                         onTap: () {
                           // Navigator.of(context).push(MaterialPageRoute(
                           //     builder: (context) =>

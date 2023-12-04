@@ -16,17 +16,17 @@ class AdminAppDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           AppBar(
-            title: const Text(''),
+            title: const Text('Admin'),
             automaticallyImplyLeading: false,
           ),
           ListTile(
             leading: const Icon(Icons.home),
-            title: const Text('Admin'),
+            title: const Text('Trang chủ'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/');
             },
           ),
-                    const Divider(),
+          const Divider(),
           ListTile(
             leading: const Icon(Icons.account_circle),
             title: const Text('Trang cá nhân'),

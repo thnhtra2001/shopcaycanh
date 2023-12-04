@@ -92,4 +92,6 @@ class Product {
       isFavorite: json['isFavorite'],
     );
   }
+
+  toList() {}
 }

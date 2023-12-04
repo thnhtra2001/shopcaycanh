@@ -4,7 +4,6 @@ import 'package:shopcaycanh/models/cart_item.dart';
 import 'package:shopcaycanh/ui/cart/cart_screen.dart';
 import 'package:shopcaycanh/ui/payment_cart1/payment_cart_screen.dart';
 import 'package:shopcaycanh/ui/products/top_right_badge.dart';
-
 import '../../models/product.dart';
 import '../cart/cart_manager.dart';
 import '../cart/cart_manager1.dart';
@@ -16,7 +15,7 @@ class ProductDetailScreen extends StatelessWidget {
     super.key,
   });
 
-  final Product product;
+  final product;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,6 @@ class ProductDetailScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               const SizedBox(
                 height: 20,
@@ -37,13 +35,11 @@ class ProductDetailScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // const SizedBox(height: 20),
                       SizedBox(
                         height: 300,
                         width: 200,
-                        // width: double.infinity,
                         child: Image.network(
-                          product.imageUrl,
+                          product['imageUrl'],
                           fit: BoxFit.fitHeight,
                         ),
                       ),
@@ -64,7 +60,7 @@ class ProductDetailScreen extends StatelessWidget {
                                           color: Colors.black, fontSize: 20),
                                     ),
                                     Text(
-                                      '${product.title}',
+                                      '${product['title']}',
                                       style: const TextStyle(
                                         color: Colors.red,
                                         fontStyle: FontStyle.italic,
@@ -82,7 +78,7 @@ class ProductDetailScreen extends StatelessWidget {
                                           color: Colors.black, fontSize: 20),
                                     ),
                                     Text(
-                                      '${product.owner}',
+                                      '${product['owner']}',
                                       style: const TextStyle(
                                         color: Colors.grey,
                                         fontSize: 18,
@@ -99,7 +95,7 @@ class ProductDetailScreen extends StatelessWidget {
                                           color: Colors.black, fontSize: 20),
                                     ),
                                     Text(
-                                      '${product.origin}',
+                                      '${product['origin']}',
                                       style: const TextStyle(
                                         color: Colors.grey,
                                         fontSize: 18,
@@ -116,7 +112,7 @@ class ProductDetailScreen extends StatelessWidget {
                                           color: Colors.black, fontSize: 20),
                                     ),
                                     Text(
-                                      '${product.status}',
+                                      '${product['status']}',
                                       style: const TextStyle(
                                         color: Colors.grey,
                                         fontSize: 18,
@@ -133,7 +129,7 @@ class ProductDetailScreen extends StatelessWidget {
                                           color: Colors.black, fontSize: 20),
                                     ),
                                     Text(
-                                      '${product.price}',
+                                      '${product['price']}',
                                       style: const TextStyle(
                                         color: Colors.grey,
                                         fontSize: 18,
@@ -237,7 +233,7 @@ class ProductDetailScreen extends StatelessWidget {
                       style: TextStyle(color: Colors.grey, fontSize: 20),
                     ),
                     Text(
-                      product.description,
+                      product['description'],
                       style: TextStyle(color: Colors.black, fontSize: 18),
                       textAlign: TextAlign.start,
                       softWrap: true,
