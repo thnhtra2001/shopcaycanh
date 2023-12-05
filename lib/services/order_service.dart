@@ -54,4 +54,18 @@ class OrderService extends FirebaseService {
       return null;
     }
   }
+
+    Future<bool> updateOrder(OrderItem order) async {
+    try {
+      final url = Uri.parse('$databaseUrl/orders/${order.id}.json?auth=$token');
+      final response = await http.patch(url, body: json.encode(order.toJson()));
+      if (response.statusCode != 200) {
+        throw Exception(json.decode(response.body)['error']);
+      }
+      return true;
+    } catch (error) {
+      print(error);
+      return false;
+    }
+  }
 }

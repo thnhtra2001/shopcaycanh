@@ -8,20 +8,25 @@ import 'package:shopcaycanh/ui/chat/chat.dart';
 import 'package:shopcaycanh/ui/orders/order_detail_screen.dart';
 import 'package:shopcaycanh/ui/orders/order_manager.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
+import 'package:shopcaycanh/ui/orders_admin/order_manager.dart';
+import 'package:shopcaycanh/ui/orders_admin/order_screen.dart';
 import 'package:shopcaycanh/ui/payment_cart1/payment_cart_screen.dart';
 import 'package:shopcaycanh/ui/products/product_detail_screen.dart';
 import 'package:shopcaycanh/ui/products/product_overview_screen.dart';
 import 'package:shopcaycanh/ui/products/products_manager.dart';
 import 'package:shopcaycanh/ui/products/search_product.dart';
 import 'package:shopcaycanh/ui/screens.dart';
-import 'models/product.dart';
 import 'ui/cart/cart_manager1.dart';
 import 'ui/chatbot_rasa_ai/chatbot_rasa_ai.dart';
-import 'ui/products/product_overview_screen.dart';
-
 import 'ui/admin/user_product_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
+import 'ui/orders1_admin/order_manager.dart';
+import 'ui/orders1_admin/order_screen.dart';
+import 'ui/orders2_admin/order_manager.dart';
+import 'ui/orders2_admin/order_screen.dart';
+import 'ui/orders3_admin/order_manager.dart';
+import 'ui/orders3_admin/order_screen.dart';
 import 'ui/screens.dart';
 import 'ui/personal/personal_screen.dart';
 
@@ -41,7 +46,10 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => OrdersManager()),
           ChangeNotifierProvider(create: (context) => AuthManager()),
           ChangeNotifierProvider(create: (context) => CartManager1()),
-          // ChangeNotifierProvider(create: (context) => MessageManager()),
+          ChangeNotifierProvider(create: (context) => OrdersManagerAdmin()),
+          ChangeNotifierProvider(create: (context) => OrdersManagerAdmin1()),
+          ChangeNotifierProvider(create: (context) => OrdersManagerAdmin2()),
+          ChangeNotifierProvider(create: (context) => OrdersManagerAdmin3()),
 
 
         ],
@@ -81,6 +89,11 @@ class MyApp extends StatelessWidget {
               SearchScreen.routeName:(context) => const SearchScreen(),
               ChatbotScreen1.routeName:(context) => const ChatbotScreen1(),
               SearchAdminScreen.routeName: (context) => const SearchAdminScreen(),
+              OrdersScreenAdmin.routeName: (context) => const OrdersScreenAdmin(),
+              OrdersScreenAdmin1.routeName: (context) => const OrdersScreenAdmin1(),
+              OrdersScreenAdmin2.routeName: (context) => const OrdersScreenAdmin2(),
+              OrdersScreenAdmin3.routeName: (context) => const OrdersScreenAdmin3(),
+
             },
             onGenerateRoute: (settings) {
               if (settings.name == ProductDetailScreen.routeName) {

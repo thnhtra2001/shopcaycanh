@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/ui/admin/personal_screen.dart';
 import 'package:shopcaycanh/ui/auth/auth_manager.dart';
+import 'package:shopcaycanh/ui/orders_admin/order_screen.dart';
 
 import '../orders/order_screen.dart';
 import '../admin/user_product_screen.dart';
+import '../orders1_admin/order_screen.dart';
+import '../orders2_admin/order_screen.dart';
+import '../orders3_admin/order_screen.dart';
 import '../personal/personal_screen.dart';
 
 class AdminAppDrawer extends StatelessWidget {
@@ -33,6 +37,42 @@ class AdminAppDrawer extends StatelessWidget {
             onTap: () {
               Navigator.of(context)
                   .pushReplacementNamed(PersonalScreenAdmin.routeName);
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.check),
+            title: const Text('Xác nhận đơn hàng'),
+            onTap: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(OrdersScreenAdmin.routeName);
+            },
+          ),
+                    const Divider(),
+          ListTile(
+            leading: const Icon(Icons.plus_one),
+            title: const Text('Đơn đã đặt'),
+            onTap: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(OrdersScreenAdmin1.routeName);
+            },
+          ),
+                    const Divider(),
+          ListTile(
+            leading: const Icon(Icons.local_shipping_outlined),
+            title: const Text('Đơn đang giao'),
+            onTap: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(OrdersScreenAdmin2.routeName);
+            },
+          ),
+                    const Divider(),
+          ListTile(
+            leading: const Icon(Icons.cancel_rounded),
+            title: const Text('Đơn đã hủy'),
+            onTap: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(OrdersScreenAdmin3.routeName);
             },
           ),
           const Divider(),

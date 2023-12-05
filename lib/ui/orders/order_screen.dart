@@ -27,7 +27,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final ordersManager = OrdersManager();
     return Scaffold(
         appBar: AppBar(
           title: const Text('Đơn đã đặt'),

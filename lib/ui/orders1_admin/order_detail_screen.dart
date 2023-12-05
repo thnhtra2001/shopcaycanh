@@ -5,22 +5,21 @@ import 'dart:math';
 import '../orders/order_manager.dart';
 import '../../models/order_item.dart';
 
-class OrderDetailScreen extends StatefulWidget {
-  static const routeName = 'order-detail-screen';
+class OrderDetailScreenAdmin extends StatefulWidget {
   final OrderItem order;
 
-  const OrderDetailScreen(this.order, {super.key});
+  const OrderDetailScreenAdmin(this.order, {super.key});
 
   @override
-  State<OrderDetailScreen> createState() => OrderDetailScreenState();
+  State<OrderDetailScreenAdmin> createState() => _OrderDetailScreenAdminState();
 }
 
-class OrderDetailScreenState extends State<OrderDetailScreen> {
+class _OrderDetailScreenAdminState extends State<OrderDetailScreenAdmin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Lịch sử đơn hàng'),
+          title: Text('Chi tiết đơn'),
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -88,10 +87,10 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
             buildTotalAmountRow(),
             const SizedBox(height: 20),
             buildOwnerRow(),
-            // const SizedBox(height: 20),
-            // buildOriginRow(),
-            // const SizedBox(height: 20),
-            // buildStatusRow(),
+            const SizedBox(height: 20),
+            buildOriginRow(),
+            const SizedBox(height: 20),
+            buildStatusRow(),
             const SizedBox(height: 20),
             buildStatusPayment(),
             const SizedBox(height: 20),
@@ -185,7 +184,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
         Container(
             padding: EdgeInsets.only(left: 20),
             child: const Text(
-              'Chủ cửa hàng',
+              'Người bán',
               style: TextStyle(
                 color: Colors.black54,
                 fontSize: 20,

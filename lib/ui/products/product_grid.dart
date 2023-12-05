@@ -27,9 +27,10 @@ class _ProductsGridState extends State<ProductsGrid> {
         (productsManager) => productsManager.items);
 
     ///A
+    ///
     late List<dynamic> map = product.map((e) => e.toJson()).toList();
     return GroupedListView<dynamic, dynamic>(
-      elements: product.map((e) => e.toJson()).toList(),
+      elements: map,
       groupBy: (elements) => elements['type'],
       groupSeparatorBuilder: (dynamic groupByValue) => Padding(
         padding: EdgeInsets.all(10),

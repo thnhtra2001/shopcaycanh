@@ -25,6 +25,7 @@ class PaymentCartScreen1 extends StatefulWidget {
 
 class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
   late OrderItem _order;
+  int orderStatus = 0;
   String zpTransToken = "";
   String payResult = "Thanh toán bằng tiền mặt";
   late Future<Map<String, dynamic>> _futureFetchUserInformation;
@@ -234,6 +235,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
             address: snapshot.data['address'],
             customerId: snapshot.data['uid'],
             payResult: payResult,
+            orderStatus: orderStatus,
             // owner: cart.owner,
             // origin: cart.origin,
             // status: cart.status,
@@ -249,7 +251,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
               color: Colors.red,
               borderRadius: BorderRadius.circular(1.0),
             ),
-            child: Text("Thanh toán bằng tiền mặt",
+            child: const Text("Thanh toán bằng tiền mặt",
                 style: TextStyle(color: Colors.white, fontSize: 16))),
       ),
     );
@@ -264,7 +266,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
           showDialog(
               context: context,
               builder: (BuildContext context) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               });
@@ -297,6 +299,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                     address: snapshot.data['address'],
                     customerId: snapshot.data['uid'],
                     payResult: payResult,
+                    orderStatus: orderStatus,
                     // owner: cart.owner,
                     // origin: cart.origin,
                     // status: cart.status,
@@ -317,6 +320,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                     address: snapshot.data['address'],
                     customerId: snapshot.data['uid'],
                     payResult: payResult,
+                    orderStatus: orderStatus,
                     // owner: cart.owner,
                     // origin: cart.origin,
                     // status: cart.status,
@@ -337,6 +341,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                     address: snapshot.data['address'],
                     customerId: snapshot.data['uid'],
                     payResult: payResult,
+                    orderStatus: orderStatus,
                     // owner: cart.owner,
                     // origin: cart.origin,
                     // status: cart.status,
@@ -364,7 +369,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
               color: Colors.blue[600],
               borderRadius: BorderRadius.circular(1.0),
             ),
-            child: Text("Thanh toán bằng ZaloPay",
+            child: const Text("Thanh toán bằng ZaloPay",
                 style: TextStyle(color: Colors.white, fontSize: 16))),
       ),
     );

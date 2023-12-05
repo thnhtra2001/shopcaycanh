@@ -2,8 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:shopcaycanh/models/cart_item.dart';
-
-import 'cart_item.dart';
+import 'package:shopcaycanh/ui/orders/order_manager.dart';
 
 class OrderItem with ChangeNotifier {
   late String? id;
@@ -16,10 +15,7 @@ class OrderItem with ChangeNotifier {
   late String address;
   late String payResult;
   late String customerId;
-  // late String owner;
-  // late String origin;
-  // late String status;
-
+  late int orderStatus;
   int get productCount {
     return products.length;
   }
@@ -34,9 +30,7 @@ class OrderItem with ChangeNotifier {
     required this.address,
     required this.payResult,
     required this.customerId,
-    // required this.owner,
-    // required this.origin,
-    // required this.status,
+    required this.orderStatus,
     DateTime? dateTime,
   }) : dateTime = dateTime ?? DateTime.now();
 
@@ -51,6 +45,7 @@ class OrderItem with ChangeNotifier {
     String? address,
     String? payResult,
     String? customerId,
+    int? orderStatus,
     String? owner,
     String? origin,
     String? status,
@@ -66,9 +61,7 @@ class OrderItem with ChangeNotifier {
       address: address ?? this.address,
       payResult: payResult ?? this.payResult,
       customerId: customerId ?? this.customerId,
-      // owner: owner ?? this.owner,
-      // origin: origin ?? this.origin,
-      // status: status ?? this.status,
+      orderStatus: orderStatus ?? this.orderStatus,
     );
   }
 
@@ -84,7 +77,8 @@ class OrderItem with ChangeNotifier {
       List<CartItem> products,
       String owner,
       String origin,
-      String status
+      String status,
+      int orderStatus,
       ) {}
 
   Map toJson() {
@@ -98,9 +92,7 @@ class OrderItem with ChangeNotifier {
       'address': address,
       'payResult': payResult,
       'customerId': customerId,
-      // 'owner': owner,
-      // 'origin': origin,
-      // 'status': status
+      'orderStatus': orderStatus,
     };
   }
 
@@ -118,13 +110,7 @@ class OrderItem with ChangeNotifier {
       address: json['address'],
       payResult: json['payResult'],
       customerId: json['customerId'],
-      // owner: json['owner'],
-      // origin: json['origin'],
-      // status: json['status'],
+      orderStatus: json['orderStatus']
     );
   }
-  // @override
-  // String toString(){
-  //   return '{ ${this.id}, ${this.amount}, ${this.dateTime}, ${this.totalQuantity}, ${this.name}, ${this.phone}, ${this.address}, ${this.payResult}, ${this.customerId}, ${this.products}}';
-  // }
 }
