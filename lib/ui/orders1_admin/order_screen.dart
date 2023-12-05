@@ -30,6 +30,7 @@ class _OrdersScreenAdmin1State extends State<OrdersScreenAdmin1> {
 
   @override
   Widget build(BuildContext context) {
+    context.read<OrdersManagerAdmin1>().updateList();
     return Scaffold(
         appBar: AppBar(
           title: const Text('Đơn đã đặt thành công'),

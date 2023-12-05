@@ -30,6 +30,7 @@ class _OrdersScreenAdmin3State extends State<OrdersScreenAdmin3> {
 
   @override
   Widget build(BuildContext context) {
+    context.read<OrdersManagerAdmin3>().updateList();
     return Scaffold(
         appBar: AppBar(
           title: const Text('Đơn đã hủy'),

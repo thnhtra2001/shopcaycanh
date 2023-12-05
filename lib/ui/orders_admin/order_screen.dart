@@ -30,6 +30,7 @@ class _OrdersScreenAdminState extends State<OrdersScreenAdmin> {
 
   @override
   Widget build(BuildContext context) {
+    context.read<OrdersManagerAdmin>().updateList();
     return Scaffold(
         appBar: AppBar(
           title: const Text('Xác nhận đơn hàng'),

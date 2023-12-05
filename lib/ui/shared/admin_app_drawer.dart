@@ -68,7 +68,7 @@ class AdminAppDrawer extends StatelessWidget {
           ),
                     const Divider(),
           ListTile(
-            leading: const Icon(Icons.cancel_rounded),
+            leading: const Icon(Icons.cancel_outlined),
             title: const Text('Đơn đã hủy'),
             onTap: () {
               Navigator.of(context)
