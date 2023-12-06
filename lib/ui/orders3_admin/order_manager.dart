@@ -23,13 +23,13 @@ class OrdersManagerAdmin3 with ChangeNotifier {
   //   });
   //   return _orders0;
   // }
-    List<OrderItem> updateList() {
-    _orders3 = _orders
-        .where((element) =>
-            element.orderStatus == 1)
-        .toList();
-    return _orders3;
-  }
+  //   List<OrderItem> updateList() {
+  //   _orders3 = _orders
+  //       .where((element) =>
+  //           element.orderStatus == 1)
+  //       .toList();
+  //   return _orders3;
+  // }
 
   int get orders3Count {
     return _orders3.length;
@@ -38,7 +38,7 @@ class OrdersManagerAdmin3 with ChangeNotifier {
     return [..._orders3];
   }
   Future<void> fetchOrders() async {
-    _orders = await _orderService.fetchOrders();
+    _orders3 = await _orderService.fetchOrders(1);
     print(_orders.length);
     notifyListeners();
   }

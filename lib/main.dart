@@ -5,12 +5,12 @@ import 'package:shopcaycanh/ui/admin/search_admin.dart';
 import 'package:shopcaycanh/ui/cart/cart_manager.dart';
 import 'package:shopcaycanh/ui/cart/cart_screen.dart';
 import 'package:shopcaycanh/ui/chat/chat.dart';
-import 'package:shopcaycanh/ui/orders/order_detail_screen.dart';
 import 'package:shopcaycanh/ui/orders/order_manager.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
 import 'package:shopcaycanh/ui/orders_admin/order_manager.dart';
 import 'package:shopcaycanh/ui/orders_admin/order_screen.dart';
 import 'package:shopcaycanh/ui/payment_cart1/payment_cart_screen.dart';
+import 'package:shopcaycanh/ui/pie_chart/pie_chart_manager.dart';
 import 'package:shopcaycanh/ui/products/product_detail_screen.dart';
 import 'package:shopcaycanh/ui/products/product_overview_screen.dart';
 import 'package:shopcaycanh/ui/products/products_manager.dart';
@@ -27,6 +27,7 @@ import 'ui/orders2_admin/order_manager.dart';
 import 'ui/orders2_admin/order_screen.dart';
 import 'ui/orders3_admin/order_manager.dart';
 import 'ui/orders3_admin/order_screen.dart';
+import 'ui/pie_chart/pie_chart.dart';
 import 'ui/screens.dart';
 import 'ui/personal/personal_screen.dart';
 
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => OrdersManagerAdmin1()),
           ChangeNotifierProvider(create: (context) => OrdersManagerAdmin2()),
           ChangeNotifierProvider(create: (context) => OrdersManagerAdmin3()),
+          ChangeNotifierProvider(create: (context) => PieChartManager(),)
 
 
         ],
@@ -93,6 +95,7 @@ class MyApp extends StatelessWidget {
               OrdersScreenAdmin1.routeName: (context) => const OrdersScreenAdmin1(),
               OrdersScreenAdmin2.routeName: (context) => const OrdersScreenAdmin2(),
               OrdersScreenAdmin3.routeName: (context) => const OrdersScreenAdmin3(),
+              PieChartScreen.routeName:(context) => PieChartScreen(),
 
             },
             onGenerateRoute: (settings) {

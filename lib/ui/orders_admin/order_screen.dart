@@ -25,12 +25,14 @@ class _OrdersScreenAdminState extends State<OrdersScreenAdmin> {
     print("-------------------------------");
     print(_fetchOrders);
     print('-----------------------------');
-    context.read<OrdersManagerAdmin>().updateList();
+    // context.read<OrdersManagerAdmin>().updateList();
   }
-
+  Future<void> _refreshProduct(BuildContext context) async {
+    await context.read<OrdersManagerAdmin>().fetchOrders();
+  }
   @override
   Widget build(BuildContext context) {
-    context.read<OrdersManagerAdmin>().updateList();
+    // context.read<OrdersManagerAdmin>().updateList();
     return Scaffold(
         appBar: AppBar(
           title: const Text('Xác nhận đơn hàng'),
@@ -54,7 +56,22 @@ class _OrdersScreenAdminState extends State<OrdersScreenAdmin> {
                                             ordersManager.orders0[i])),
                               );
                             },
-                            child: OrderItemCard(ordersManager.orders0[i])));
+                            child: 
+                            RefreshIndicator(
+                  onRefresh: () => _refreshProduct(context),
+                  child: Column(
+                    children: [
+                            OrderItemCard(ordersManager.orders0[i])
+                      // SizedBox(
+                          // height: 700,
+                          // child: buildUserProductListView(productsManager)),
+                    ],
+                  )
+                  // buildTotalProduct(productsManager),
+                  // SizedBox(child: buildUserProductListView(productsManager)),
+                  ),
+                            // OrderItemCard(ordersManager.orders0[i])
+                            ));
                   },
                 );
               }

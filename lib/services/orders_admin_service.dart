@@ -8,13 +8,13 @@ import 'package:flutter/services.dart';
 class OrderServiceAdmin extends FirebaseService {
   OrderServiceAdmin() : super();
 
-  Future<List<OrderItem>> fetchOrders() async {
+  Future<List<OrderItem>> fetchOrders(value) async {
     late List<OrderItem> orders = [];
     try {
       final authToken = (await AuthService().loadSavedAuthToken())!.token;
-      final uid = (await AuthService().loadSavedAuthToken())!.userId;
+      // final uid = (await AuthService().loadSavedAuthToken())!.userId;
       final ordersUrl = Uri.parse(
-          '$databaseUrl/orders.json?orderBy="customerId"&"&auth=$authToken');
+          '$databaseUrl/orders.json?orderBy="orderStatus"&equalTo=$value&auth=$authToken');
       final response = await http.get(ordersUrl);
       final ordersMap = json.decode(response.body) as Map<dynamic, dynamic>;
       if (response.statusCode != 200) {

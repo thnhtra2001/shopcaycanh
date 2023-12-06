@@ -25,12 +25,12 @@ class _OrdersScreenAdmin2State extends State<OrdersScreenAdmin2> {
     print("-------------------------------");
     print(_fetchOrders);
     print('-----------------------------');
-    context.read<OrdersManagerAdmin2>().updateList();
+    // context.read<OrdersManagerAdmin2>().updateList();
   }
 
   @override
   Widget build(BuildContext context) {
-    context.read<OrdersManagerAdmin2>().updateList();
+    // context.read<OrdersManagerAdmin2>().updateList();
     return Scaffold(
         appBar: AppBar(
           title: const Text('Đơn đang giao'),

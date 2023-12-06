@@ -2,11 +2,14 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:shopcaycanh/models/http_exception.dart';
+import 'package:shopcaycanh/ui/orders_admin/order_manager.dart';
 
 import '../../models/order_item.dart';
 import '../../services/order_service.dart';
 import '../shared/dialog_utils.dart';
+import 'order_screen.dart';
 
 class OrderItemCard extends StatefulWidget {
   final OrderItem order;
@@ -58,6 +61,10 @@ class _OrderItemCardState extends State<OrderItemCard> {
                 customerId: widget.order.customerId,
                 orderStatus: 2);
             _submit(_order);
+            setState(() {
+            context.read<OrdersManagerAdmin>().removeItem(_order.id!);
+            // Navigator.of(context).pushNamed(OrdersScreenAdmin.routeName);
+            });
           },
         ),
       ),
@@ -87,6 +94,8 @@ class _OrderItemCardState extends State<OrderItemCard> {
                 customerId: widget.order.customerId,
                 orderStatus: 1);
             _submit(_order);
+            context.read<OrdersManagerAdmin>().removeItem(_order.id!);
+            // Navigator.of(context).pushNamed(OrdersScreenAdmin.routeName);
           },
         ),
       ),

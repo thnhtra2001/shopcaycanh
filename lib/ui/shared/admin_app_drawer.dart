@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shopcaycanh/ui/admin/personal_screen.dart';
 import 'package:shopcaycanh/ui/auth/auth_manager.dart';
 import 'package:shopcaycanh/ui/orders_admin/order_screen.dart';
+import 'package:shopcaycanh/ui/pie_chart/pie_chart.dart';
 
 import '../orders/order_screen.dart';
 import '../admin/user_product_screen.dart';
@@ -27,7 +28,7 @@ class AdminAppDrawer extends StatelessWidget {
             leading: const Icon(Icons.home),
             title: const Text('Trang chủ'),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed('/');
+              Navigator.of(context).pushReplacementNamed(UserProductsScreen.routeName);
             },
           ),
           const Divider(),
@@ -48,7 +49,7 @@ class AdminAppDrawer extends StatelessWidget {
                   .pushReplacementNamed(OrdersScreenAdmin.routeName);
             },
           ),
-                    const Divider(),
+          const Divider(),
           ListTile(
             leading: const Icon(Icons.plus_one),
             title: const Text('Đơn đã đặt'),
@@ -57,7 +58,7 @@ class AdminAppDrawer extends StatelessWidget {
                   .pushReplacementNamed(OrdersScreenAdmin1.routeName);
             },
           ),
-                    const Divider(),
+          const Divider(),
           ListTile(
             leading: const Icon(Icons.local_shipping_outlined),
             title: const Text('Đơn đang giao'),
@@ -66,13 +67,22 @@ class AdminAppDrawer extends StatelessWidget {
                   .pushReplacementNamed(OrdersScreenAdmin2.routeName);
             },
           ),
-                    const Divider(),
+          const Divider(),
           ListTile(
             leading: const Icon(Icons.cancel_outlined),
             title: const Text('Đơn đã hủy'),
             onTap: () {
               Navigator.of(context)
                   .pushReplacementNamed(OrdersScreenAdmin3.routeName);
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.pie_chart),
+            title: const Text('Thống kê đơn hàng'),
+            onTap: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(PieChartScreen.routeName);
             },
           ),
           const Divider(),

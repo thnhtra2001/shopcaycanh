@@ -5,6 +5,7 @@ version: 1.0.0+1
 environment:
   sdk: '>=3.0.6 <4.0.0'
 dependencies:
+  pie_chart:
   grouped_list: ^5.1.2
   crypto: 
   flutter_zalopay_sdk:
