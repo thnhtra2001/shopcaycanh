@@ -19,14 +19,23 @@ class CartManager with ChangeNotifier {
   Iterable<MapEntry<String, CartItem>> get productEntries {
     return {..._cartitems}.entries;
   }
-
-  double get totalAmount {
-    var total = 0.0;
+  ///////gia goc khi thanh toan
+  int get totalAmount0 {
+    var total = 0;
+    _cartitems.forEach((key, cartItem) {
+      total += cartItem.price0 * cartItem.quantity;
+    });
+    return total;
+  }
+  /////////tong gia khi ban
+  int get totalAmount {
+    var total = 0;
     _cartitems.forEach((key, cartItem) {
       total += cartItem.price * cartItem.quantity;
     });
     return total;
   }
+  ///////////tong so luong san pham
     int get totalQuantity {
     var totalQuantity = 0;
     _cartitems.forEach((key, cartItem) {
@@ -54,6 +63,7 @@ class CartManager with ChangeNotifier {
           id: 'c${DateTime.now().toIso8601String()}',
           productId: product['id'],
           title: product['title'],
+          price0: product['price0'],
           price: product['price'],
           quantity: 1,
           imageUrl: product['imageUrl'],

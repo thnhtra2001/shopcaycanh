@@ -1,10 +1,13 @@
+import 'dart:ffi';
+
 import 'package:flutter/foundation.dart';
 
 class Product {
   final String? id;
   final String title;
   final String description;
-  final double price;
+  final int price0;
+  final int price;
   final String imageUrl;
   late final String owner;
   late final String origin;
@@ -16,6 +19,7 @@ class Product {
     this.id,
     required this.title,
     required this.description,
+    required this.price0,
     required this.price,
     required this.imageUrl,
     required this.owner,
@@ -41,7 +45,8 @@ class Product {
     String? id,
     String? title,
     String? description,
-    double? price,
+    int? price0,
+    int? price,
     String? imageUrl,
     String? owner,
     String? origin,
@@ -53,6 +58,7 @@ class Product {
         id: id ?? this.id,
         title: title ?? this.title,
         description: description ?? this.description,
+        price0: price0 ?? this.price0,
         price: price ?? this.price,
         imageUrl: imageUrl ?? this.imageUrl,
         owner: owner ?? this.owner,
@@ -68,6 +74,7 @@ class Product {
       'id': id,
       'title': title,
       'description': description,
+      'price0': price0,
       'price': price,
       'imageUrl': imageUrl,
       'owner': owner,
@@ -83,6 +90,7 @@ class Product {
       id: json['id'],
       title: json['title'],
       description: json['description'],
+      price0: json['price0'],
       price: json['price'],
       imageUrl: json['imageUrl'],
       owner: json['owner'],
@@ -92,6 +100,4 @@ class Product {
       isFavorite: json['isFavorite'],
     );
   }
-
-  toList() {}
 }

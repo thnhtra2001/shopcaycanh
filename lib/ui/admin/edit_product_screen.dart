@@ -25,7 +25,8 @@ class EditProductScreen extends StatefulWidget {
         owner: '',
         origin: '',
         status: '',
-        type: ''
+        type: '',
+        price0: 0
       );
     } else {
       this.product = product;
@@ -128,6 +129,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     buildTypeField(),
                     buildOriginField(),
                     buildStatusField(),
+                    buildPrice0Field(),
                     buildPriceField(),
                     buildDescriptionField(),
                     buildProductPreview(),
@@ -226,27 +228,50 @@ class _EditProductScreenState extends State<EditProductScreen> {
       },
     );
   }
-
-  TextFormField buildPriceField() {
+    TextFormField buildPrice0Field() {
     return TextFormField(
-      initialValue: _editedProduct.price.toString(),
-      decoration: const InputDecoration(labelText: 'Giá'),
+      initialValue: _editedProduct.price0.toString(),
+      decoration: const InputDecoration(labelText: 'Giá gốc'),
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.number,
       validator: (value) {
         if (value!.isEmpty) {
           return 'Please provide a price';
         }
-        if (double.tryParse(value) == null) {
+        if (int.tryParse(value) == null) {
           return 'Please enter a valid number';
         }
-        if (double.parse(value) <= 0) {
+        if (int.parse(value) <= 0) {
           return 'Please enter a number greater than zero';
         }
         return null;
       },
       onSaved: (value) {
-        _editedProduct = _editedProduct.copyWith(price: double.parse(value!));
+        _editedProduct = _editedProduct.copyWith(price0: int.parse(value!));
+      },
+    );
+  }
+
+  TextFormField buildPriceField() {
+    return TextFormField(
+      initialValue: _editedProduct.price.toString(),
+      decoration: const InputDecoration(labelText: 'Giá bán'),
+      textInputAction: TextInputAction.next,
+      keyboardType: TextInputType.number,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please provide a price';
+        }
+        if (int.tryParse(value) == null) {
+          return 'Please enter a valid number';
+        }
+        if (int.parse(value) <= 0) {
+          return 'Please enter a number greater than zero';
+        }
+        return null;
+      },
+      onSaved: (value) {
+        _editedProduct = _editedProduct.copyWith(price: int.parse(value!));
       },
     );
   }

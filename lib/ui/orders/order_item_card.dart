@@ -62,6 +62,7 @@ class _OrderItemCardState extends State<OrderItemCard> {
             _order = OrderItem(
                 id: widget.order.id,
                 amount: widget.order.amount,
+                amount0: widget.order.amount0,
                 products: widget.order.products,
                 totalQuantity: widget.order.totalQuantity,
                 name: widget.order.name,
@@ -124,6 +125,7 @@ class _OrderItemCardState extends State<OrderItemCard> {
             _order = OrderItem(
                 id: widget.order.id,
                 amount: widget.order.amount,
+                amount0: widget.order.amount0,
                 products: widget.order.products,
                 totalQuantity: widget.order.totalQuantity,
                 name: widget.order.name,

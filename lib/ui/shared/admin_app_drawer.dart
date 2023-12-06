@@ -11,6 +11,7 @@ import '../orders1_admin/order_screen.dart';
 import '../orders2_admin/order_screen.dart';
 import '../orders3_admin/order_screen.dart';
 import '../personal/personal_screen.dart';
+import '../product_manager_admin/admin_product_screens.dart';
 
 class AdminAppDrawer extends StatelessWidget {
   const AdminAppDrawer({super.key});
@@ -28,7 +29,8 @@ class AdminAppDrawer extends StatelessWidget {
             leading: const Icon(Icons.home),
             title: const Text('Trang chủ'),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed(UserProductsScreen.routeName);
+              Navigator.of(context)
+                  .pushReplacementNamed(UserProductsScreen.routeName);
             },
           ),
           const Divider(),
@@ -83,6 +85,15 @@ class AdminAppDrawer extends StatelessWidget {
             onTap: () {
               Navigator.of(context)
                   .pushReplacementNamed(PieChartScreen.routeName);
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.admin_panel_settings),
+            title: const Text('Quan ly san pham'),
+            onTap: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(AdminProductManagerScreens.routeName);
             },
           ),
           const Divider(),

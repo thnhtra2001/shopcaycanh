@@ -11,6 +11,7 @@ import 'package:shopcaycanh/ui/orders_admin/order_manager.dart';
 import 'package:shopcaycanh/ui/orders_admin/order_screen.dart';
 import 'package:shopcaycanh/ui/payment_cart1/payment_cart_screen.dart';
 import 'package:shopcaycanh/ui/pie_chart/pie_chart_manager.dart';
+import 'package:shopcaycanh/ui/product_manager_admin/admin_product_manager.dart';
 import 'package:shopcaycanh/ui/products/product_detail_screen.dart';
 import 'package:shopcaycanh/ui/products/product_overview_screen.dart';
 import 'package:shopcaycanh/ui/products/products_manager.dart';
@@ -28,6 +29,7 @@ import 'ui/orders2_admin/order_screen.dart';
 import 'ui/orders3_admin/order_manager.dart';
 import 'ui/orders3_admin/order_screen.dart';
 import 'ui/pie_chart/pie_chart.dart';
+import 'ui/product_manager_admin/admin_product_screens.dart';
 import 'ui/screens.dart';
 import 'ui/personal/personal_screen.dart';
 
@@ -51,7 +53,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => OrdersManagerAdmin1()),
           ChangeNotifierProvider(create: (context) => OrdersManagerAdmin2()),
           ChangeNotifierProvider(create: (context) => OrdersManagerAdmin3()),
-          ChangeNotifierProvider(create: (context) => PieChartManager(),)
+          ChangeNotifierProvider(create: (context) => PieChartManager(),),
+          ChangeNotifierProvider(create: (context) => AdminProductsManager(),)
+
 
 
         ],
@@ -96,6 +100,7 @@ class MyApp extends StatelessWidget {
               OrdersScreenAdmin2.routeName: (context) => const OrdersScreenAdmin2(),
               OrdersScreenAdmin3.routeName: (context) => const OrdersScreenAdmin3(),
               PieChartScreen.routeName:(context) => PieChartScreen(),
+              AdminProductManagerScreens.routeName:(context) => const AdminProductManagerScreens(),
 
             },
             onGenerateRoute: (settings) {
