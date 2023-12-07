@@ -6,7 +6,7 @@ import 'package:shopcaycanh/ui/orders/order_manager.dart';
 
 class OrdersAdminProduct with ChangeNotifier {
   late String? id;
-  late String? title;
+  late String title;
   late int quantity;
   late int price;
   late int price0;

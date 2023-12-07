@@ -3,6 +3,7 @@ import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/ui/shared/admin_app_drawer.dart';
 import '../../models/orders_admin_product.dart';
+import 'admin_list_tile.dart';
 import 'admin_product_manager.dart';
 
 class AdminProductManagerScreens extends StatefulWidget {
@@ -28,8 +29,11 @@ class AdminProductManagerScreensState
 
   @override
   Widget build(BuildContext context) {
-    final orders = context.watch<AdminProductsManager>();
+    final orders = context.read<AdminProductsManager>();
     final orders1 = orders.orders1;
+    // final data = orders.data;
+    // print("dataaaaaaaaaaaaaa");
+    // print(data.length);
     Map<String, OrdersAdminProduct> data1 = {};
     for (var order in orders1) {
       for (var product in order.products) {
@@ -54,8 +58,9 @@ class AdminProductManagerScreensState
     // print(data1.length);
     // print(data1.values.last.title);
     // print(data1.values.last.quantity);
-    final Map<String, double> dataMap ={};
-     data1.forEach((key, value) => dataMap.putIfAbsent(key, () => value.quantity.toDouble()));
+    final Map<String, double> dataMap = {};
+    data1.forEach((key, value) =>
+        dataMap.putIfAbsent(key, () => value.quantity.toDouble()));
     return Scaffold(
       appBar: AppBar(
         title: const Text('Thống kê sản phẩm'),
@@ -78,46 +83,21 @@ class AdminProductManagerScreensState
               ),
             ),
           ),
-          DataTable(
-            columns: const <DataColumn>[
-              DataColumn(
-                label: Expanded(
-                  child: Text(
-                    'San pham ban nhieu nhat',
-                    style: TextStyle(fontStyle: FontStyle.italic),
-                  ),
-                ),
-              ),
-              DataColumn(
-                label: Expanded(
-                  child: Text(
-                    'San pham co doanh thu cao nhat',
-                    style: TextStyle(fontStyle: FontStyle.italic),
-                  ),
-                ),
-              ),
-              DataColumn(
-                label: Expanded(
-                  child: Text(
-                    'San pham ban thap nhat',
-                    style: TextStyle(fontStyle: FontStyle.italic),
-                  ),
-                ),
-              ),
-            ],
-            rows: <DataRow>[
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text("AAA")),
-                  DataCell(Text("AAA")),
-                  DataCell(Text("AAA")),
-
-                ],
-              ),
-            ],
-          )
+          // buildDetailProduct(orders),
         ],
       )),
     );
   }
+
+  // Widget buildDetailProduct(AdminProductsManager data) {
+  //   return Consumer<AdminProductsManager>(
+  //     builder: (context, adminProductsManager, child) {
+  //       return ListView.builder(
+  //           itemCount: adminProductsManager.orders1Count,
+  //           itemBuilder: (context, index) => Column(
+  //                 children: [AdminListTile(adminProductsManager.data[index])],
+  //               ));
+  //     },
+  //   );
+  // }
 }
