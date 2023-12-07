@@ -69,7 +69,8 @@ class CartManager with ChangeNotifier {
           imageUrl: product['imageUrl'],
           owner: product['owner'],
           origin: product['origin'],
-          status: product['status']
+          status: product['status'],
+          type: product['type'],
         ),
       );
     }

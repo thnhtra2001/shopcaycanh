@@ -13,6 +13,7 @@ class CartItem with ChangeNotifier {
   final String owner;
   final String origin;
   final String status;
+  final String type;
 
   CartItem({
     this.id,
@@ -25,6 +26,7 @@ class CartItem with ChangeNotifier {
     required this.owner,
     required this.origin,
     required this.status,
+    required this.type,
   });
 
   CartItem copyWith(
@@ -37,7 +39,8 @@ class CartItem with ChangeNotifier {
       String? imageUrl,
       String? owner,
       String? origin,
-      String? status
+      String? status,
+      String? type,
       }) {
     return CartItem(
       id: id ?? this.id,
@@ -50,6 +53,7 @@ class CartItem with ChangeNotifier {
       owner: owner ?? this.owner,
       origin: origin ?? this.origin,
       status: status ?? this.status,
+      type: type ?? this.type,
     );
   }
 
@@ -64,6 +68,7 @@ class CartItem with ChangeNotifier {
       'owner': owner,
       'origin': origin,
       'status': status,
+      'type': type,
     };
   }
 
@@ -78,7 +83,8 @@ class CartItem with ChangeNotifier {
         imageUrl: json['imageUrl'],
         owner: json['owner'],
         origin: json['origin'],
-        status: json['status']
+        status: json['status'],
+        type: json['type']
         );
   }
   // @override

@@ -90,7 +90,7 @@ class AdminAppDrawer extends StatelessWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.admin_panel_settings),
-            title: const Text('Quan ly san pham'),
+            title: const Text('Thong ke san pham'),
             onTap: () {
               Navigator.of(context)
                   .pushReplacementNamed(AdminProductManagerScreens.routeName);
