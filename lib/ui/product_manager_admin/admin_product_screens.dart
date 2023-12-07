@@ -33,14 +33,14 @@ class AdminProductManagerScreensState
     Map<String, OrdersAdminProduct> data1 = {};
     for (var order in orders1) {
       for (var product in order.products) {
-        if (data1.containsKey(product.productId)) {
+        if (data1.containsKey(product.title)) {
           data1.update(
-              product.productId!,
+              product.title,
               (value) =>
                   value.copyWith(quantity: value.quantity + product.quantity));
         } else {
           data1.putIfAbsent(
-              product.productId!,
+              product.title,
               () => OrdersAdminProduct(
                   title: product.title,
                   quantity: product.quantity,
@@ -54,15 +54,11 @@ class AdminProductManagerScreensState
     // print(data1.length);
     // print(data1.values.last.title);
     // print(data1.values.last.quantity);
-
-    Map<String, double> dataMap = {
-      "Đã đặt": 5,
-      "Đang vận chuyển": 5,
-      "Đã hủy": 5
-    };
+    final Map<String, double> dataMap ={};
+     data1.forEach((key, value) => dataMap.putIfAbsent(key, () => value.quantity.toDouble()));
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Thống kê san pham'),
+        title: const Text('Thống kê sản phẩm'),
       ),
       drawer: AdminAppDrawer(),
       body: SingleChildScrollView(
@@ -82,43 +78,44 @@ class AdminProductManagerScreensState
               ),
             ),
           ),
-          // DataTable(
-          //   columns: const <DataColumn>[
-          //     DataColumn(
-          //       label: Expanded(
-          //         child: Text(
-          //           'San pham ban nhieu nhat',
-          //           style: TextStyle(fontStyle: FontStyle.italic),
-          //         ),
-          //       ),
-          //     ),
-          //     DataColumn(
-          //       label: Expanded(
-          //         child: Text(
-          //           'San pham co doanh thu cao nhat',
-          //           style: TextStyle(fontStyle: FontStyle.italic),
-          //         ),
-          //       ),
-          //     ),
-          //     DataColumn(
-          //       label: Expanded(
-          //         child: Text(
-          //           'San pham ban thap nhat',
-          //           style: TextStyle(fontStyle: FontStyle.italic),
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          //   rows: <DataRow>[
-          //     DataRow(
-          //       cells: <DataCell>[
-          //         // DataCell(Text(orders1.toString())),
-          //         // DataCell(Text(orders2.toString())),
-          //         // DataCell(Text(orders3.toString())),
-          //       ],
-          //     ),
-          //   ],
-          // )
+          DataTable(
+            columns: const <DataColumn>[
+              DataColumn(
+                label: Expanded(
+                  child: Text(
+                    'San pham ban nhieu nhat',
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
+                ),
+              ),
+              DataColumn(
+                label: Expanded(
+                  child: Text(
+                    'San pham co doanh thu cao nhat',
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
+                ),
+              ),
+              DataColumn(
+                label: Expanded(
+                  child: Text(
+                    'San pham ban thap nhat',
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
+                ),
+              ),
+            ],
+            rows: <DataRow>[
+              DataRow(
+                cells: <DataCell>[
+                  DataCell(Text("AAA")),
+                  DataCell(Text("AAA")),
+                  DataCell(Text("AAA")),
+
+                ],
+              ),
+            ],
+          )
         ],
       )),
     );

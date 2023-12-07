@@ -71,7 +71,7 @@ class AdminAppDrawer extends StatelessWidget {
           ),
           const Divider(),
           ListTile(
-            leading: const Icon(Icons.cancel_outlined),
+            leading: const Icon(Icons.cancel_presentation),
             title: const Text('Đơn đã hủy'),
             onTap: () {
               Navigator.of(context)
@@ -89,8 +89,8 @@ class AdminAppDrawer extends StatelessWidget {
           ),
           const Divider(),
           ListTile(
-            leading: const Icon(Icons.admin_panel_settings),
-            title: const Text('Thong ke san pham'),
+            leading: const Icon(Icons.edit_note),
+            title: const Text('Thống kê sản phẩm'),
             onTap: () {
               Navigator.of(context)
                   .pushReplacementNamed(AdminProductManagerScreens.routeName);
