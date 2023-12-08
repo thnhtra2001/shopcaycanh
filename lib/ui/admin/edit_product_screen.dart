@@ -26,6 +26,7 @@ class EditProductScreen extends StatefulWidget {
         origin: '',
         status: '',
         type: '',
+        sl: 0,
         price0: 0
       );
     } else {
@@ -129,6 +130,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     buildTypeField(),
                     buildOriginField(),
                     buildStatusField(),
+                    buildSLField(),
                     buildPrice0Field(),
                     buildPriceField(),
                     buildDescriptionField(),
@@ -251,7 +253,29 @@ class _EditProductScreenState extends State<EditProductScreen> {
       },
     );
   }
-
+  TextFormField buildSLField() {
+    return TextFormField(
+      initialValue: _editedProduct.sl.toString(),
+      decoration: const InputDecoration(labelText: 'Số lượng'),
+      textInputAction: TextInputAction.next,
+      keyboardType: TextInputType.number,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please provide a price';
+        }
+        if (int.tryParse(value) == null) {
+          return 'Please enter a valid number';
+        }
+        if (int.parse(value) <= 0) {
+          return 'Please enter a number greater than zero';
+        }
+        return null;
+      },
+      onSaved: (value) {
+        _editedProduct = _editedProduct.copyWith(sl: int.parse(value!));
+      },
+    );
+  }
   TextFormField buildPriceField() {
     return TextFormField(
       initialValue: _editedProduct.price.toString(),

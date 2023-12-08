@@ -71,6 +71,7 @@ class CartManager with ChangeNotifier {
           origin: product['origin'],
           status: product['status'],
           type: product['type'],
+          sl: product['sl']
         ),
       );
     }

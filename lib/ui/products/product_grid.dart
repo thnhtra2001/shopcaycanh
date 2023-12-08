@@ -45,7 +45,9 @@ class _ProductsGridState extends State<ProductsGrid> {
                     groupByValue,
                     textAlign: TextAlign.start,
                     style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey),
                   ),
                 )
               ],
@@ -161,19 +163,56 @@ class _ProductsGridState extends State<ProductsGrid> {
     return IconButton(
       onPressed: () async {
         final cart = context.read<CartManager>();
-        cart.addItem(element);
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(SnackBar(
-            content: const Text('Đã thêm vào giỏ hàng!'),
-            duration: const Duration(seconds: 2),
-            action: SnackBarAction(
-              label: 'Xóa',
-              onPressed: () {
-                cart.removeSingleItem(element);
-              },
-            ),
-          ));
+        final index =
+            cart.products.indexWhere((e) => e.productId == element['id']);
+        if (index < 0) {
+          cart.addItem(element);
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(
+              content: const Text('Đã thêm vào giỏ hàng!'),
+              duration: const Duration(seconds: 2),
+              action: SnackBarAction(
+                label: 'Xóa',
+                onPressed: () {
+                  cart.removeSingleItem(element);
+                },
+              ),
+            ));
+        } else {
+          final sl1 = cart.products[index].quantity;
+          print("------------");
+          print(sl1);
+          print(element['sl']);
+          if (sl1 < element['sl']) {
+            cart.addItem(element);
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(SnackBar(
+                content: const Text('Đã thêm vào giỏ hàng!'),
+                duration: const Duration(seconds: 2),
+                action: SnackBarAction(
+                  label: 'Xóa',
+                  onPressed: () {
+                    cart.removeSingleItem(element);
+                  },
+                ),
+              ));
+          } else {
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(SnackBar(
+                content: const Text('Vượt quá số lượng trong kho!'),
+                duration: const Duration(seconds: 2),
+                action: SnackBarAction(
+                  label: '',
+                  onPressed: () {
+                    cart.removeSingleItem(element);
+                  },
+                ),
+              ));
+          }
+        }
       },
       icon: const Icon(Icons.shopping_cart),
       color: Theme.of(context).colorScheme.error,

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zalopay_sdk/flutter_zalopay_sdk.dart';
 import 'package:shopcaycanh/models/cart_item.dart';
+import 'package:shopcaycanh/models/http_exception.dart';
 import 'package:shopcaycanh/models/order_item.dart';
+import 'package:shopcaycanh/services/products_service.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
+import '../../models/product.dart';
 import '../../repo_zalo/payment.dart';
 import '../../services/user_service.dart';
 import '../screens.dart';
@@ -24,7 +27,17 @@ class PaymentCartScreen1 extends StatefulWidget {
 }
 
 class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
+    Future<void> _submit(product) async {
+    try {
+      await ProductsService().updateProduct(product);
+    } catch (error) {
+      showErrorDialog(context,
+          (error is HttpException) ? error.toString() : 'Có lỗi xảy ra');
+    }
+  }
+
   late OrderItem _order;
+  late Product _product1;
   int orderStatus = 0;
   String zpTransToken = "";
   String payResult = "Thanh toán bằng tiền mặt";
@@ -37,7 +50,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
 
   @override
   Widget build(BuildContext context) {
-    final cart = context.watch<CartManager>();
+    final cart = context.read<CartManager>();
     return Scaffold(
         appBar: AppBar(
           title: const Text('Trang thanh toán'),
@@ -213,7 +226,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
     );
   }
 
-  Widget paymentNow(snapshot, cart) {
+  Widget paymentNow(snapshot,CartManager cart) {
     return Container(
       width: 400,
       height: 50,
@@ -237,13 +250,15 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
             customerId: snapshot.data['uid'],
             payResult: payResult,
             orderStatus: orderStatus,
-            // owner: cart.owner,
-            // origin: cart.origin,
-            // status: cart.status,
           );
           context.read<OrdersManager>().addOrders(_order);
-          // cart.clear();
           showMyDialog(context, cart);
+          // final index = cart.products.length;
+          // print("quantity la");
+          // print(cart.products[index-1].title);
+          // print(cart.products[index-1].quantity);
+          // print("index la");
+          // print(index);
           // Navigator.of(context).pushNamed(OrdersScreen.routeName);
         },
         child: Container(
@@ -293,7 +308,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                   payResult = "Thanh toán thành công";
                   _order = OrderItem(
                     amount: cart.totalAmount,
-            amount0: cart.totalAmount0,
+                    amount0: cart.totalAmount0,
 
                     products: cart.products,
                     totalQuantity: cart.totalQuantity,
@@ -316,7 +331,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                   payResult = "Thanh toán thất bại";
                   _order = OrderItem(
                     amount: cart.totalAmount,
-            amount0: cart.totalAmount0,
+                    amount0: cart.totalAmount0,
 
                     products: cart.products,
                     totalQuantity: cart.totalQuantity,
@@ -339,7 +354,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                   payResult = "Thanh toán đang được xử lý";
                   _order = OrderItem(
                     amount: cart.totalAmount,
-            amount0: cart.totalAmount0,
+                    amount0: cart.totalAmount0,
 
                     products: cart.products,
                     totalQuantity: cart.totalQuantity,

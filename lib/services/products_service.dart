@@ -21,8 +21,6 @@ class ProductsService extends FirebaseService {
           Uri.parse('$databaseUrl/products.json?auth=$authToken');
       final response = await http.get(productUrl);
       final productsMap = json.decode(response.body) as Map<String, dynamic>;
-      print("BBBBBBBBBBBBbbb");
-      print(productsMap);
       if (response.statusCode != 200) {
         return products;
       }
@@ -41,8 +39,6 @@ class ProductsService extends FirebaseService {
           ...product,
         }).copyWith(isFavorite: isFavorite));
       });
-      print("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
-      print(products);
       return products;
     } catch (error) {
       print(error);
