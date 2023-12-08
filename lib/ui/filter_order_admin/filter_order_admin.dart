@@ -42,7 +42,9 @@ class _FilterOrderAdminState extends State<FilterOrderAdmin> {
                 builder: (contex, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     // return Center(child: Text(snapshot.data!.first.amount.toString()),);
-                    return SizedBox(
+                    return Container(child: Column(children: [
+                      // Container(child: snapshot.data!.map((e) => OrderItemCard1(e) )),
+                      SizedBox(
                         height: 500,
                         child: ListView.builder(
                           itemCount: snapshot.data!.length.toInt(),
@@ -50,18 +52,22 @@ class _FilterOrderAdminState extends State<FilterOrderAdmin> {
                             // OrderItemCard(snapshot.data![index]);
                             return Container(
                               child: Column(children: [
+                                // Container(child: Text("AAAA"),),
                                 ListTile(
-                                  title: Text(
-                                      'Hoa don ${index + 1}: ${snapshot.data![index].id}'),
+                                  leading: Text(
+                                      'Hoa don ${index + 1}'),
                                   subtitle: Text(
                                       'Ngay: ${snapshot.data![index].dateTime.day}/${snapshot.data![index].dateTime.month}/${snapshot.data![index].dateTime.year} - Tong tien: ${snapshot.data![index].amount}'),
-                                  trailing: Text('Tien goc: ${snapshot.data![index].amount0}'),
+                                  title: Text(
+                                      'Tien goc: ${snapshot.data![index].amount0}'),
+                                  trailing: Text('Loi nhuan: ${snapshot.data![index].amount- snapshot.data![index].amount0}'),
                                 ),
                                 const Divider()
                               ]),
                             );
                           },
-                        ));
+                        ))
+                    ],),);
                   }
                   return const Center(child: CircularProgressIndicator());
                 })

@@ -8,15 +8,15 @@ import '../../models/order_item.dart';
 import '../../services/order_service.dart';
 import '../shared/dialog_utils.dart';
 
-class OrderItemCard extends StatefulWidget {
+class OrderItemCard1 extends StatefulWidget {
   final OrderItem order;
-  const OrderItemCard(this.order, {super.key});
+  const OrderItemCard1(this.order, {super.key});
 
   @override
-  State<OrderItemCard> createState() => _OrderItemCardState();
+  State<OrderItemCard1> createState() => _OrderItemCard1State();
 }
 
-class _OrderItemCardState extends State<OrderItemCard> {
+class _OrderItemCard1State extends State<OrderItemCard1> {
   Future<void> _submit(order) async {
     try {
       await OrderService().updateOrder(order);
