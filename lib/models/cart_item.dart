@@ -7,6 +7,7 @@ class CartItem with ChangeNotifier {
   final String? productId;
   final String title;
   late final int quantity;
+  late String description;
   final int price0;
   final int price;
   final String imageUrl;
@@ -21,6 +22,7 @@ class CartItem with ChangeNotifier {
     required this.productId,
     required this.title,
     required this.quantity,
+    required this.description,
     required this.price0,
     required this.price,
     required this.imageUrl,
@@ -36,6 +38,7 @@ class CartItem with ChangeNotifier {
       String? productId,
       String? title,
       int? quantity,
+      String? description,
       int? price0,
       int? price,
       String? imageUrl,
@@ -50,6 +53,7 @@ class CartItem with ChangeNotifier {
       productId: productId ?? this.productId,
       title: title ?? this.title,
       quantity: quantity ?? this.quantity,
+      description: description ?? this.description,
       price0: price0 ?? this.price0,
       price: price ?? this.price,
       imageUrl: imageUrl ?? this.imageUrl,
@@ -66,6 +70,7 @@ class CartItem with ChangeNotifier {
       'productId': productId,
       'title': title,
       'quantity': quantity,
+      'description': description,
       'price0': price0,
       'price': price,
       'imageUrl': imageUrl,
@@ -83,6 +88,7 @@ class CartItem with ChangeNotifier {
         productId: json['productId'],
         title: json['title'],
         quantity: json['quantity'],
+        description: json['description'],
         price0: json['price0'],
         price: json['price'],
         imageUrl: json['imageUrl'],

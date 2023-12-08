@@ -74,25 +74,81 @@ class AdminProductManagerScreensState
         future: _fetchOrders,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return Column(
-              children: [
-                Container(
-                  child: Center(
-                    child: PieChart(
-                      dataMap: snapshot.data!,
-                      chartRadius: MediaQuery.of(context).size.width / 1.5,
-                      legendOptions: const LegendOptions(
-                        legendPosition: LegendPosition.bottom,
-                      ),
-                      chartValuesOptions: const ChartValuesOptions(
-                        showChartValuesInPercentage: true,
+            if (snapshot.data! == null) {
+              return Center(
+                child: Text("Chưa có đơn hàng nào thành công!"),
+              );
+            } else {
+              return Column(
+                children: [
+                  Container(
+                    child: Center(
+                      child: PieChart(
+                        dataMap: snapshot.data!,
+                        chartRadius: MediaQuery.of(context).size.width / 1.5,
+                        legendOptions: const LegendOptions(
+                          legendPosition: LegendPosition.bottom,
+                        ),
+                        chartValuesOptions: const ChartValuesOptions(
+                          showChartValuesInPercentage: true,
+                        ),
                       ),
                     ),
                   ),
+                            DataTable(
+            columns: const <DataColumn>[
+              DataColumn(
+                label: Expanded(
+                  child: Text(
+                    'Đơn đang vận chuyển',
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
                 ),
-                // buildDetailProduct(orders),
-              ],
-            );
+              ),
+              DataColumn(
+                label: Expanded(
+                  child: Text(
+                    'Đơn đã hủy',
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
+                ),
+              ),
+            ],
+            rows: <DataRow>[
+              DataRow(
+                cells: <DataCell>[
+                  DataCell(Text(snapshot.data!.keys.toString())),
+                  DataCell(Text(snapshot.data!.values.toString())),
+                ],
+              ),
+            ],
+          ),
+                  // Container(
+                  //   child:
+                  //   Column(
+                  //     children: [
+                  //       ListTile(
+                  //         title:  Text(snapshot.data!.keys.toString()),
+                  //         leading: Text(snapshot.data!.values.toString()),
+                  //       ),
+                  //     ],
+                  //   )
+                  //       // Center(child: Text(snapshot.data!.values.toString())),
+                  // )
+                  // Container(
+                  //   child: ListView(
+                  //     children:
+                  //       orders.productEntries.map((entry) => AdminListTile(
+                  //       title: entry.key,
+                  //       quantity: entry.value
+                  //       )).toList()
+
+                  //   )
+                  // )
+                  // buildDetailProduct(orders),
+                ],
+              );
+            }
           } else
             return Center(
               child: SingleChildScrollView(),

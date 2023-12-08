@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import '../../models/orders_admin_product.dart';
 
 class AdminListTile extends StatelessWidget {
-  final OrdersAdminProduct data;
+  final String title;
+  final double quantity;
 
-  const AdminListTile(
-    this.data, {
-    super.key,
+  const AdminListTile( {
+    super.key, required this.title, required this.quantity
   });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(data.title),
+      title: Text(title),
       subtitle: Text(
-        '${data.price}',
+        '${quantity}',
         style: TextStyle(color: Colors.black),
       ),
     );

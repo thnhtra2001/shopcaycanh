@@ -66,6 +66,7 @@ class CartManager with ChangeNotifier {
           price0: product['price0'],
           price: product['price'],
           quantity: 1,
+          description: product['description'],
           imageUrl: product['imageUrl'],
           owner: product['owner'],
           origin: product['origin'],

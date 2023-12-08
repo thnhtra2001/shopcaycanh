@@ -38,6 +38,10 @@ class AdminProductsManager with ChangeNotifier {
     return data1;
   }
 
+  Iterable<MapEntry<String, double>> get productEntries {
+    return {...data1}.entries;
+  }
+
   // Map<String, OrdersAdminProduct> get productTypeAdmin {
   //   for (var order in _orders1) {
   //     print(order.id);

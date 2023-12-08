@@ -27,7 +27,7 @@ class PaymentCartScreen1 extends StatefulWidget {
 }
 
 class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
-    Future<void> _submit(product) async {
+  Future<void> _submit(product) async {
     try {
       await ProductsService().updateProduct(product);
     } catch (error) {
@@ -226,7 +226,7 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
     );
   }
 
-  Widget paymentNow(snapshot,CartManager cart) {
+  Widget paymentNow(snapshot, CartManager cart) {
     return Container(
       width: 400,
       height: 50,
@@ -254,9 +254,22 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
           context.read<OrdersManager>().addOrders(_order);
           showMyDialog(context, cart);
           // final index = cart.products.length;
+          cart.products.forEach((e) => _product1 = Product(
+              id: e.productId,
+              title: e.title,
+              description: e.description,
+              price0: e.price0,
+              price: e.price,
+              imageUrl: e.imageUrl,
+              owner: e.owner,
+              origin: e.origin,
+              status: e.status,
+              type: e.type,
+              sl: e.sl - e.quantity));
+          _submit(_product1);
           // print("quantity la");
-          // print(cart.products[index-1].title);
-          // print(cart.products[index-1].quantity);
+          // print(cart.products[index - 1].title);
+          // print(cart.products[index - 1].quantity);
           // print("index la");
           // print(index);
           // Navigator.of(context).pushNamed(OrdersScreen.routeName);
@@ -324,8 +337,19 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                   );
                   context.read<OrdersManager>().addOrders(_order);
                   showConfirmDialogZalo(context, payResult, cart);
-                  print(payResult);
-                  print(payResult + 'aaaa');
+                  cart.products.forEach((e) => _product1 = Product(
+                      id: e.productId,
+                      title: e.title,
+                      description: e.description,
+                      price0: e.price0,
+                      price: e.price,
+                      imageUrl: e.imageUrl,
+                      owner: e.owner,
+                      origin: e.origin,
+                      status: e.status,
+                      type: e.type,
+                      sl: e.sl - e.quantity));
+                  _submit(_product1);
                   break;
                 case FlutterZaloPayStatus.failed:
                   payResult = "Thanh toán thất bại";
@@ -347,8 +371,19 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                   );
                   context.read<OrdersManager>().addOrders(_order);
                   showConfirmDialogZalo(context, payResult, cart);
-                  print(payResult);
-                  print(payResult + 'aaaa');
+                  cart.products.forEach((e) => _product1 = Product(
+                      id: e.productId,
+                      title: e.title,
+                      description: e.description,
+                      price0: e.price0,
+                      price: e.price,
+                      imageUrl: e.imageUrl,
+                      owner: e.owner,
+                      origin: e.origin,
+                      status: e.status,
+                      type: e.type,
+                      sl: e.sl - e.quantity));
+                  _submit(_product1);
                   break;
                 default:
                   payResult = "Thanh toán đang được xử lý";
@@ -370,8 +405,19 @@ class _PaymentCartScreen1State extends State<PaymentCartScreen1> {
                   );
                   context.read<OrdersManager>().addOrders(_order);
                   showConfirmDialogZalo(context, payResult, cart);
-                  print(payResult);
-                  print(payResult + 'aaaa');
+                  cart.products.forEach((e) => _product1 = Product(
+                      id: e.productId,
+                      title: e.title,
+                      description: e.description,
+                      price0: e.price0,
+                      price: e.price,
+                      imageUrl: e.imageUrl,
+                      owner: e.owner,
+                      origin: e.origin,
+                      status: e.status,
+                      type: e.type,
+                      sl: e.sl - e.quantity));
+                  _submit(_product1);
                   break;
               }
             });
