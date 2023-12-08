@@ -41,7 +41,7 @@ class _OrderDetailScreenAdminState extends State<OrderDetailScreenAdmin> {
                   Container(
                     alignment: Alignment.centerRight,
                     padding: EdgeInsets.only(right: 5),
-                    child: Text(DateFormat('dd/MM/yyyy hh:mm')
+                    child: Text(DateFormat('dd/MM/yyyy HH:mm')
                         .format(widget.order.dateTime)),
                   ),
                 ],

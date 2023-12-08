@@ -32,13 +32,17 @@ class _OrderItemCardState extends State<OrderItemCard> {
       margin: const EdgeInsets.all(10),
       child: Column(
         children: [
-          SizedBox(
+          Container(
+            color: Colors.grey,
+            child:
+            SizedBox(
               child: widget.order.orderStatus == 0
                   ? buildStatusOrder()
                   : widget.order.orderStatus == 1
                       ? buildStatusOrder1()
                       : widget.order.orderStatus == 2
                       ? buildStatusOrder2() : buildStatusOrder3()),
+          ),
           buildOrderSummary(),
           buildOrderDetails()
         ],
@@ -208,7 +212,7 @@ class _OrderItemCardState extends State<OrderItemCard> {
     return ListTile(
       title: Text('${widget.order.amount} VND'),
       subtitle: Text(
-        DateFormat('dd/MM/yyyy hh:mm').format(widget.order.dateTime),
+        DateFormat('dd/MM/yyyy HH:mm').format(widget.order.dateTime),
       ),
     );
   }

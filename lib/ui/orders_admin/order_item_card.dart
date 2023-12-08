@@ -20,7 +20,7 @@ class OrderItemCard extends StatefulWidget {
 }
 
 class _OrderItemCardState extends State<OrderItemCard> {
-    Future<void> _submit(order) async {
+  Future<void> _submit(order) async {
     try {
       await OrderService().updateOrder(order);
     } catch (error) {
@@ -28,15 +28,31 @@ class _OrderItemCardState extends State<OrderItemCard> {
           (error is HttpException) ? error.toString() : 'Có lỗi xảy ra');
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.all(10),
       child: Column(
-        children: <Widget>[buildStatusOrder2(),buildStatusOrder1(),buildOrderSummary(), buildOrderDetails()],
+        children: <Widget>[
+          Container(
+            color: Colors.grey,
+            child: SizedBox(
+              child: Column(
+              children: [
+                buildStatusOrder2(),
+                const Divider(color: Colors.black,),
+                buildStatusOrder1(),
+              ],)
+            ),
+          ),
+          buildOrderSummary(),
+          buildOrderDetails()
+        ],
       ),
     );
   }
+
   Widget buildStatusOrder2() {
     late OrderItem _order;
     return Container(
@@ -63,15 +79,16 @@ class _OrderItemCardState extends State<OrderItemCard> {
                 orderStatus: 2);
             _submit(_order);
             setState(() {
-            context.read<OrdersManagerAdmin>().removeItem(_order.id!);
-            // Navigator.of(context).pushNamed(OrdersScreenAdmin.routeName);
+              context.read<OrdersManagerAdmin>().removeItem(_order.id!);
+              // Navigator.of(context).pushNamed(OrdersScreenAdmin.routeName);
             });
           },
         ),
       ),
     );
   }
-    Widget buildStatusOrder1() {
+
+  Widget buildStatusOrder1() {
     late OrderItem _order;
     return Container(
       child: ListTile(
@@ -103,6 +120,7 @@ class _OrderItemCardState extends State<OrderItemCard> {
       ),
     );
   }
+
   Widget buildOrderDetails() {
     return SizedBox(
       height: widget.order.productCount * 32,
@@ -141,7 +159,7 @@ class _OrderItemCardState extends State<OrderItemCard> {
     return ListTile(
       title: Text('${widget.order.amount} VND'),
       subtitle: Text(
-        DateFormat('dd/MM/yyyy hh:mm').format(widget.order.dateTime),
+        DateFormat('dd/MM/yyyy HH:mm').format(widget.order.dateTime),
       ),
     );
   }

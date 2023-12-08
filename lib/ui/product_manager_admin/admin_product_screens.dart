@@ -193,7 +193,7 @@ class AdminProductManagerScreensState
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  subtitle: Text(value[index].toString()),
+                                  subtitle: Text('Số lượng: ${value[index]}', style: TextStyle(color: Colors.red),),
                                 ),
                                 const Divider()
                               ],
