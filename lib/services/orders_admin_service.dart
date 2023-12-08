@@ -30,6 +30,28 @@ class OrderServiceAdmin extends FirebaseService {
       return orders;
     }
   }
+    Future<List<OrderItem>> fetchOrdersAll() async {
+    late List<OrderItem> orders = [];
+    try {
+      final authToken = (await AuthService().loadSavedAuthToken())!.token;
+      // final uid = (await AuthService().loadSavedAuthToken())!.userId;
+      final ordersUrl = Uri.parse(
+          '$databaseUrl/orders.json?orderBy="orderStatus"&auth=$authToken');
+      final response = await http.get(ordersUrl);
+      final ordersMap = json.decode(response.body) as Map<dynamic, dynamic>;
+      if (response.statusCode != 200) {
+        print(ordersMap['error']);
+        return orders;
+      }
+      ordersMap.forEach((keys, value) {
+        orders.insert(0, OrderItem.fromJson({'id': keys, ...value}));
+      });
+      return orders;
+    } catch (error) {
+      print(error);
+      return orders;
+    }
+  }
 
   // Future<OrderItem?> addOrder(OrderItem order) async {
   //   try {

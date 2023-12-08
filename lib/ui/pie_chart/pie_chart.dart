@@ -15,13 +15,11 @@ class PieChartScreen extends StatefulWidget {
 }
 
 class _PieChartScreenState extends State<PieChartScreen> {
-  late Future<void> _fetchOrders = Future(() => null);
+  late Future<Map<String, double>> _fetchOrders;
   @override
   void initState() {
     super.initState();
-    _fetchOrders = context.read<PieChartManager>().fetchOrders1();
-    _fetchOrders = context.read<PieChartManager>().fetchOrders2();
-    _fetchOrders = context.read<PieChartManager>().fetchOrders3();
+    _fetchOrders = context.read<PieChartManager>().fetchOrdersAll();
 
     print("-------------------------------");
     print(_fetchOrders);
@@ -31,87 +29,51 @@ class _PieChartScreenState extends State<PieChartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    late final orders1 =
-        context.read<PieChartManager>().orders1Count.toDouble();
-    late final orders2 =
-        context.read<PieChartManager>().orders2Count.toDouble();
-    late final orders3 =
-        context.read<PieChartManager>().orders3Count.toDouble();
-    print("Da dat");
-    print(orders1);
-    print("Dang giao");
-    print(orders2);
-    print("Da huy");
-    print(orders3);
-    Map<String, double> dataMap = {
-      "Đã đặt": orders1,
-      "Đang vận chuyển": orders2,
-      "Đã hủy": orders3
-    };
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-    print(orders1);
-    // final orders1 = context.read<OrdersManagerAdmin1>().orders1Count;
+    final pie = context.read<PieChartManager>();
+    final dataMap = pie.data2;
+    print(dataMap);
+    // Map<String, double> dataMap = {
+    //   "Đã đặt": orders1,
+    //   "Đang vận chuyển": orders2,
+    //   "Đã hủy": orders3
+    // };
     return Scaffold(
       appBar: AppBar(
         title: const Text('Thống kê đơn hàng'),
       ),
-      drawer: AdminAppDrawer(),
+      drawer: const AdminAppDrawer(),
       body: SingleChildScrollView(
-          child: Column(
-        children: [
-          Container(
-            child: Center(
-              child: PieChart(
-                dataMap: dataMap,
-                chartRadius: MediaQuery.of(context).size.width / 1.5,
-                legendOptions: const LegendOptions(
-                  legendPosition: LegendPosition.bottom,
-                ),
-                chartValuesOptions: const ChartValuesOptions(
-                  showChartValuesInPercentage: true,
-                ),
-              ),
-            ),
-          ),
-          DataTable(
-            columns: const <DataColumn>[
-              DataColumn(
-                label: Expanded(
-                  child: Text(
-                    'Đơn đã đặt',
-                    style: TextStyle(fontStyle: FontStyle.italic),
+        // child: Center(child: Text(dataMap.length.toString()),),
+          child: FutureBuilder(
+        future: _fetchOrders,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Column(
+              children: [
+                // Center(
+                //   child: Text(snapshot.data!.length.toString()),
+                // ),
+                Center(
+                  child: PieChart(
+                    dataMap: snapshot.data!,
+                    chartRadius: MediaQuery.of(context).size.width / 1.5,
+                    legendOptions: const LegendOptions(
+                      legendPosition: LegendPosition.bottom,
+                    ),
+                    chartValuesOptions: const ChartValuesOptions(
+                      showChartValuesInPercentage: true,
+                    ),
                   ),
                 ),
-              ),
-              DataColumn(
-                label: Expanded(
-                  child: Text(
-                    'Đơn đang vận chuyển',
-                    style: TextStyle(fontStyle: FontStyle.italic),
-                  ),
-                ),
-              ),
-              DataColumn(
-                label: Expanded(
-                  child: Text(
-                    'Đơn đã hủy',
-                    style: TextStyle(fontStyle: FontStyle.italic),
-                  ),
-                ),
-              ),
-            ],
-            rows: <DataRow>[
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text(orders1.toString())),
-                  DataCell(Text(orders2.toString())),
-                  DataCell(Text(orders3.toString())),
-                ],
-              ),
-            ],
-          )
-        ],
-      )),
+              ],
+            );
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      )
+      ),
     );
   }
 }
