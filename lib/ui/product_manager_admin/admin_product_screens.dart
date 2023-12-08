@@ -30,7 +30,7 @@ class AdminProductManagerScreensState
   @override
   Widget build(BuildContext context) {
     print("tea dep chaiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
-    final orders = context.read<AdminProductsManager>();
+    // final orders = context.read<AdminProductsManager>();
     // final orders1 = orders.productTypeAdmin;
     // print('-----------------------------');
     // print(orders1.length);
@@ -153,37 +153,6 @@ class AdminProductManagerScreensState
                         itemBuilder: (context, index) {
                           List<String> key = snapshot.data!.keys.toList();
                           List<double> value = snapshot.data!.values.toList();
-                          // return DataTable(
-                          //   columns: const <DataColumn>[
-                          //     DataColumn(
-                          //       label: Expanded(
-                          //         child: Text(
-                          //           'San pham',
-                          //           style:
-                          //               TextStyle(fontStyle: FontStyle.italic),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //     DataColumn(
-                          //       label: Expanded(
-                          //         child: Text(
-                          //           'So luong',
-                          //           style:
-                          //               TextStyle(fontStyle: FontStyle.italic),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ],
-                          //   rows:
-                          //   <DataRow>[
-                          //     DataRow(
-                          //       cells: <DataCell>[
-                          //         DataCell(Text(key[index])),
-                          //         DataCell(Text(value[index].toString())),
-                          //       ],
-                          //     ),
-                          //   ],
-                          // );
                           return Container(
                             child: Column(
                               children: [
@@ -193,7 +162,10 @@ class AdminProductManagerScreensState
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  subtitle: Text('Số lượng: ${value[index]}', style: TextStyle(color: Colors.red),),
+                                  subtitle: Text(
+                                    'Số lượng: ${value[index]}',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
                                 ),
                                 const Divider()
                               ],

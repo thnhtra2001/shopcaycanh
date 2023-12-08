@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/ui/admin/personal_screen.dart';
 import 'package:shopcaycanh/ui/auth/auth_manager.dart';
+import 'package:shopcaycanh/ui/filter_order_admin/filter_order_admin.dart';
 import 'package:shopcaycanh/ui/orders_admin/order_screen.dart';
 import 'package:shopcaycanh/ui/pie_chart/pie_chart.dart';
 
@@ -94,6 +95,15 @@ class AdminAppDrawer extends StatelessWidget {
             onTap: () {
               Navigator.of(context)
                   .pushReplacementNamed(AdminProductManagerScreens.routeName);
+            },
+          ),
+          const Divider(),
+                    ListTile(
+            leading: const Icon(Icons.headphones),
+            title: const Text('Thống kê doanh thu'),
+            onTap: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(FilterOrderAdmin.routeName);
             },
           ),
           const Divider(),

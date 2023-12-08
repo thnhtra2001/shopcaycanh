@@ -5,6 +5,7 @@ import 'package:shopcaycanh/ui/admin/search_admin.dart';
 import 'package:shopcaycanh/ui/cart/cart_manager.dart';
 import 'package:shopcaycanh/ui/cart/cart_screen.dart';
 import 'package:shopcaycanh/ui/chat/chat.dart';
+import 'package:shopcaycanh/ui/filter_order_admin/filter_admin_manager.dart';
 import 'package:shopcaycanh/ui/orders/order_manager.dart';
 import 'package:shopcaycanh/ui/orders/order_screen.dart';
 import 'package:shopcaycanh/ui/orders_admin/order_manager.dart';
@@ -22,6 +23,7 @@ import 'ui/chatbot_rasa_ai/chatbot_rasa_ai.dart';
 import 'ui/admin/user_product_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
+import 'ui/filter_order_admin/filter_order_admin.dart';
 import 'ui/orders1_admin/order_manager.dart';
 import 'ui/orders1_admin/order_screen.dart';
 import 'ui/orders2_admin/order_manager.dart';
@@ -54,7 +56,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => OrdersManagerAdmin2()),
           ChangeNotifierProvider(create: (context) => OrdersManagerAdmin3()),
           ChangeNotifierProvider(create: (context) => PieChartManager(),),
-          ChangeNotifierProvider(create: (context) => AdminProductsManager(),)
+          ChangeNotifierProvider(create: (context) => AdminProductsManager(),),
+          ChangeNotifierProvider(create: (context) => FilterOrderAdminManager(),)
 
 
 
@@ -101,6 +104,7 @@ class MyApp extends StatelessWidget {
               OrdersScreenAdmin3.routeName: (context) => const OrdersScreenAdmin3(),
               PieChartScreen.routeName:(context) => PieChartScreen(),
               AdminProductManagerScreens.routeName:(context) => const AdminProductManagerScreens(),
+              FilterOrderAdmin.routeName:(context) => const FilterOrderAdmin(),
 
             },
             onGenerateRoute: (settings) {
