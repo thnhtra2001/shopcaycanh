@@ -95,34 +95,44 @@ class AdminProductManagerScreensState
                       ),
                     ),
                   ),
-                            DataTable(
-            columns: const <DataColumn>[
-              DataColumn(
-                label: Expanded(
-                  child: Text(
-                    'Đơn đang vận chuyển',
-                    style: TextStyle(fontStyle: FontStyle.italic),
-                  ),
-                ),
-              ),
-              DataColumn(
-                label: Expanded(
-                  child: Text(
-                    'Đơn đã hủy',
-                    style: TextStyle(fontStyle: FontStyle.italic),
-                  ),
-                ),
-              ),
-            ],
-            rows: <DataRow>[
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text(snapshot.data!.keys.toString())),
-                  DataCell(Text(snapshot.data!.values.toString())),
-                ],
-              ),
-            ],
-          ),
+                  // Container(
+                  //     child: Column(
+                  //   children: [
+                  //     ListTile(
+                  //       title: Text(snapshot.data!.length.toString()),
+                  //     ),
+                  //   ],
+                  // )
+                  //     // Center(child: Text(snapshot.data!.values.toString())),
+                  //     ),
+                  // DataTable(
+                  //   columns: const <DataColumn>[
+                  //     DataColumn(
+                  //       label: Expanded(
+                  //         child: Text(
+                  //           'San pham',
+                  //           style: TextStyle(fontStyle: FontStyle.italic),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     DataColumn(
+                  //       label: Expanded(
+                  //         child: Text(
+                  //           'So luong',
+                  //           style: TextStyle(fontStyle: FontStyle.italic),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  //   rows: <DataRow>[
+                  //     DataRow(
+                  //       cells: <DataCell>[
+                  //         DataCell(Text(snapshot.data!.keys.toString())),
+                  //         DataCell(Text(snapshot.data!.values.toString())),
+                  //       ],
+                  //     ),
+                  //   ],
+                  // ),
                   // Container(
                   //   child:
                   //   Column(
@@ -135,16 +145,62 @@ class AdminProductManagerScreensState
                   //   )
                   //       // Center(child: Text(snapshot.data!.values.toString())),
                   // )
-                  // Container(
-                  //   child: ListView(
-                  //     children:
-                  //       orders.productEntries.map((entry) => AdminListTile(
-                  //       title: entry.key,
-                  //       quantity: entry.value
-                  //       )).toList()
-
-                  //   )
-                  // )
+                  SizedBox(
+                      height: 500,
+                      child: Container(
+                          child: ListView.builder(
+                        itemCount: snapshot.data!.length.toInt(),
+                        itemBuilder: (context, index) {
+                          List<String> key = snapshot.data!.keys.toList();
+                          List<double> value = snapshot.data!.values.toList();
+                          // return DataTable(
+                          //   columns: const <DataColumn>[
+                          //     DataColumn(
+                          //       label: Expanded(
+                          //         child: Text(
+                          //           'San pham',
+                          //           style:
+                          //               TextStyle(fontStyle: FontStyle.italic),
+                          //         ),
+                          //       ),
+                          //     ),
+                          //     DataColumn(
+                          //       label: Expanded(
+                          //         child: Text(
+                          //           'So luong',
+                          //           style:
+                          //               TextStyle(fontStyle: FontStyle.italic),
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ],
+                          //   rows:
+                          //   <DataRow>[
+                          //     DataRow(
+                          //       cells: <DataCell>[
+                          //         DataCell(Text(key[index])),
+                          //         DataCell(Text(value[index].toString())),
+                          //       ],
+                          //     ),
+                          //   ],
+                          // );
+                          return Container(
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  title: Text(
+                                    key[index],
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  subtitle: Text(value[index].toString()),
+                                ),
+                                const Divider()
+                              ],
+                            ),
+                          );
+                        },
+                      )))
                   // buildDetailProduct(orders),
                 ],
               );
