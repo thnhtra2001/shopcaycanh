@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
+import 'package:shopcaycanh/ui/screens.dart';
 import 'package:shopcaycanh/ui/shared/admin_app_drawer.dart';
 import '../../models/orders_admin_product.dart';
 import 'admin_product_manager.dart';
@@ -29,6 +30,8 @@ class AdminProductManagerScreensState
   @override
   Widget build(BuildContext context) {
     print("tea dep chaiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+    final product = context.read<ProductsManager>();
+    final pro = product.items;
     // final orders = context.read<AdminProductsManager>();
     // final orders1 = orders.productTypeAdmin;
     // print('-----------------------------');
@@ -73,7 +76,7 @@ class AdminProductManagerScreensState
         future: _fetchOrders,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.data! == null) {
+            if (snapshot.data!.length == 0) {
               return Center(
                 child: Text("Chưa có đơn hàng nào thành công!"),
               );
@@ -171,8 +174,33 @@ class AdminProductManagerScreensState
                             ),
                           );
                         },
+                      ))),
+                  SizedBox(
+                      height: 500,
+                      child: Container(
+                          child: ListView.builder(
+                        itemCount: pro.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  title: Text(
+                                    pro[index].title,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  subtitle: Text(
+                                    'Số lượng còn lại: ${pro[index].sl}',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ),
+                                const Divider()
+                              ],
+                            ),
+                          );
+                        },
                       )))
-                  // buildDetailProduct(orders),
                 ],
               );
             }
