@@ -9,15 +9,6 @@ class FilterOrderAdminManager with ChangeNotifier {
   late List<OrderItem> data = [];
   late List<OrderItem> _orders1 = [];
 
-
-  int get ordersCount {
-    return _orders.length;
-  }
-
-  List<OrderItem> get orders {
-    return [..._orders];
-  }
-
   // List<OrderItem> get order0 {
   //   _orders.forEach((order) {
 
@@ -46,7 +37,7 @@ class FilterOrderAdminManager with ChangeNotifier {
     var year = 2023;
       final startMonth = (quater - 1) * 3 + 1;
       final endMonth = startMonth + 2;
-      return _orders1
+      return data=_orders1
           .where((e) =>
               e.dateTime.year == year &&
               e.dateTime.month >= startMonth &&

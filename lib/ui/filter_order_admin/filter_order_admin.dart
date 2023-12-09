@@ -27,10 +27,19 @@ class _FilterOrderAdminState extends State<FilterOrderAdmin> {
 
   @override
   Widget build(BuildContext context) {
-    var orders = context.read<FilterOrderAdminManager>();
-    // var orderFilter = orders.filterOrder(4, 2023);
-    print("BBBBBBBBBBBBB");
+    // List<Widget?> ord = [];
+    // const a = 0;
+    // Map<String, int> a = {};
+    // var orders = context.read<FilterOrderAdminManager>();
+    // final filter = orders.data;
+    // print("AAAAAAAAAa");
+    // print(filter.length);
+    // var orderFilter = orders.orders1.map((e) => a.update(e.id!, (value) => value+e.amount));
+    // print("AAAAAAaaa");
     // print(orderFilter.length);
+    // print("BBBBBBBBBBBBB");
+    // print(orderFilter.length);
+    int a = 0;
     return Scaffold(
         appBar: AppBar(
           title: const Text('Thống kê doanh thu theo quý'),
@@ -42,32 +51,48 @@ class _FilterOrderAdminState extends State<FilterOrderAdmin> {
                 builder: (contex, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     // return Center(child: Text(snapshot.data!.first.amount.toString()),);
-                    return Container(child: Column(children: [
-                      // Container(child: snapshot.data!.map((e) => OrderItemCard1(e) )),
-                      SizedBox(
-                        height: 500,
-                        child: ListView.builder(
-                          itemCount: snapshot.data!.length.toInt(),
-                          itemBuilder: (context, index) {
-                            // OrderItemCard(snapshot.data![index]);
-                            return Container(
-                              child: Column(children: [
-                                // Container(child: Text("AAAA"),),
-                                ListTile(
-                                  leading: Text(
-                                      'Hoa don ${index + 1}'),
-                                  subtitle: Text(
-                                      'Ngay: ${snapshot.data![index].dateTime.day}/${snapshot.data![index].dateTime.month}/${snapshot.data![index].dateTime.year} - Tong tien: ${snapshot.data![index].amount}'),
-                                  title: Text(
-                                      'Tien goc: ${snapshot.data![index].amount0}'),
-                                  trailing: Text('Loi nhuan: ${snapshot.data![index].amount- snapshot.data![index].amount0}'),
-                                ),
-                                const Divider()
-                              ]),
-                            );
-                          },
-                        ))
-                    ],),);
+                    return Container(
+                      child: Column(
+                        children: [
+                          Container(
+                            child: Center(
+                                child: Text(
+                                    'Tong so don da dat: ${snapshot.data!.length}')),
+                          ),
+
+                          // buildTotal(context, snapshot),
+                          // Container(child: ord = snapshot.data!.map((OrderItem e) => ListTile(title: e.dateTime,)).toList()),
+                          // Container(child: Center(child: Text(snapshot.data!.length.))),
+                          SizedBox(
+                              height: 500,
+                              child: ListView.builder(
+                                itemCount: snapshot.data!.length.toInt(),
+                                itemBuilder: (context, index) {
+                                  // OrderItemCard(snapshot.data![index]);
+                                  return Container(
+                                    child: Column(children: [
+                                      // Container(child: Text("AAAA"),),
+                                      ListTile(
+                                        leading: Text('Hoa don ${index + 1}'),
+                                        subtitle: Text(
+                                            'Ngay: ${snapshot.data![index].dateTime.day}/${snapshot.data![index].dateTime.month}/${snapshot.data![index].dateTime.year} - Tong tien: ${snapshot.data![index].amount}'),
+                                        title: Text(
+                                            'Tien goc: ${snapshot.data![index].amount0}'),
+                                        trailing: Text(
+                                            'Loi nhuan: ${snapshot.data![index].amount - snapshot.data![index].amount0}'),
+                                      ),
+                                      Container(
+                                        child: Text(
+                                            'Tong loi nhuan:${a += snapshot.data![index].amount - snapshot.data![index].amount0}'),
+                                      ),
+                                      const Divider(),
+                                    ]),
+                                  );
+                                },
+                              )),
+                        ],
+                      ),
+                    );
                   }
                   return const Center(child: CircularProgressIndicator());
                 })
@@ -84,4 +109,38 @@ class _FilterOrderAdminState extends State<FilterOrderAdmin> {
             // )
             ));
   }
+
+  // Widget buildTotal(BuildContext context, snapshot) {
+  //   return Container(
+  //       height: 50,
+  //       color: Colors.grey,
+  //       child:
+  //           Center(child: snapshot.data.map((e) => Text(e.toString()))));
+  ///////////////
+  //   return Card(
+  //     margin: const EdgeInsets.all(15),
+  //     child: Padding(
+  //       padding: const EdgeInsets.all(8),
+  //       child: Row(
+  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //         children: <Widget>[
+  //           const Text(
+  //             'Tổng doanh thu',
+  //             style: TextStyle(fontSize: 20),
+  //           ),
+  //           const Spacer(),
+  //           Chip(
+  //             label: Text(
+  //               data.toString(),
+  //               style: TextStyle(
+  //                 color: Theme.of(context).primaryTextTheme.titleLarge?.color,
+  //               ),
+  //             ),
+  //             backgroundColor: Theme.of(context).primaryColor,
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }

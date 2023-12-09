@@ -43,16 +43,23 @@ class _PieChartScreenState extends State<PieChartScreen> {
       ),
       drawer: const AdminAppDrawer(),
       body: SingleChildScrollView(
-        // child: Center(child: Text(dataMap.length.toString()),),
+          // child: Center(child: Text(dataMap.length.toString()),),
           child: FutureBuilder(
         future: _fetchOrders,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return Column(
               children: [
-                // Center(
-                //   child: Text(snapshot.data!.length.toString()),
-                // ),
+                const Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Chú thích:"),
+                      Text("0: Đơn hàng đang chờ xác nhận"),
+                      Text("1: Đơn hàng đã hủy"),
+                      Text("2: Đơn hàng đang vận chuyển"),
+                      Text("3: Đơn hàng đã đặt"),
+                    ]),
                 Center(
                   child: PieChart(
                     dataMap: snapshot.data!,
@@ -65,6 +72,34 @@ class _PieChartScreenState extends State<PieChartScreen> {
                     ),
                   ),
                 ),
+                SizedBox(
+                    height: 500,
+                    child: Container(
+                        child: ListView.builder(
+                      itemCount: snapshot.data!.length.toInt(),
+                      itemBuilder: (context, index) {
+                        List<String> key = snapshot.data!.keys.toList();
+                        List<double> value = snapshot.data!.values.toList();
+                        return Container(
+                          child: Column(
+                            children: [
+                              ListTile(
+                                title: Text(
+                                  key[index],
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                subtitle: Text(
+                                  'Số lượng: ${value[index]}',
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              ),
+                              const Divider()
+                            ],
+                          ),
+                        );
+                      },
+                    )))
               ],
             );
           }
@@ -72,8 +107,7 @@ class _PieChartScreenState extends State<PieChartScreen> {
             child: CircularProgressIndicator(),
           );
         },
-      )
-      ),
+      )),
     );
   }
 }
