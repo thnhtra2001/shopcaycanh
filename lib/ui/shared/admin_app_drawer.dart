@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/ui/admin/personal_screen.dart';
+import 'package:shopcaycanh/ui/admin_user/admin_user_screen.dart';
 import 'package:shopcaycanh/ui/auth/auth_manager.dart';
 import 'package:shopcaycanh/ui/filter_order_admin/filter_order_admin.dart';
 import 'package:shopcaycanh/ui/orders_admin/order_screen.dart';
@@ -20,7 +21,7 @@ class AdminAppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Column(
+      child: SingleChildScrollView(child: Column(
         children: <Widget>[
           AppBar(
             title: const Text('Admin'),
@@ -41,6 +42,15 @@ class AdminAppDrawer extends StatelessWidget {
             onTap: () {
               Navigator.of(context)
                   .pushReplacementNamed(PersonalScreenAdmin.routeName);
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.child_care),
+            title: const Text('Quản lý người dùng'),
+            onTap: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(AdminUserScreen.routeName);
             },
           ),
           const Divider(),
@@ -98,7 +108,7 @@ class AdminAppDrawer extends StatelessWidget {
             },
           ),
           const Divider(),
-                    ListTile(
+          ListTile(
             leading: const Icon(Icons.headphones),
             title: const Text('Thống kê doanh thu'),
             onTap: () {
@@ -118,7 +128,7 @@ class AdminAppDrawer extends StatelessWidget {
             },
           )
         ],
-      ),
+      ),)
     );
   }
 }

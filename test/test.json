@@ -1,32 +1,101 @@
 {
-    "-Nj6DdJAmIMSBWkv8FEX": {
-        "address": "tphcmaaaaa",
-        "amount": 7222.0,
-        "customerId": "UjJYJsVdeIVyCqiFTDCBQrTfX2p2",
-        "dateTime": "2023-11-13 12:49:46.465433",
-        "name": "tran Thanh tra",
-        "payResult": "Thanh toán bằng tiền mặt",
+    "-Ng_yJ-WACDq0_E04qol": {
+        "address": "ca mau",
+        "birthday": "2023-11-09",
+        "email": "thanhtra2001cm@gmail.com",
+        "name": "Tran Thanh tra",
         "phone": "0354653950",
-        "products": [
-            {
-                "imageUrl": "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg",
-                "price": 222.0,
-                "quantity": 1,
-                "title": "afaddddkkk"
-            },
-            {
-                "imageUrl": "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg",
-                "price": 2000.0,
-                "quantity": 1,
-                "title": "san pham 3"
-            },
-            {
-                "imageUrl": "https://live.staticflickr.com/4043/4438260868_cc79b3369d_z.jpg",
-                "price": 5000.0,
-                "quantity": 1,
-                "title": "San pham 2"
-            }
-        ],
-        "totalQuantity": 3
+        "role": "admin",
+        "uid": "7a2gXIr3utMvft5bCAjsSMd6ogl1"
+    },
+    "-NgaOu-9GCrcgZ5C9eKc": {
+        "address": "cần thơ",
+        "birthday": "2023-10-18",
+        "email": "tra@gmail.com",
+        "name": "tran Thanh tra",
+        "phone": "0354653950",
+        "role": "user",
+        "uid": "UjJYJsVdeIVyCqiFTDCBQrTfX2p2"
+    },
+    "-NitJ0Wx8R_3GIX3PpFr": {
+        "address": "ca mau",
+        "birthday": "",
+        "email": "tra2001@gmail.com",
+        "name": "tran thanh tra",
+        "phone": "0354653950",
+        "role": "user",
+        "uid": "8pYiLdlDsvWetToUJss8ltBkTd52"
+    },
+    "-NiwpOpr1zwCUBkkYtV4": {
+        "address": "ca mau",
+        "birthday": "",
+        "email": "account2@gmail.com",
+        "name": "thanh tra",
+        "phone": "0354653950",
+        "role": "user",
+        "uid": "E784cyFKuoU3kkLDgW5bbSeg67r1"
+    },
+    "-NjpPpKsWzDh1-E3b8yB": {
+        "address": "cà mau",
+        "birthday": "",
+        "email": "test@gmail.com",
+        "name": "tran thanh tra",
+        "phone": "0354653950",
+        "role": "user",
+        "uid": "Pdga2DqfVVfNtvYZWta2bzP0ZtZ2"
+    },
+    "-NjpQ353QYKUeYZa8XTb": {
+        "address": "cà mau",
+        "birthday": "",
+        "email": "tes1@gmail.com",
+        "name": "tran thanh tra",
+        "phone": "0354653950",
+        "role": "user",
+        "uid": "oIr0zDQ8fnVAhQch83jHklj4IxI2"
+    },
+    "-NjqgNJr14krRe3hfl9z": {
+        "address": "cà mau",
+        "birthday": "",
+        "email": "test3@gmail.com",
+        "name": "thanhtra",
+        "phone": "0354653950",
+        "role": "user",
+        "uid": "I1Vx7qxSRQMEiqpChIeg68kdiWr2"
+    },
+    "-Njqj03r16zJtYviRByI": {
+        "address": "ca mau",
+        "birthday": "",
+        "email": "test4@gmail.com",
+        "name": "thanh tra",
+        "phone": "0354653950",
+        "role": "admin",
+        "uid": "g54CR8OHZBQsGAnkmFAEAhet5Ml2"
+    },
+    "-NkAfNBr-4aQ_BfaoEiY": {
+        "address": "cà mau ",
+        "birthday": "",
+        "email": "dungtho1002@gmail.com",
+        "name": "ngọc Dung ",
+        "phone": "0869388416",
+        "role": "user",
+        "uid": "RJJl8v0UsFMoi8J0elpOIVfZP8A2"
+    },
+    "-NkJmVnLgXq6ugOJkdW3": {
+        "address": "cần thơ",
+        "birthday": "",
+        "email": "tra113@gmail.com",
+        "name": "Trà Khùng",
+        "phone": "0797799770",
+        "role": "user",
+        "uid": "PH3fJGQecoOy0T1JinJtOLe7Hsj1"
+    },
+    "-NkyRCds90PRezuHSjki": {
+        "address": "cantho",
+        "birthday": "",
+        "email": "test1@gmail.com",
+        "name": "thanhtra",
+        "phone": "0123466789",
+        "role": "user",
+        "uid": "GkdlBKkGo4gm0uoib3cxuo1JORD3"
     }
 }

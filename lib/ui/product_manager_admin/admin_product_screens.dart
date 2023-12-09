@@ -3,7 +3,6 @@ import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/ui/shared/admin_app_drawer.dart';
 import '../../models/orders_admin_product.dart';
-import 'admin_list_tile.dart';
 import 'admin_product_manager.dart';
 
 class AdminProductManagerScreens extends StatefulWidget {

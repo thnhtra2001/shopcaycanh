@@ -39,6 +39,8 @@ class ProductsService extends FirebaseService {
           ...product,
         }).copyWith(isFavorite: isFavorite));
       });
+      print("KKKKKKKKKKKKKK");
+      print(products.length);
       return products;
     } catch (error) {
       print(error);

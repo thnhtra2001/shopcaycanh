@@ -56,7 +56,9 @@ class _ProductsGridState extends State<ProductsGrid> {
         ),
       ),
       itemBuilder: (context, dynamic element) {
-        return ListTile(
+        return Column(
+          children: [
+            ListTile(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => ProductDetailScreen(element)));
@@ -83,6 +85,9 @@ class _ProductsGridState extends State<ProductsGrid> {
                   ],
                 ),
               )),
+        ),
+        const Divider(height: 5, color: Colors.grey,)
+          ],
         );
         //////////////////
         // return GestureDetector(

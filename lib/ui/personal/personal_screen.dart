@@ -291,7 +291,6 @@ class _PersonalScreenState extends State<PersonalScreen> {
 
   Widget _buildBirthField(initValue) {
     _birthFieldController.value.text = initValue;
-
     return Column(
       children: [
         Container(
@@ -308,7 +307,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
               builder: (context, birthFieldController, child) {
                 return TextFormField(
                   controller: _birthFieldController.value,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       border: OutlineInputBorder(
                           borderSide: BorderSide(
                               width: 1,

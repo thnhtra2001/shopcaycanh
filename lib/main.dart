@@ -18,6 +18,8 @@ import 'package:shopcaycanh/ui/products/product_overview_screen.dart';
 import 'package:shopcaycanh/ui/products/products_manager.dart';
 import 'package:shopcaycanh/ui/products/search_product.dart';
 import 'package:shopcaycanh/ui/screens.dart';
+import 'ui/admin_user/admin_user_manager.dart';
+import 'ui/admin_user/admin_user_screen.dart';
 import 'ui/cart/cart_manager1.dart';
 import 'ui/chatbot_rasa_ai/chatbot_rasa_ai.dart';
 import 'ui/admin/user_product_screen.dart';
@@ -57,7 +59,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => OrdersManagerAdmin3()),
           ChangeNotifierProvider(create: (context) => PieChartManager(),),
           ChangeNotifierProvider(create: (context) => AdminProductsManager(),),
-          ChangeNotifierProvider(create: (context) => FilterOrderAdminManager(),)
+          ChangeNotifierProvider(create: (context) => FilterOrderAdminManager(),),
+          ChangeNotifierProvider(create: (context) => AdminUserManager(),)
 
 
 
@@ -105,6 +108,7 @@ class MyApp extends StatelessWidget {
               PieChartScreen.routeName:(context) => PieChartScreen(),
               AdminProductManagerScreens.routeName:(context) => const AdminProductManagerScreens(),
               FilterOrderAdmin.routeName:(context) => const FilterOrderAdmin(),
+              AdminUserScreen.routeName:(context) => AdminUserScreen(),
 
             },
             onGenerateRoute: (settings) {
