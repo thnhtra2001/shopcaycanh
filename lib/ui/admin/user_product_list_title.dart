@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/ui/admin/edit_product_screen.dart';
 import 'package:shopcaycanh/ui/products/products_manager.dart';
@@ -17,13 +18,14 @@ class UserProductListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = NumberFormat.simpleCurrency(locale: 'vi_VN');
     return ListTile(
       title: Text(product.title),
       leading: CircleAvatar(
         backgroundImage: NetworkImage(product.imageUrl),
       ),
       subtitle: Text(
-        '${product.price}',
+        '${formatCurrency.format(product.price)}',
         style: TextStyle(color: Colors.black),
       ),
       trailing: SizedBox(
