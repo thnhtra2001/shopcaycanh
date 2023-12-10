@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/models/cart_item.dart';
 import 'package:shopcaycanh/ui/cart/cart_screen.dart';
@@ -19,6 +20,7 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = NumberFormat.simpleCurrency(locale: 'vi_VN');
     return Scaffold(
       appBar: AppBar(
         title: Text("Chi tiết cây cảnh"),
@@ -121,6 +123,7 @@ class ProductDetailScreen extends StatelessWidget {
                                   ],
                                 ),
                                 Column(
+                                  
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
@@ -129,7 +132,7 @@ class ProductDetailScreen extends StatelessWidget {
                                           color: Colors.black, fontSize: 20),
                                     ),
                                     Text(
-                                      '${product['price']}',
+                                      '${formatCurrency.format(product['price'])}',
                                       style: const TextStyle(
                                         color: Colors.grey,
                                         fontSize: 18,

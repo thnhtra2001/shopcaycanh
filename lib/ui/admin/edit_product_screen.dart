@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 import 'package:provider/provider.dart';
 
@@ -231,11 +233,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
     );
   }
     TextFormField buildPrice0Field() {
+    final formatCurrency = NumberFormat.simpleCurrency(locale: 'vi_VN');
     return TextFormField(
-      initialValue: _editedProduct.price0.toString(),
+      initialValue: formatCurrency.format(_editedProduct.price0),
       decoration: const InputDecoration(labelText: 'Giá gốc'),
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.number,
+      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,3}')),],
       validator: (value) {
         if (value!.isEmpty) {
           return 'Please provide a price';
@@ -277,11 +281,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
     );
   }
   TextFormField buildPriceField() {
+    final formatCurrency = NumberFormat.simpleCurrency(locale: 'vi_VN');
     return TextFormField(
-      initialValue: _editedProduct.price.toString(),
+      initialValue: formatCurrency.format(_editedProduct.price),
       decoration: const InputDecoration(labelText: 'Giá bán'),
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.number,
+      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,3}')),],
       validator: (value) {
         if (value!.isEmpty) {
           return 'Please provide a price';

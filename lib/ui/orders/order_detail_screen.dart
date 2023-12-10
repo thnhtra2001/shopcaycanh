@@ -100,6 +100,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
   }
 
   Widget buildOrderDetails() {
+    final formatCurrency = NumberFormat.simpleCurrency(locale: 'vi_VN');
     return SizedBox(
         height: widget.order.productCount * 32,
         child: Container(
@@ -118,7 +119,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
                         ),
                       ),
                       Text(
-                        '${prod.quantity}x${prod.price}',
+                        '${prod.quantity}x${formatCurrency.format(prod.price)}',
                         style: const TextStyle(
                           fontSize: 18,
                           color: Colors.grey,
@@ -299,6 +300,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
   }
 
   Widget buildTotalAmountRow() {
+    final formatCurrency = NumberFormat.simpleCurrency(locale: 'vi_VN');
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -314,7 +316,7 @@ class OrderDetailScreenState extends State<OrderDetailScreen> {
         Container(
           alignment: Alignment.centerRight,
           padding: EdgeInsets.only(right: 20),
-          child: Text('${widget.order.amount}',
+          child: Text('${formatCurrency.format(widget.order.amount)}',
               style: TextStyle(fontSize: 16, color: Colors.black)),
         ),
       ],

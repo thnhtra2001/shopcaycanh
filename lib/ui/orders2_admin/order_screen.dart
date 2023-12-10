@@ -33,7 +33,7 @@ class _OrdersScreenAdmin2State extends State<OrdersScreenAdmin2> {
     // context.read<OrdersManagerAdmin2>().updateList();
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Đơn đang giao'),
+          title: const Text('Đơn đang giaoa'),
         ),
         drawer: const AdminAppDrawer(),
         body: FutureBuilder(

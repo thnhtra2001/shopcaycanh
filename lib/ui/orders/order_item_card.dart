@@ -175,6 +175,7 @@ class _OrderItemCardState extends State<OrderItemCard> {
     );
   }
   Widget buildOrderDetails() {
+    final formatCurrency = NumberFormat.simpleCurrency(locale: 'vi_VN');
     return SizedBox(
       height: widget.order.productCount * 32,
       child: Container(
@@ -193,7 +194,7 @@ class _OrderItemCardState extends State<OrderItemCard> {
                       ),
                     ),
                     Text(
-                      '${prod.quantity}x${prod.price}',
+                      '${prod.quantity}x${formatCurrency.format(prod.price)}',
                       style: const TextStyle(
                         fontSize: 18,
                         color: Colors.grey,
@@ -209,8 +210,9 @@ class _OrderItemCardState extends State<OrderItemCard> {
   }
 
   Widget buildOrderSummary() {
+    final formatCurrency = NumberFormat.simpleCurrency(locale: 'vi_VN');
     return ListTile(
-      title: Text('${widget.order.amount} VND'),
+      title: Text('${formatCurrency.format(widget.order.amount)}'),
       subtitle: Text(
         DateFormat('dd/MM/yyyy HH:mm').format(widget.order.dateTime),
       ),

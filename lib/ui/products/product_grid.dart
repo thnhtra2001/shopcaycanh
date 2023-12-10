@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../cart/cart_manager.dart';
@@ -21,6 +22,7 @@ class ProductsGrid extends StatefulWidget {
 }
 
 class _ProductsGridState extends State<ProductsGrid> {
+    final formatCurrency = NumberFormat.simpleCurrency(locale: 'vi_VN');
   @override
   Widget build(BuildContext context) {
     final product = context.select<ProductsManager, List<Product>>(
@@ -68,7 +70,7 @@ class _ProductsGridState extends State<ProductsGrid> {
             style: TextStyle(color: Colors.black),
           ),
           subtitle: Text(
-            '${element['price']}',
+            'Giá: ${formatCurrency.format(element['price'])}',
             style: TextStyle(color: Colors.black),
           ),
           leading: CircleAvatar(
