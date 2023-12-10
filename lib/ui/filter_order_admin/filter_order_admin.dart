@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shopcaycanh/models/order_item.dart';
 import 'package:shopcaycanh/ui/orders/order_detail_screen.dart';
@@ -27,6 +28,7 @@ class _FilterOrderAdminState extends State<FilterOrderAdmin> {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = NumberFormat.simpleCurrency(locale: 'vi_VN');
     // List<Widget?> ord = [];
     // const a = 0;
     // Map<String, int> a = {};
@@ -54,10 +56,11 @@ class _FilterOrderAdminState extends State<FilterOrderAdmin> {
                     return Container(
                       child: Column(
                         children: [
+                          const SizedBox(height: 20,),
                           Container(
                             child: Center(
                                 child: Text(
-                                    'Tong so don da dat: ${snapshot.data!.length}')),
+                                    'Tổng số đơn hàng giao thành công: ${snapshot.data!.length}')),
                           ),
 
                           // buildTotal(context, snapshot),
@@ -73,17 +76,17 @@ class _FilterOrderAdminState extends State<FilterOrderAdmin> {
                                     child: Column(children: [
                                       // Container(child: Text("AAAA"),),
                                       ListTile(
-                                        leading: Text('Hoa don ${index + 1}'),
+                                        leading: Text('Hóa đơn ${index + 1}'),
                                         subtitle: Text(
-                                            'Ngay: ${snapshot.data![index].dateTime.day}/${snapshot.data![index].dateTime.month}/${snapshot.data![index].dateTime.year} - Tong tien: ${snapshot.data![index].amount}'),
+                                            'Ngày: ${snapshot.data![index].dateTime.day}/${snapshot.data![index].dateTime.month}/${snapshot.data![index].dateTime.year} - Tổng tiền: ${formatCurrency.format(snapshot.data![index].amount)}'),
                                         title: Text(
-                                            'Tien goc: ${snapshot.data![index].amount0}'),
+                                            'Tiền gốc: ${formatCurrency.format(snapshot.data![index].amount0)}'),
                                         trailing: Text(
-                                            'Loi nhuan: ${snapshot.data![index].amount - snapshot.data![index].amount0}'),
+                                            'Lợi nhuận: ${formatCurrency.format(snapshot.data![index].amount - snapshot.data![index].amount0)}'),
                                       ),
                                       Container(
                                         child: Text(
-                                            'Tong loi nhuan:${a += snapshot.data![index].amount - snapshot.data![index].amount0}'),
+                                            'Tổng lợi nhuận:${formatCurrency.format(a += snapshot.data![index].amount - snapshot.data![index].amount0)}'),
                                       ),
                                       const Divider(),
                                     ]),

@@ -148,7 +148,7 @@ class AdminProductManagerScreensState
                   //       // Center(child: Text(snapshot.data!.values.toString())),
                   // )
                   SizedBox(
-                      height: 500,
+                      height: 400,
                       child: Container(
                           child: ListView.builder(
                         itemCount: snapshot.data!.length.toInt(),
@@ -156,6 +156,7 @@ class AdminProductManagerScreensState
                           List<String> key = snapshot.data!.keys.toList();
                           List<double> value = snapshot.data!.values.toList();
                           return Container(
+                            // height: snapshot.data!.length*30,
                             child: Column(
                               children: [
                                 ListTile(
@@ -175,13 +176,16 @@ class AdminProductManagerScreensState
                           );
                         },
                       ))),
+                      // const Divider(),
+                      Text("Số lượng còn lại"),
                   SizedBox(
-                      height: 500,
+                      height: 400,
                       child: Container(
                           child: ListView.builder(
                         itemCount: pro.length,
                         itemBuilder: (context, index) {
                           return Container(
+                            // height: snapshot.data!.length*30,
                             child: Column(
                               children: [
                                 ListTile(
